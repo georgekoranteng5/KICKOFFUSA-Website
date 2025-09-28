@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation Test - KickoffUSA</title>
+  <link rel="stylesheet" href="styles.css?v=3">
+  <style>
+    .test-container {
+      padding: 50px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .test-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid #e5e7eb;
+    }
+    .test-button {
+      background: linear-gradient(135deg, #111, #333);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+    .test-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1 style="text-align: center; margin-bottom: 40px;">🎨 Animation Test Page</h1>
+    
+    <div class="test-card animate-on-scroll">
+      <h2>Scroll Animation Test</h2>
+      <p>This card should fade in when you scroll to it.</p>
+    </div>
+    
+    <div class="test-card animate-stagger">
+      <h2>Stagger Animation Test</h2>
+      <p>These elements should appear one by one:</p>
+      <div>Element 1</div>
+      <div>Element 2</div>
+      <div>Element 3</div>
+    </div>
+    
+    <div class="test-card">
+      <h2>Button Hover Test</h2>
+      <button class="test-button">Hover me!</button>
+      <button class="btn primary">Primary Button</button>
+      <button class="btn secondary">Secondary Button</button>
+    </div>
+    
+    <div class="test-card">
+      <h2>Floating Animation Test</h2>
+      <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #111, #333); border-radius: 50%; margin: 20px auto; animation: float 3s ease-in-out infinite;"></div>
+    </div>
+    
+    <div class="test-card">
+      <h2>Shimmer Effect Test</h2>
+      <div style="height: 60px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200px 100%; animation: shimmer 1.5s infinite; border-radius: 8px;"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Simple intersection observer for testing
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.animate-on-scroll, .animate-stagger').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

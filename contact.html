@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KickoffUSA - Contact</title>
+  <meta name="description" content="Get in touch with us for partnerships, events, or any questions about KickoffUSA. We'd love to hear from you!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav" style="background: #fff; padding: 0;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0;">
+        <div class="brand" style="display: flex; align-items: center;">
+          <img src="assets/kicoff-logo-1.PNG" alt="KickoffUSA Logo" style="height: 40px; margin-right: 12px;">
+          <span style="color: #000; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
+        </div>
+        <nav>
+          <ul style="display: flex; gap: 40px; margin: 0; padding: 0; list-style: none;">
+            <li><a href="#" class="nav-category" data-category="discover" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🔍</span>Discover</a></li>
+            <li><a href="#" class="nav-category" data-category="store" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🛍️</span>Store</a></li>
+            <li><a href="#" class="nav-category" data-category="community" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">👥</span>Community</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- Secondary Navigation Bar -->
+    <div class="secondary-nav">
+      <div class="container">
+        <nav>
+          <ul id="secondary-nav-links">
+            <!-- Dynamic content will be inserted here -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contact Section -->
+  <section id="contact" class="animate-on-scroll" style="background: #fff; color: #000; min-height: 100vh; display: flex; width: 100vw; margin-left: calc(-50vw + 50%);">
+    <!-- Left Column - Image -->
+    <div class="parallax-element" style="flex: 1; position: relative; overflow: hidden;">
+      <img src="assets/about.jpg" alt="KickoffUSA Team" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow);">
+    </div>
+    
+    <!-- Right Column - Contact Form -->
+    <div class="animate-stagger" style="flex: 1; background: #fff; padding: 80px 40px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="max-width: 700px; width: 100%;">
+        <h1 style="font-size: clamp(48px, 6vw, 72px); font-weight: 900; margin: 0 0 30px; color: #000; font-style: italic; animation: fadeInUp 0.8s ease-out;">Talk to Us</h1>
+        
+        <p style="color: #000; font-size: 18px; line-height: 1.6; margin: 0 0 40px; animation: fadeInUp 0.8s ease-out 0.2s both;">
+          Connect with us. Drop us a mail to <a href="mailto:kickoffusakickoffusa@gmail.com" style="color: #dc2626; text-decoration: none; font-weight: 600;">kickoffusakickoffusa@gmail.com</a>, engage with us on <a href="https://instagram.com/kickoffusa_" target="_blank" rel="noopener" style="color: #1e40af; text-decoration: none; font-weight: 600;">@kickoffusa_</a>, or simply fill out the form below. Your questions, feedback, or just a friendly hello are always welcome.
+        </p>
+        
+        <form class="form animate-on-scroll" id="contactForm" onsubmit="submitContactForm(event)" style="display: flex; flex-direction: column; gap: 24px; animation: fadeInUp 0.8s ease-out 0.4s both;">
+          <!-- Name and Email Row -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <input class="input" id="name" name="name" placeholder="Name" required style="width: 100%; padding: 20px 24px; border: 2px solid #e5e7eb; border-radius: 12px; background: #fff; color: #000; font-size: 16px; font-family: inherit; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onfocus="this.style.borderColor='#dc2626'; this.style.boxShadow='0 0 0 3px rgba(220, 38, 38, 0.1), 0 4px 12px rgba(0,0,0,0.1)';" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
+            </div>
+            <div class="form-group">
+              <input class="input" id="email" name="email" type="email" placeholder="Email" required style="width: 100%; padding: 20px 24px; border: 2px solid #e5e7eb; border-radius: 12px; background: #fff; color: #000; font-size: 16px; font-family: inherit; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onfocus="this.style.borderColor='#1e40af'; this.style.boxShadow='0 0 0 3px rgba(30, 64, 175, 0.1), 0 4px 12px rgba(0,0,0,0.1)';" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
+            </div>
+          </div>
+          
+          <!-- Message Field -->
+          <div class="form-group">
+            <textarea id="message" name="message" placeholder="Message" required style="width: 100%; padding: 20px 24px; border: 2px solid #e5e7eb; border-radius: 12px; background: #fff; color: #000; font-size: 16px; font-family: inherit; resize: vertical; min-height: 140px; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onfocus="this.style.borderColor='#fbbf24'; this.style.boxShadow='0 0 0 3px rgba(251, 191, 36, 0.1), 0 4px 12px rgba(0,0,0,0.1)';" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';"></textarea>
+          </div>
+          
+          <!-- Submit Button -->
+          <div style="display: flex; justify-content: flex-start; margin-top: 10px;">
+            <button class="btn primary" type="submit" style="padding: 20px 40px; background: linear-gradient(135deg, #dc2626, #b91c1c); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; font-family: inherit; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notification System -->
+  <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 10000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span id="notification-icon" style="font-size: 20px;">✓</span>
+      <span id="notification-message">Notification message</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© <span id="year"></span> KickoffUSA</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Minimal page script + smooth anchor scrolling with sticky header offset
+    (function(){
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+
+      const header = document.querySelector('header');
+      const OFFSET = (header?.offsetHeight || 0) + 8; // extra breathing room
+
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(!el) return; // not an in-page anchor
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

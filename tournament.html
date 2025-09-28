@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KickoffUSA - Tournament Center</title>
+  <meta name="description" content="Register your team, view schedules, and track tournament progress in real-time. Join the competition and showcase your skills!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav" style="background: #fff; padding: 0;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0;">
+        <div class="brand" style="display: flex; align-items: center;">
+          <img src="assets/kicoff-logo-1.PNG" alt="KickoffUSA Logo" style="height: 40px; margin-right: 12px;">
+          <span style="color: #000; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
+        </div>
+        <nav>
+          <ul style="display: flex; gap: 40px; margin: 0; padding: 0; list-style: none;">
+            <li><a href="#" class="nav-category" data-category="discover" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🔍</span>Discover</a></li>
+            <li><a href="#" class="nav-category" data-category="store" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🛍️</span>Store</a></li>
+            <li><a href="#" class="nav-category" data-category="community" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">👥</span>Community</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- Secondary Navigation Bar -->
+    <div class="secondary-nav">
+      <div class="container">
+        <nav>
+          <ul id="secondary-nav-links">
+            <!-- Dynamic content will be inserted here -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tournament Center -->
+  <section id="tournament" class="animate-on-scroll" style="background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%); color: #000; padding: 80px 0; position: relative; overflow: hidden;">
+    <!-- Background Pattern -->
+    <div class="parallax-element" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 25% 25%, rgba(0,0,0,0.02) 1px, transparent 1px), radial-gradient(circle at 75% 75%, rgba(0,0,0,0.02) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.5;"></div>
+    
+    <div class="container animate-stagger" style="position: relative; z-index: 1;">
+      <!-- Header Section -->
+      <div style="text-align: center; margin-bottom: 60px;">
+        <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.1); backdrop-filter: blur(10px); border-radius: 50px; padding: 8px 20px; margin-bottom: 20px; animation: fadeInUp 0.8s ease-out;">
+          <span style="font-size: 24px;">⚽</span>
+          <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #000;">Tournament Center</span>
+        </div>
+        <h2 class="section-title" style="color: #000; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); font-size: clamp(36px, 6vw, 56px); margin: 0 0 20px; font-weight: 900; animation: fadeInUp 0.8s ease-out 0.2s both;">Compete & Win</h2>
+        <p style="color: #333; margin: 0; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 18px; line-height: 1.6; animation: fadeInUp 0.8s ease-out 0.4s both;">
+          Create teams, view schedules, and track tournament progress in real-time. Join the competition and showcase your skills!
+        </p>
+      </div>
+      
+      <!-- How it works section -->
+      <div style="background: rgba(0,0,0,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.1); border-radius: 24px; padding: 40px; margin-bottom: 50px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+        <h3 style="color: #000; text-align: center; margin-bottom: 40px; font-size: 28px; font-weight: 700;">How It Works</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center;">
+          <div style="padding: 20px; position: relative;">
+            <div style="background: #000; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: bold; font-size: 24px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);">1</div>
+            <h4 style="color: #000; margin: 0 0 12px; font-size: 20px; font-weight: 700;">Register Your Team</h4>
+            <p style="color: #333; font-size: 16px; margin: 0; line-height: 1.5;">Fill out the team registration form with your details and skill level</p>
+          </div>
+          <div style="padding: 20px; position: relative;">
+            <div style="background: #000; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: bold; font-size: 24px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);">2</div>
+            <h4 style="color: #000; margin: 0 0 12px; font-size: 20px; font-weight: 700;">Wait for Tournament</h4>
+            <p style="color: #333; font-size: 16px; margin: 0; line-height: 1.5;">We'll notify you when a tournament is created and teams are assigned to groups</p>
+          </div>
+          <div style="padding: 20px; position: relative;">
+            <div style="background: #000; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: bold; font-size: 24px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);">3</div>
+            <h4 style="color: #000; margin: 0 0 12px; font-size: 20px; font-weight: 700;">Play & Compete</h4>
+            <p style="color: #333; font-size: 16px; margin: 0; line-height: 1.5;">View your schedule, track scores, and compete for the championship</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tournament Cards Grid -->
+      <div class="animate-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 40px;">
+        <!-- Team Registration -->
+        <div class="tournament-card animate-on-scroll" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: linear-gradient(135deg, #000, #333); border-radius: 0 20px 0 100px; opacity: 0.1;"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+            <div style="background: #000; color: #fff; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;">📝</div>
+            <h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #1a202c;">Register Your Team</h3>
+          </div>
+          <p style="color: #64748b; font-size: 15px; margin-bottom: 25px; line-height: 1.5;">Join an active tournament and showcase your skills</p>
+          <form class="team-form" onsubmit="event.preventDefault(); createTeam();" style="display: grid; gap: 15px;">
+            <select class="input" required id="tournamentSelect" style="padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; transition: border-color 0.3s ease;">
+              <option value="">Select Tournament</option>
+            </select>
+            <input class="input" placeholder="Team Name" required id="teamName" style="padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; transition: border-color 0.3s ease;">
+            <input class="input" placeholder="Captain Name" required id="captainName" style="padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; transition: border-color 0.3s ease;">
+            <input class="input" type="email" placeholder="Captain Email" required id="captainEmail" style="padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; transition: border-color 0.3s ease;">
+            <input class="input" placeholder="Phone Number" required id="phoneNumber" style="padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; transition: border-color 0.3s ease;">
+            <select class="input" required id="skillLevel" style="padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; transition: border-color 0.3s ease;">
+              <option value="">Select Skill Level</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+              <option value="professional">Professional</option>
+            </select>
+            <button class="btn primary" type="submit" style="padding: 14px 24px; background: linear-gradient(135deg, #dc2626, #b91c1c); color: #fff; border: none; border-radius: 10px; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);">Register Team</button>
+          </form>
+        </div>
+
+        <!-- Live Tournament Status -->
+        <div style="background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: linear-gradient(135deg, #fff, #f0f0f0); border-radius: 0 20px 0 100px; opacity: 0.1;"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+            <div style="background: #fff; color: #000; border: 2px solid #000; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;">🏆</div>
+            <h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #1a202c;">Current Tournament</h3>
+          </div>
+          <div id="currentTournament">
+            <p style="text-align: center; color: #64748b; font-size: 15px;">Loading tournament information...</p>
+          </div>
+          <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #dc2626;">
+            <p style="color: #64748b; font-size: 13px; margin: 0 0 8px; font-weight: 600;">Admin Access Required</p>
+            <p style="color: #64748b; font-size: 12px; margin: 0;">Click "Admin" in the header to manage tournaments</p>
+          </div>
+        </div>
+
+        <!-- Group Standings -->
+        <div style="background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: linear-gradient(135deg, #000, #333); border-radius: 0 20px 0 100px; opacity: 0.1;"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+            <div style="background: #000; color: #fff; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;">📊</div>
+            <h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #1a202c;">Group Standings</h3>
+          </div>
+          <div id="groupStandings">
+            <p style="text-align: center; color: #64748b; font-size: 15px;">Create a tournament to see group standings</p>
+          </div>
+        </div>
+
+        <!-- Knockout Stage -->
+        <div style="background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: linear-gradient(135deg, #fff, #f0f0f0); border-radius: 0 20px 0 100px; opacity: 0.1;"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+            <div style="background: #fff; color: #000; border: 2px solid #000; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;">🥇</div>
+            <h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #1a202c;">Knockout Stage</h3>
+          </div>
+          <div id="knockoutStage">
+            <p style="text-align: center; color: #64748b; font-size: 15px;">Generate knockout stage to see semi-finals and final</p>
+          </div>
+        </div>
+
+        <!-- Match Schedule -->
+        <div style="background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: linear-gradient(135deg, #000, #333); border-radius: 0 20px 0 100px; opacity: 0.1;"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+            <div style="background: #000; color: #fff; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;">📅</div>
+            <h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #1a202c;">Match Schedule & Live Scores</h3>
+          </div>
+          <div id="matchSchedule">
+            <p style="text-align: center; color: #64748b; font-size: 15px;">Loading match schedule...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Login Panel (Hidden by default) -->
+      <div id="adminLoginPanel" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #fff, #f8f8f8); border: 3px solid #000; border-radius: 20px; padding: 40px; z-index: 9999; box-shadow: 0 25px 50px rgba(0,0,0,0.4); min-width: 420px; text-align: center; backdrop-filter: blur(10px);">
+        <div style="background: #000; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px;">🔐</div>
+        <h3 style="color: #000; font-size: 28px; margin: 0 0 12px; font-weight: 700;">ADMIN LOGIN</h3>
+        <p style="color: #000; font-size: 15px; margin-bottom: 30px;">Enter admin password to access tournament management</p>
+        <div class="admin-login-form" style="display: flex; flex-direction: column; gap: 20px;">
+          <input type="password" id="adminPassword" placeholder="Enter admin password" style="padding: 16px 20px; border: 2px solid #000; border-radius: 12px; font-size: 16px; text-align: center; background: #fff; transition: all 0.3s ease;">
+          <div style="display: flex; gap: 12px;">
+            <button class="btn primary" onclick="adminLogin()" style="font-size: 16px; padding: 14px 24px; flex: 1; background: #000; color: #fff; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Login</button>
+            <button class="btn secondary" onclick="closeAdminLogin()" style="font-size: 16px; padding: 14px 24px; flex: 1; background: transparent; color: #000; border: 2px solid #000; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Cancel</button>
+          </div>
+          <p id="adminLoginError" style="color: #dc2626; font-size: 13px; margin: 0; display: none; font-weight: 500;">Incorrect password. Please try again.</p>
+        </div>
+      </div>
+
+      <!-- Admin Panel (Hidden by default) -->
+      <div id="adminPanel" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #fff, #f8f8f8); border: 3px solid #000; border-radius: 20px; padding: 40px; z-index: 9999; box-shadow: 0 25px 50px rgba(0,0,0,0.4); min-width: 480px; text-align: center; backdrop-filter: blur(10px);">
+        <div style="background: #000; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px;">🔧</div>
+        <h3 style="color: #000; font-size: 28px; margin: 0 0 12px; font-weight: 700;">ADMIN PANEL</h3>
+        <p style="color: #000; font-size: 15px; margin-bottom: 30px;">Tournament Management Controls</p>
+        <div class="admin-controls" style="display: flex; flex-direction: column; gap: 15px;">
+          <button class="btn primary" onclick="createTournament()" style="font-size: 16px; padding: 16px 28px; background: #000; color: #fff; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">Create New Tournament</button>
+          <button class="btn outline" onclick="generateGroups()" id="generateBtn" style="font-size: 16px; padding: 16px 28px; background: transparent; color: #000; border: 2px solid #000; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Generate Groups & Fixtures</button>
+          <button class="btn outline" onclick="generateKnockout()" style="font-size: 16px; padding: 16px 28px; background: transparent; color: #000; border: 2px solid #000; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Generate Knockout Stage</button>
+          <button class="btn secondary" onclick="adminLogout()" style="font-size: 16px; padding: 16px 28px; background: #6b7280; color: #fff; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Logout</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notification System -->
+  <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 10000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span id="notification-icon" style="font-size: 20px;">✓</span>
+      <span id="notification-message">Notification message</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© <span id="year"></span> KickoffUSA</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Minimal page script + smooth anchor scrolling with sticky header offset
+    (function(){
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+
+      const header = document.querySelector('header');
+      const OFFSET = (header?.offsetHeight || 0) + 8; // extra breathing room
+
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(!el) return; // not an in-page anchor
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

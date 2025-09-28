@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KickoffUSA - Gallery</title>
+  <meta name="description" content="Relive the best moments from our previous events. Browse through photos and videos from KickoffUSA tournaments and gatherings." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav" style="background: #fff; padding: 0;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0;">
+        <div class="brand" style="display: flex; align-items: center;">
+          <img src="assets/kicoff-logo-1.PNG" alt="KickoffUSA Logo" style="height: 40px; margin-right: 12px;">
+          <span style="color: #000; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
+        </div>
+        <nav>
+          <ul style="display: flex; gap: 40px; margin: 0; padding: 0; list-style: none;">
+            <li><a href="#" class="nav-category" data-category="discover" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🔍</span>Discover</a></li>
+            <li><a href="#" class="nav-category" data-category="store" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🛍️</span>Store</a></li>
+            <li><a href="#" class="nav-category" data-category="community" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">👥</span>Community</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- Secondary Navigation Bar -->
+    <div class="secondary-nav">
+      <div class="container">
+        <nav>
+          <ul id="secondary-nav-links">
+            <!-- Dynamic content will be inserted here -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Gallery -->
+  <section id="gallery" class="animate-on-scroll" style="background: #f8fafc; padding: 80px 0;">
+    <div class="container animate-stagger">
+      <h2 class="section-title" style="font-size: clamp(32px, 5vw, 48px); margin: 0 0 16px; color: #1a202c; font-weight: 900; letter-spacing: -1px; animation: fadeInUp 0.8s ease-out;">Event Gallery</h2>
+      <p style="text-align: center; color: var(--muted); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 18px; animation: fadeInUp 0.8s ease-out 0.2s both;">
+        Relive the best moments from our previous events. Browse through photos and videos from KickoffUSA tournaments and gatherings.
+      </p>
+      
+      <!-- Gallery Filters -->
+      <div class="gallery-filters animate-on-scroll" id="galleryFilters" style="display: flex; gap: 12px; margin-bottom: 24px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease-out 0.4s both;">
+        <button class="filter-btn active" onclick="filterGallery('all', this)">All Events</button>
+        <!-- Filter buttons will be dynamically added here -->
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid animate-stagger" id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+        <!-- Gallery items will be loaded here -->
+        <div style="text-align: center; color: var(--muted); grid-column: 1 / -1; padding: 40px;">
+          <p>Loading gallery...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notification System -->
+  <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 10000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span id="notification-icon" style="font-size: 20px;">✓</span>
+      <span id="notification-message">Notification message</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© <span id="year"></span> KickoffUSA</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Minimal page script + smooth anchor scrolling with sticky header offset
+    (function(){
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+
+      const header = document.querySelector('header');
+      const OFFSET = (header?.offsetHeight || 0) + 8; // extra breathing room
+
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(!el) return; // not an in-page anchor
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

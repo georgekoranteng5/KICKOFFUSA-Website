@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KickoffUSA - Events</title>
+  <meta name="description" content="Join our exciting soccer tournaments and events. Check out upcoming matches and register to participate." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav" style="background: #fff; padding: 0;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0;">
+        <div class="brand" style="display: flex; align-items: center;">
+          <img src="assets/kicoff-logo-1.PNG" alt="KickoffUSA Logo" style="height: 40px; margin-right: 12px;">
+          <span style="color: #000; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
+        </div>
+        <nav>
+          <ul style="display: flex; gap: 40px; margin: 0; padding: 0; list-style: none;">
+            <li><a href="#" class="nav-category" data-category="discover" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🔍</span>Discover</a></li>
+            <li><a href="#" class="nav-category" data-category="store" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🛍️</span>Store</a></li>
+            <li><a href="#" class="nav-category" data-category="community" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">👥</span>Community</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- Secondary Navigation Bar -->
+    <div class="secondary-nav">
+      <div class="container">
+        <nav>
+          <ul id="secondary-nav-links">
+            <!-- Dynamic content will be inserted here -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Events Hero Section -->
+  <section class="events-hero animate-on-scroll" style="position: relative; min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); overflow: hidden;">
+    <!-- Background Video -->
+    <div class="hero-image parallax-element" style="position: absolute; inset: 0; z-index: 0;">
+      <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) saturate(1.2); transition: transform var(--transition-slow);">
+        <source src="assets/kling_20250928_Image_to_Video_Add_some_c_2962_0.mp4" type="video/mp4">
+        <img src="assets/gallery/KICKOFF CUP/IMG_3831.JPG" alt="KickoffUSA Event" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) saturate(1.2);">
+      </video>
+      <div class="image-overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 50%, rgba(51, 65, 85, 0.8) 100%);"></div>
+    </div>
+    
+    <!-- Hero Content -->
+    <div class="container animate-stagger" style="position: relative; z-index: 1; text-align: center; color: #fff; padding: 80px 20px;">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <!-- Hero Badge -->
+        <div style="display: inline-block; background: rgba(220, 38, 38, 0.2); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 50px; padding: 8px 20px; margin-bottom: 24px; backdrop-filter: blur(10px); animation: fadeInUp 0.8s ease-out;">
+          <span style="color: #fca5a5; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">⚽ Live Events</span>
+        </div>
+        
+        <!-- Main Title -->
+        <h1 style="font-size: clamp(48px, 8vw, 72px); margin: 0 0 24px; font-weight: 900; line-height: 1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.5); background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 0.8s ease-out 0.2s both;">
+          UPCOMING EVENTS
+        </h1>
+        
+        <!-- Subtitle -->
+        <p style="font-size: clamp(18px, 3vw, 24px); margin: 0 0 40px; color: #cbd5e1; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto; animation: fadeInUp 0.8s ease-out 0.4s both;">
+          Join our exciting tournaments and showcase your skills on the field. Experience the thrill of competitive soccer.
+        </p>
+        
+        <!-- CTA Buttons -->
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; animation: fadeInUp 0.8s ease-out 0.6s both;">
+          <a href="#events-content" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; background: linear-gradient(135deg, #dc2626, #b91c1c); color: #fff; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);">
+            View Events
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="tournament.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; background: transparent; color: #fff; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; font-weight: 700; font-size: 16px; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+            Join Tournament
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: #cbd5e1; text-align: center; animation: bounce 2s infinite;">
+      <div style="font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Scroll Down</div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 13l3 3 3-3M7 6l3 3 3-3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Events Content Section -->
+  <section id="events-content" style="background: #f8fafc; padding: 100px 0;">
+    <div class="container">
+      <!-- Section Header -->
+      <div style="text-align: center; margin-bottom: 60px;">
+        <h2 style="font-size: clamp(32px, 5vw, 48px); margin: 0 0 16px; color: #1a202c; font-weight: 900; letter-spacing: -1px;">Featured Events</h2>
+        <p style="font-size: 18px; color: #64748b; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto;">Discover our upcoming tournaments and register to secure your spot</p>
+      </div>
+      
+      <!-- Countdown Timer Section -->
+      <div class="countdown-section" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 24px; padding: 50px 30px; margin-bottom: 60px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+        <!-- Background Pattern -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JhaW4iIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjA1Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNncmFpbikiLz48L3N2Zz4='); opacity: 0.3;"></div>
+        
+        <!-- Top Accent -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #dc2626, #1e40af, #fbbf24, #10b981);"></div>
+        
+        <!-- Content -->
+        <div style="position: relative; z-index: 1;">
+          <div style="display: inline-block; background: rgba(220, 38, 38, 0.2); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 50px; padding: 8px 20px; margin-bottom: 20px; backdrop-filter: blur(10px);">
+            <span style="color: #fca5a5; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">⏰ Next Event</span>
+          </div>
+          
+          <h3 style="color: #ffffff; margin: 0 0 30px; font-size: clamp(24px, 4vw, 32px); font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">College Baller 1v1 Challenge</h3>
+          
+          <div id="countdown" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 0 auto 30px; max-width: 500px;">
+            <div class="countdown-item" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 24px 16px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #dc2626, #b91c1c);"></div>
+              <div id="days" style="font-size: 32px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 8px;">00</div>
+              <div style="font-size: 12px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">DAYS</div>
+            </div>
+            <div class="countdown-item" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 24px 16px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #1e40af, #1d4ed8);"></div>
+              <div id="hours" style="font-size: 32px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 8px;">00</div>
+              <div style="font-size: 12px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">HOURS</div>
+            </div>
+            <div class="countdown-item" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 24px 16px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #fbbf24, #f59e0b);"></div>
+              <div id="minutes" style="font-size: 32px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 8px;">00</div>
+              <div style="font-size: 12px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">MINUTES</div>
+            </div>
+            <div class="countdown-item" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 24px 16px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+              <div id="seconds" style="font-size: 32px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 8px;">00</div>
+              <div style="font-size: 12px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">SECONDS</div>
+            </div>
+          </div>
+          
+          <p style="color: #cbd5e1; margin: 0; font-size: 16px; font-weight: 500;">October 4, 2025 • John F. Kennedy Park • 2:00 PM</p>
+        </div>
+      </div>
+      
+      <!-- Event Cards Grid -->
+      <div class="events-grid animate-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 60px;">
+        <!-- Main Event Card -->
+        <article class="event-card featured animate-on-scroll" style="background: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; border: 1px solid #e2e8f0; position: relative;">
+          <!-- Featured Badge -->
+          <div style="position: absolute; top: 20px; left: 20px; background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; z-index: 2; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);">
+            FEATURED
+          </div>
+          
+          <div class="media" style="position: relative; height: 250px; overflow: hidden;">
+            <img src="assets/college-baller-flyer.jpg" alt="College Baller 1v1 Challenge flyer" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" />
+            <div class="date-badge" style="position: absolute; top: 20px; right: 20px; background: #ffffff; color: #000000; padding: 12px 16px; border-radius: 12px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.3); border: 2px solid #e5e7eb;">
+              <div style="font-size: 24px; font-weight: 900; line-height: 1;">11</div>
+              <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">OCT</div>
+            </div>
+            <!-- Gradient Overlay -->
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(transparent, rgba(0,0,0,0.7));"></div>
+          </div>
+          
+          <div class="content" style="padding: 30px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+              <div style="width: 8px; height: 8px; background: #dc2626; border-radius: 50%; animation: pulse 2s infinite;"></div>
+              <span style="color: #64748b; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">UPCOMING EVENT</span>
+            </div>
+            
+            <h3 style="font-size: 24px; font-weight: 900; color: #1a202c; margin: 0 0 12px; line-height: 1.2;">College Baller — 1v1 Challenge</h3>
+            <p class="desc" style="color: #64748b; font-size: 16px; line-height: 1.6; margin: 0 0 20px;">$100 cash prize · $5 player fee · Water & drinks provided</p>
+            
+            <div class="meta" style="display: flex; align-items: center; gap: 20px; margin-bottom: 25px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 8px; color: #64748b; font-size: 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12,6 12,12 16,14"></polyline>
+                </svg>
+                <span>2:00 PM</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; color: #64748b; font-size: 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>John F. Kennedy Park</span>
+              </div>
+            </div>
+            
+            <div class="actions">
+              <a class="btn primary" href="https://event.getbookt.io/kickoff-university-1v1s?fbclid=PAZXh0bgNhZW0CMTEAAad8v9vE0oOGeXHxZZVeiu7xPuH6yjNYWBEdgIkr60xFq177xbgP4bAkfNtU9A_aem_htD1HIU6ZDVRkAlBDP0ekw" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);">
+                Register Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Coming Soon Card -->
+        <article class="event-card coming-soon animate-on-scroll" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 50px 30px; position: relative;">
+          <!-- Background Pattern -->
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48cGF0dGVybiBpZD0iZG90cyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjY2JkNWUxIiBvcGFjaXR5PSIwLjMiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+PC9zdmc+'); opacity: 0.5;"></div>
+          
+          <div style="position: relative; z-index: 1;">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a202c" stroke-width="2">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+            </div>
+            <h3 style="font-size: 20px; font-weight: 800; color: #1a202c; margin: 0 0 12px;">More Events Coming Soon</h3>
+            <p style="color: #64748b; font-size: 16px; line-height: 1.6; margin: 0 0 30px; max-width: 300px;">Stay tuned for exciting new tournaments and events. We're always working on something amazing!</p>
+            <a href="contact.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: transparent; color: #dc2626; text-decoration: none; border: 2px solid #dc2626; border-radius: 12px; font-weight: 700; font-size: 14px; transition: all 0.3s ease;">
+              Get Notified
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </article>
+      </div>
+      
+      <!-- Call to Action Section -->
+      <div style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 24px; padding: 60px 40px; text-align: center; color: #fff; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDEwIDAgTCAwIDAgMCAxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg=='); opacity: 0.3;"></div>
+        
+        <div style="position: relative; z-index: 1;">
+          <h3 style="font-size: clamp(28px, 4vw, 36px); margin: 0 0 16px; font-weight: 900;">Ready to Join the Action?</h3>
+          <p style="font-size: 18px; margin: 0 0 30px; color: #cbd5e1; max-width: 600px; margin-left: auto; margin-right: auto;">Don't miss out on our upcoming events. Register now and be part of the KickoffUSA community!</p>
+          <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <a href="tournament.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; background: linear-gradient(135deg, #dc2626, #b91c1c); color: #fff; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);">
+              Join Tournament
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </a>
+            <a href="contact.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; background: transparent; color: #fff; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; font-weight: 700; font-size: 16px; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+              Contact Us
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notification System -->
+  <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 10000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span id="notification-icon" style="font-size: 20px;">✓</span>
+      <span id="notification-message">Notification message</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© <span id="year"></span> KickoffUSA</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Minimal page script + smooth anchor scrolling with sticky header offset
+    (function(){
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+
+      const header = document.querySelector('header');
+      const OFFSET = (header?.offsetHeight || 0) + 8; // extra breathing room
+
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(!el) return; // not an in-page anchor
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

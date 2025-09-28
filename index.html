@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KickoffUSA - Home</title>
+  <meta name="description" content="KickoffUSA — A soccer initiative based in Atlanta, focused on uniting people with the beautiful game." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav" style="background: #fff; padding: 0;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0;">
+        <div class="brand" style="display: flex; align-items: center;">
+          <img src="assets/kicoff-logo-1.PNG" alt="KickoffUSA Logo" style="height: 40px; margin-right: 12px;">
+          <span style="color: #000; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
+        </div>
+        <nav>
+          <ul style="display: flex; gap: 40px; margin: 0; padding: 0; list-style: none;">
+            <li><a href="#" class="nav-category" data-category="discover" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🔍</span>Discover</a></li>
+            <li><a href="#" class="nav-category" data-category="store" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🛍️</span>Store</a></li>
+            <li><a href="#" class="nav-category" data-category="community" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">👥</span>Community</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- Secondary Navigation Bar -->
+    <div class="secondary-nav">
+      <div class="container">
+        <nav>
+          <ul id="secondary-nav-links">
+            <!-- Dynamic content will be inserted here -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & About Combined with Image Background -->
+  <div class="hero-about-wrapper" style="position: relative; min-height: 100vh;">
+    <div class="image-wrap" aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden; z-index: 0;">
+      <img src="assets/gallery/KICKOFF CUP/IMG_3834.JPG" alt="KickoffUSA Celebration" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.85) saturate(1.1) contrast(1.1);">
+      <div class="overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);"></div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero" aria-label="KickoffUSA hero" style="position: relative; z-index: 1; padding: 0; min-height: 100vh; display: flex; align-items: center;">
+      <div class="container" style="padding: 80px 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+        
+        <!-- Main Hero Content - Centered -->
+        <div class="hero-main animate-stagger" style="text-align: center; margin-bottom: 80px;">
+          <div style="background: rgba(0,0,0,0.4); padding: 60px 40px; border-radius: 24px; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); max-width: 1200px; margin: 0 auto; position: relative; overflow: hidden;">
+            <!-- Animated background pattern -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%); animation: shimmer 3s ease-in-out infinite; pointer-events: none;"></div>
+            
+            <!-- Logo positioned at top-left -->
+            <div style="position: absolute; top: 20px; left: 20px; z-index: 2;">
+              <img src="assets/kickoff-logo.png?v=2" alt="KickoffUSA Logo" class="parallax-element" style="height: 120px; filter: drop-shadow(2px 2px 8px rgba(0,0,0,0.7)); animation: float 3s ease-in-out infinite;">
+            </div>
+            
+            <!-- Centered content -->
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; text-align: center;">
+              <h1 style="font-size: clamp(48px, 8vw, 84px); margin: 0 0 24px; font-weight: 900; line-height: 1.1; text-shadow: 4px 4px 8px rgba(0,0,0,0.8); color: #fff; letter-spacing: 2px; position: relative; z-index: 1;">KICKOFFUSA</h1>
+              <p class="sub" style="font-size: clamp(20px, 3vw, 28px); margin: 0 0 40px; line-height: 1.4; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-weight: 300; position: relative; z-index: 1;">A soccer initiative based in Atlanta focused on uniting people with the beautiful game.</p>
+              <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1;">
+                <a class="btn primary" href="https://docs.google.com/presentation/d/1dQ4MjVsWi8wcB6XmAERjJx-FeyBe8Qtf/edit?slide=id.p1#slide=id.p1" target="_blank" rel="noopener" style="font-size: 18px; padding: 18px 36px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); background: linear-gradient(135deg, #fff, #f8f9fa); color: #000; border: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Become a partner</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mission & Stats Section -->
+        <div class="mission-stats" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px;">
+          <!-- Mission Card -->
+          <div class="mission-card" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
+            <h2 style="font-size: clamp(20px, 2.5vw, 24px); margin: 0 0 20px; color: #fff; font-weight: 700; text-align: center;">OUR MISSION</h2>
+            <p style="color: #e5e7eb; font-size: 16px; line-height: 1.7; margin: 0 0 16px; text-align: center;">At KickoffUSA, we believe the game doesn't end at the final whistle — it lives on in the way we connect, create, and carry ourselves every day.</p>
+            <p style="color: #e5e7eb; font-size: 16px; line-height: 1.7; margin: 0; text-align: center;">We're building a community where every player, every fan, and every supporter can find their place on and off the field.</p>
+          </div>
+
+          <!-- Stats Card -->
+          <div class="stats-card" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="font-size: clamp(20px, 2.5vw, 24px); margin: 0 0 30px; color: #fff; font-weight: 700; text-align: center;">BY THE NUMBERS</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div style="text-align: center;">
+                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">200+</div>
+                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Players</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">20+</div>
+                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Teams</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">3+</div>
+                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Events</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">1</div>
+                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Year</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator animate-on-scroll" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; color: rgba(255, 255, 255, 0.8); font-size: 24px; cursor: pointer; transition: all 0.3s ease;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Scroll to explore</span>
+            <div style="width: 2px; height: 30px; background: currentColor; border-radius: 1px; animation: bounce 2s infinite;"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Notification System -->
+  <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 10000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span id="notification-icon" style="font-size: 20px;">✓</span>
+      <span id="notification-message">Notification message</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© <span id="year"></span> KickoffUSA</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  // Minimal page script + smooth anchor scrolling with sticky header offset
+  (function(){
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+
+    const header = document.querySelector('header');
+    const OFFSET = (header?.offsetHeight || 0) + 8; // extra breathing room
+
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(!el) return; // not an in-page anchor
+      e.preventDefault();
+      const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+
+  })();
+</script>
+
+</body>
+</html>
