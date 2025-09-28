@@ -112,4 +112,23 @@ temp/
 *.AVI
 *.mkv
 *.MKV
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+.vercel/
+.next/
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Focus-friend subdirectory
+focus-friend/
 .vercel
