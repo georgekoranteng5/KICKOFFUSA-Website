@@ -1479,11 +1479,44 @@ function initializeGallery() {
   loadGallery();
 }
 
-// Load gallery items from server
+// Load gallery items from static files
 async function loadGallery() {
   try {
-    const response = await fetch('http://localhost:3000/api/gallery');
-    galleryItems = await response.json();
+    // Static gallery data for GitHub Pages
+    galleryItems = [
+      // CHAMPION SOUND images
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6162.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6163.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6164.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6165.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6167.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6168.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6169.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6172.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6184.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6185.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6186.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      { src: 'assets/gallery/CHAMPION SOUND/IMG_6191.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
+      
+      // KICKOFF CUP images
+      { src: 'assets/gallery/KICKOFF CUP/DSCN0336.JPG', event_name: 'KICKOFF CUP', type: 'image' },
+      { src: 'assets/gallery/KICKOFF CUP/IMG_3762.HEIC', event_name: 'KICKOFF CUP', type: 'image' },
+      { src: 'assets/gallery/KICKOFF CUP/IMG_3830.JPG', event_name: 'KICKOFF CUP', type: 'image' },
+      { src: 'assets/gallery/KICKOFF CUP/IMG_3831.JPG', event_name: 'KICKOFF CUP', type: 'image' },
+      { src: 'assets/gallery/KICKOFF CUP/IMG_3834.JPG', event_name: 'KICKOFF CUP', type: 'image' },
+      { src: 'assets/gallery/KICKOFF CUP/IMG_3884.JPG', event_name: 'KICKOFF CUP', type: 'image' },
+      { src: 'assets/gallery/KICKOFF CUP/IMG_3885.JPG', event_name: 'KICKOFF CUP', type: 'image' },
+      { src: 'assets/gallery/KICKOFF CUP/IMG_5823.JPG', event_name: 'KICKOFF CUP', type: 'image' },
+      
+      // SUMMER SERIES images
+      { src: 'assets/gallery/SUMMER SERIES /AO4I9247.jpg', event_name: 'SUMMER SERIES', type: 'image' },
+      { src: 'assets/gallery/SUMMER SERIES /AO4I9452.jpg', event_name: 'SUMMER SERIES', type: 'image' },
+      { src: 'assets/gallery/SUMMER SERIES /AO4I9498.jpg', event_name: 'SUMMER SERIES', type: 'image' },
+      { src: 'assets/gallery/SUMMER SERIES /AO4I9753.jpg', event_name: 'SUMMER SERIES', type: 'image' },
+      { src: 'assets/gallery/SUMMER SERIES /AO4I9895.jpg', event_name: 'SUMMER SERIES', type: 'image' },
+      { src: 'assets/gallery/SUMMER SERIES /AO4I9928.jpg', event_name: 'SUMMER SERIES', type: 'image' },
+      { src: 'assets/gallery/SUMMER SERIES /AO4I9950.jpg', event_name: 'SUMMER SERIES', type: 'image' }
+    ];
     
     // Extract unique events for filter buttons
     availableEvents.clear();
