@@ -1480,8 +1480,9 @@ function initializeGallery() {
 }
 
 // Load gallery items from static files
-async function loadGallery() {
+function loadGallery() {
   try {
+    console.log('Loading gallery...');
     // Static gallery data for GitHub Pages
     galleryItems = [
       // CHAMPION SOUND images
@@ -1552,8 +1553,12 @@ function updateFilterButtons() {
 
 // Display gallery items with pagination
 function displayGallery() {
+  console.log('Displaying gallery, items count:', galleryItems.length);
   const container = document.getElementById('galleryGrid');
-  if (!container) return;
+  if (!container) {
+    console.log('Gallery container not found');
+    return;
+  }
   
   if (galleryItems.length === 0) {
     container.innerHTML = 
