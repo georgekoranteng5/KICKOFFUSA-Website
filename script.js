@@ -422,11 +422,32 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Load available tournaments
-async function loadTournaments() {
+// Load available tournaments from static data
+function loadTournaments() {
   try {
-    const response = await fetch('http://localhost:3000/api/tournaments');
-    tournaments = await response.json();
+    // Static tournament data for GitHub Pages
+    tournaments = [
+      {
+        id: 'summer-series-2024',
+        name: 'Summer Series 2024',
+        status: 'active',
+        startDate: '2024-07-15',
+        endDate: '2024-08-15',
+        description: 'Join our exciting summer tournament featuring multiple age groups and skill levels.',
+        maxTeams: 16,
+        registrationFee: 50
+      },
+      {
+        id: 'champion-sound-2024',
+        name: 'Champion Sound 2024',
+        status: 'upcoming',
+        startDate: '2024-09-01',
+        endDate: '2024-09-30',
+        description: 'The ultimate championship tournament for advanced players.',
+        maxTeams: 12,
+        registrationFee: 75
+      }
+    ];
     
     const select = document.getElementById('tournamentSelect');
     if (select) {
@@ -446,14 +467,11 @@ async function loadTournaments() {
   }
 }
 
-// Load current active tournament
-async function loadCurrentTournament() {
+// Load current active tournament from static data
+function loadCurrentTournament() {
   try {
-    const response = await fetch('http://localhost:3000/api/tournaments');
-    const allTournaments = await response.json();
-    
-    // Find active tournament
-    const activeTournament = allTournaments.find(t => t.status === 'active');
+    // Find active tournament from static data
+    const activeTournament = tournaments.find(t => t.status === 'active');
     
     const currentTournamentEl = document.getElementById('currentTournament');
     if (currentTournamentEl) {
