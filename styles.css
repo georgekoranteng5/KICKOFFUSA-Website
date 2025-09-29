@@ -2182,33 +2182,41 @@ html { scroll-behavior: smooth; }
 /* Mobile navigation and header tightening */
 @media (max-width: 768px) {
   /* Header container spacing */
-  header .container { padding-top: 8px; padding-bottom: 8px; }
+  header .container { padding-top: 4px !important; padding-bottom: 4px !important; }
 
   /* Brand sizing */
-  header .brand img { height: 28px !important; }
-  header .brand span { font-size: 16px !important; letter-spacing: 0.5px; }
+  header .brand img { height: 24px !important; }
+  header .brand span { font-size: 14px !important; letter-spacing: 0.3px; }
 
-  /* Top nav category pills */
-  .top-nav .nav-category {
-    font-size: 13px !important;
-    padding: 8px 12px !important;
-    border-radius: 10px !important;
+  /* Top nav category pills - force horizontal layout */
+  .top-nav { 
+    display: flex !important; 
+    flex-wrap: nowrap !important; 
+    gap: 4px !important; 
+    justify-content: center !important;
   }
-  .top-nav .nav-category span { font-size: 14px !important; }
+  .top-nav .nav-category {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+  .top-nav .nav-category span { font-size: 12px !important; }
 
   /* Secondary nav group (Home / Events / Tournament) */
   .secondary-nav {
-    margin-top: 8px !important;
-    padding: 10px 12px !important;
-    border-radius: 14px !important;
+    margin-top: 4px !important;
+    padding: 6px 8px !important;
+    border-radius: 10px !important;
   }
   .secondary-nav a.secondary-nav-link {
-    font-size: 13px !important;
-    padding: 8px 10px !important;
+    font-size: 11px !important;
+    padding: 6px 8px !important;
   }
 
   /* Buttons generally a bit smaller on mobile */
-  .btn { font-size: 14px !important; padding: 10px 16px !important; }
+  .btn { font-size: 13px !important; padding: 8px 12px !important; }
 }
 
 /* iOS Safari safe viewport height for hero sections */
@@ -2229,19 +2237,19 @@ html { scroll-behavior: smooth; }
 
 /* Ultra-small phones (<=375px wide) stronger overrides */
 @media (max-width: 375px) {
-  header .container { padding-top: 6px !important; padding-bottom: 6px !important; }
-  header .brand img { height: 24px !important; }
-  header .brand span { font-size: 14px !important; }
+  header .container { padding-top: 2px !important; padding-bottom: 2px !important; }
+  header .brand img { height: 20px !important; }
+  header .brand span { font-size: 12px !important; }
 
-  .top-nav { gap: 8px !important; }
-  .top-nav .nav-category { font-size: 12px !important; padding: 6px 10px !important; line-height: 1.1 !important; }
-  .top-nav .nav-category span { font-size: 12px !important; }
+  .top-nav { gap: 2px !important; }
+  .top-nav .nav-category { font-size: 10px !important; padding: 4px 6px !important; line-height: 1.1 !important; }
+  .top-nav .nav-category span { font-size: 10px !important; }
 
-  .secondary-nav { margin-top: 6px !important; padding: 8px 10px !important; gap: 6px !important; }
-  .secondary-nav li { margin: 0 4px 4px 0 !important; }
-  .secondary-nav a.secondary-nav-link { font-size: 12px !important; padding: 6px 8px !important; line-height: 1.1 !important; }
+  .secondary-nav { margin-top: 2px !important; padding: 4px 6px !important; gap: 2px !important; }
+  .secondary-nav li { margin: 0 2px 2px 0 !important; }
+  .secondary-nav a.secondary-nav-link { font-size: 10px !important; padding: 4px 6px !important; line-height: 1.1 !important; }
 
-  .btn { font-size: 13px !important; padding: 9px 14px !important; }
+  .btn { font-size: 12px !important; padding: 6px 10px !important; }
 }
 
 /* Force-remove excess gaps under header on iOS */
