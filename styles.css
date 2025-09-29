@@ -2276,9 +2276,10 @@ html { scroll-behavior: smooth; }
   .hero .hero-main .btn,
   .hero .hero-main a.btn { position: relative; z-index: 3 !important; }
 
-  /* Simplest, safest fix: hide decorative hero logo on small screens */
-  .hero .parallax-element { display: none !important; }
-  .hero .hero-main { margin-top: 8px !important; }
+  /* Keep logo visible; make it smaller and push content down to avoid overlap */
+  .hero img.parallax-element { height: 64px !important; }
+  .hero .hero-main > div { padding-top: 120px !important; }
+  .hero .hero-main { margin-top: 0 !important; }
 }
 
 /* Slightly smaller phones (<=430px) */
