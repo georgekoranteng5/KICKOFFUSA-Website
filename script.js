@@ -397,7 +397,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   if (document.getElementById('galleryGrid')) {
-    loadGallery();
     initializeGallery();
   }
   
