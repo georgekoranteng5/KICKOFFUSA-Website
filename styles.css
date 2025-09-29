@@ -2233,11 +2233,13 @@ html { scroll-behavior: smooth; }
   header .brand img { height: 24px !important; }
   header .brand span { font-size: 14px !important; }
 
-  .top-nav .nav-category { font-size: 12px !important; padding: 6px 10px !important; }
+  .top-nav { gap: 8px !important; }
+  .top-nav .nav-category { font-size: 12px !important; padding: 6px 10px !important; line-height: 1.1 !important; }
   .top-nav .nav-category span { font-size: 12px !important; }
 
-  .secondary-nav { margin-top: 6px !important; padding: 8px 10px !important; }
-  .secondary-nav a.secondary-nav-link { font-size: 12px !important; padding: 6px 8px !important; }
+  .secondary-nav { margin-top: 6px !important; padding: 8px 10px !important; gap: 6px !important; }
+  .secondary-nav li { margin: 0 4px 4px 0 !important; }
+  .secondary-nav a.secondary-nav-link { font-size: 12px !important; padding: 6px 8px !important; line-height: 1.1 !important; }
 
   .btn { font-size: 13px !important; padding: 9px 14px !important; }
 }
@@ -2245,5 +2247,25 @@ html { scroll-behavior: smooth; }
 /* Force-remove excess gaps under header on iOS */
 @media (max-width: 768px) {
   body { padding-top: 0 !important; }
-  header { margin-bottom: 8px !important; }
+  header { margin-bottom: 8px !important; background: #fff !important; }
+  /* Beat inline styles on nav pills and secondary links */
+  a.nav-category[style], .secondary-nav a.secondary-nav-link[style] {
+    font-size: inherit !important;
+    padding: inherit !important;
+    letter-spacing: 0.5px !important;
+  }
+  /* Smaller hero headings on phones */
+  .hero h1, .events-hero h1, .shop-hero-section h1, .tournament-hero h1 {
+    font-size: clamp(28px, 8vw, 36px) !important;
+    line-height: 1.1 !important;
+    margin-top: 8px !important;
+  }
+}
+
+/* Slightly smaller phones (<=430px) */
+@media (max-width: 430px) {
+  .top-nav { gap: 10px !important; }
+  .top-nav .nav-category { font-size: 13px !important; padding: 7px 11px !important; }
+  .secondary-nav { padding: 10px 12px !important; }
+  .secondary-nav a.secondary-nav-link { font-size: 13px !important; padding: 7px 9px !important; }
 }
