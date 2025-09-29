@@ -2280,6 +2280,24 @@ html { scroll-behavior: smooth; }
   .hero img.parallax-element { height: 64px !important; }
   .hero .hero-main > div { padding-top: 120px !important; }
   .hero .hero-main { margin-top: 0 !important; }
+
+  /* Contact page mobile layout - stack image and form vertically */
+  #contact {
+    flex-direction: column !important;
+    min-height: auto !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  #contact .parallax-element {
+    flex: none !important;
+    height: 200px !important;
+    order: 1 !important;
+  }
+  #contact .animate-stagger {
+    flex: none !important;
+    padding: 40px 20px !important;
+    order: 2 !important;
+  }
 }
 
 /* Slightly smaller phones (<=430px) */
