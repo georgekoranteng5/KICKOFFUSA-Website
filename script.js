@@ -1579,10 +1579,10 @@ function displayGallery() {
 
   let html = '';
   itemsToShow.forEach(item => {
-    const isVideo = item.file_type.startsWith('video/');
+    const isVideo = item.type === 'video';
     const mediaElement = isVideo ? 
-      `<video controls><source src="${item.file_path}" type="${item.file_type}"></video>` :
-      `<img src="${item.file_path}" alt="${item.title}" loading="lazy">`;
+      `<video controls><source src="${item.src}" type="video/mp4"></video>` :
+      `<img src="${item.src}" alt="${item.event_name}" loading="lazy">`;
     
     const playIcon = isVideo ? '<div class="play-icon">▶</div>' : '';
     
