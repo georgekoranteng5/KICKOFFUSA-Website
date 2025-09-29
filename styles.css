@@ -2178,3 +2178,51 @@ html { scroll-behavior: smooth; }
     min-width: 100%;
   }
 }
+
+/* Mobile navigation and header tightening */
+@media (max-width: 768px) {
+  /* Header container spacing */
+  header .container { padding-top: 8px; padding-bottom: 8px; }
+
+  /* Brand sizing */
+  header .brand img { height: 28px !important; }
+  header .brand span { font-size: 16px !important; letter-spacing: 0.5px; }
+
+  /* Top nav category pills */
+  .top-nav .nav-category {
+    font-size: 13px !important;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+  }
+  .top-nav .nav-category span { font-size: 14px !important; }
+
+  /* Secondary nav group (Home / Events / Tournament) */
+  .secondary-nav {
+    margin-top: 8px !important;
+    padding: 10px 12px !important;
+    border-radius: 14px !important;
+  }
+  .secondary-nav a.secondary-nav-link {
+    font-size: 13px !important;
+    padding: 8px 10px !important;
+  }
+
+  /* Buttons generally a bit smaller on mobile */
+  .btn { font-size: 14px !important; padding: 10px 16px !important; }
+}
+
+/* iOS Safari safe viewport height for hero sections */
+@supports (height: 100svh) {
+  .shop-hero-section,
+  .events-hero,
+  .hero,
+  .tournament-hero {
+    min-height: 100svh;
+  }
+}
+
+/* Fallback for browsers without svh */
+.shop-hero-section,
+.events-hero,
+.hero,
+.tournament-hero { min-height: 100vh; }
