@@ -1614,9 +1614,6 @@ function displayGallery() {
           ${mediaElement}
           ${playIcon}
         </div>
-        <div class="content">
-          <div class="event-name">${item.event_name}</div>
-        </div>
       </div>
     `;
   });
