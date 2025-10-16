@@ -1820,3 +1820,35 @@ function filterGallery(filter, clickedButton) {
   displayGallery();
 }
 
+// Mobile Navigation Toggle
+function initializeMobileNavigation() {
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const mobileNav = document.querySelector('.mobile-nav');
+  
+  if (mobileMenuBtn && mobileNav) {
+    mobileMenuBtn.addEventListener('click', function() {
+      if (mobileNav.style.display === 'none' || mobileNav.style.display === '') {
+        mobileNav.style.display = 'block';
+        mobileMenuBtn.innerHTML = '✕';
+      } else {
+        mobileNav.style.display = 'none';
+        mobileMenuBtn.innerHTML = '☰';
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileNav.style.display = 'none';
+        mobileMenuBtn.innerHTML = '☰';
+      });
+    });
+  }
+}
+
+// Initialize mobile navigation when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initializeMobileNavigation();
+});
+

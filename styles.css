@@ -1668,6 +1668,40 @@ footer .container {
   z-index: 1;
 }
 
+/* Mobile Navigation Styles */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  .mobile-menu-btn {
+    display: block !important;
+  }
+  
+  .top-nav {
+    padding: 0 20px !important;
+  }
+  
+  .top-nav > div:first-child {
+    margin-right: 20px !important;
+  }
+  
+  .top-nav > div:first-child span {
+    font-size: 14px !important;
+  }
+  
+  .top-nav > div:first-child img {
+    height: 40px !important;
+    margin-right: 8px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-nav {
+    display: none !important;
+  }
+}
+
 /* Subtle background pattern for body */
 body {
   background-image: 
