@@ -139,32 +139,6 @@
       if (y) y.textContent = new Date().getFullYear();
     })();
     
-    // Mobile menu toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-      const mobileNav = document.querySelector('.mobile-nav');
-      
-      if (mobileMenuBtn && mobileNav) {
-        mobileMenuBtn.addEventListener('click', function() {
-          if (mobileNav.style.display === 'none' || mobileNav.style.display === '') {
-            mobileNav.style.display = 'block';
-            mobileMenuBtn.innerHTML = '✕';
-          } else {
-            mobileNav.style.display = 'none';
-            mobileMenuBtn.innerHTML = '☰';
-          }
-        });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileNav.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-          link.addEventListener('click', function() {
-            mobileNav.style.display = 'none';
-            mobileMenuBtn.innerHTML = '☰';
-          });
-        });
-      }
-    });
   </script>
 </body>
 </html>
