@@ -114,20 +114,20 @@ app.post('/api/teams', async (req, res) => {
     // Send confirmation email
     try {
       const mailOptions = {
-        from: 'kickoffusakickoffusa@gmail.com',
+        from: 'KICKOFFUSAKICKOFFUSA@gmail.com',
         to: captainEmail,
-        subject: 'Team Registration Confirmation - KickoffUSA',
+        subject: 'Team Registration Confirmation - KICKOFFUSA',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #111827; margin: 0;">KickoffUSA</h1>
+              <h1 style="color: #111827; margin: 0;">KICKOFFUSA</h1>
               <p style="color: #6b7280; margin: 5px 0 0;">Soccer Initiative</p>
             </div>
             
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
               <h2 style="color: #111827; margin: 0 0 15px;">Team Registration Confirmed!</h2>
               <p style="color: #374151; margin: 0 0 10px;">Hello ${captainName},</p>
-              <p style="color: #374151; margin: 0 0 15px;">Your team "<strong>${teamName}</strong>" has been successfully registered with KickoffUSA!</p>
+              <p style="color: #374151; margin: 0 0 15px;">Your team "<strong>${teamName}</strong>" has been successfully registered with KICKOFFUSA!</p>
             </div>
             
             <div style="background: #fff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
@@ -167,17 +167,17 @@ app.post('/api/teams', async (req, res) => {
             </div>
             
             <div style="text-align: center; margin-top: 30px;">
-              <p style="color: #6b7280; font-size: 14px; margin: 0;">Thank you for joining KickoffUSA!</p>
+              <p style="color: #6b7280; font-size: 14px; margin: 0;">Thank you for joining KICKOFFUSA!</p>
               <p style="color: #6b7280; font-size: 14px; margin: 5px 0 0;">Visit our website for updates and tournament information.</p>
             </div>
           </div>
         `,
         text: `
-          Team Registration Confirmation - KickoffUSA
+          Team Registration Confirmation - KICKOFFUSA
           
           Hello ${captainName},
           
-          Your team "${teamName}" has been successfully registered with KickoffUSA!
+          Your team "${teamName}" has been successfully registered with KICKOFFUSA!
           
           Team Details:
           - Team Name: ${teamName}
@@ -192,7 +192,7 @@ app.post('/api/teams', async (req, res) => {
           - You'll receive the match schedule and updates
           - Check our website for live scores and standings
           
-          Thank you for joining KickoffUSA!
+          Thank you for joining KICKOFFUSA!
         `
       };
       
@@ -829,7 +829,7 @@ function extractEventName(filename) {
   
   // If no meaningful name extracted, use a default
   if (!eventName || eventName.length < 3) {
-    eventName = 'KickoffUSA Event';
+    eventName = 'KICKOFFUSA Event';
   }
   
   return eventName;
@@ -857,7 +857,7 @@ function extractTitle(filename) {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'kickoffusakickoffusa@gmail.com',
+    user: 'KICKOFFUSAKICKOFFUSA@gmail.com',
     pass: process.env.EMAIL_PASSWORD // Password added in .env file
   }
 });
@@ -877,8 +877,8 @@ app.post('/api/contact', async (req, res) => {
 
     // Email content
     const mailOptions = {
-      from: 'kickoffusakickoffusa@gmail.com',
-      to: 'kickoffusakickoffusa@gmail.com',
+      from: 'KICKOFFUSAKICKOFFUSA@gmail.com',
+      to: 'KICKOFFUSAKICKOFFUSA@gmail.com',
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -887,7 +887,7 @@ app.post('/api/contact', async (req, res) => {
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
         <hr>
-        <p><em>This message was sent from the KickoffUSA website contact form.</em></p>
+        <p><em>This message was sent from the KICKOFFUSA website contact form.</em></p>
       `,
       text: `
         New Contact Form Submission
@@ -896,7 +896,7 @@ app.post('/api/contact', async (req, res) => {
         Email: ${email}
         Message: ${message}
         
-        This message was sent from the KickoffUSA website contact form.
+        This message was sent from the KICKOFFUSA website contact form.
       `
     };
 
@@ -917,8 +917,184 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
+// Partner form endpoint
+app.post('/api/partner', async (req, res) => {
+  try {
+    const { name, email, company, phone, partnershipType, message } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !company || !phone || !partnershipType || !message) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'All fields are required' 
+      });
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Please enter a valid email address' 
+      });
+    }
+
+    // Send notification email to KICKOFFUSA
+    const notificationMailOptions = {
+      from: 'KICKOFFUSAKICKOFFUSA@gmail.com',
+      to: 'KICKOFFUSAKICKOFFUSA@gmail.com',
+      subject: `New Partnership Request from ${name} - ${company}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="color: #111827; margin: 0;">KICKOFFUSA Partnership Request</h1>
+            <p style="color: #6b7280; margin: 5px 0 0;">New Partnership Opportunity</p>
+          </div>
+          
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="color: #111827; margin: 0 0 15px;">Partnership Request Details</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Name:</td>
+                <td style="padding: 8px 0; color: #111827;">${name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Company:</td>
+                <td style="padding: 8px 0; color: #111827;">${company}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Email:</td>
+                <td style="padding: 8px 0; color: #111827;">${email}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Phone:</td>
+                <td style="padding: 8px 0; color: #111827;">${phone}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Partnership Type:</td>
+                <td style="padding: 8px 0; color: #111827;">${partnershipType}</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div style="background: #fff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="color: #111827; margin: 0 0 15px;">Partnership Vision</h3>
+            <p style="color: #374151; margin: 0; line-height: 1.6;">${message.replace(/\n/g, '<br>')}</p>
+          </div>
+          
+          <div style="text-align: center; margin-top: 30px;">
+            <p style="color: #6b7280; font-size: 14px; margin: 0;">This partnership request was submitted through the KICKOFFUSA website.</p>
+          </div>
+        </div>
+      `,
+      text: `
+        KICKOFFUSA Partnership Request
+        
+        Name: ${name}
+        Company: ${company}
+        Email: ${email}
+        Phone: ${phone}
+        Partnership Type: ${partnershipType}
+        
+        Partnership Vision:
+        ${message}
+        
+        This partnership request was submitted through the KICKOFFUSA website.
+      `
+    };
+
+    // Send notification email
+    await transporter.sendMail(notificationMailOptions);
+
+    // Send partnership presentation to the requester
+    const presentationMailOptions = {
+      from: 'KICKOFFUSAKICKOFFUSA@gmail.com',
+      to: email,
+      subject: 'KICKOFFUSA Partnership Presentation - Thank You for Your Interest!',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="color: #111827; margin: 0;">KICKOFFUSA</h1>
+            <p style="color: #6b7280; margin: 5px 0 0;">Partnership Presentation</p>
+          </div>
+          
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="color: #111827; margin: 0 0 15px;">Thank You for Your Partnership Interest!</h2>
+            <p style="color: #374151; margin: 0 0 10px;">Hello ${name},</p>
+            <p style="color: #374151; margin: 0 0 15px;">Thank you for your interest in partnering with KICKOFFUSA! We're excited about the possibility of working together to grow Atlanta's premier soccer community.</p>
+          </div>
+          
+          <div style="background: #fff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="color: #111827; margin: 0 0 15px;">Partnership Presentation</h3>
+            <p style="color: #374151; margin: 0 0 15px;">Please find attached our comprehensive partnership presentation that outlines:</p>
+            <ul style="color: #374151; margin: 0; padding-left: 20px;">
+              <li>Our mission and vision for Atlanta soccer</li>
+              <li>Partnership opportunities and benefits</li>
+              <li>Community impact and reach</li>
+              <li>Next steps for collaboration</li>
+            </ul>
+          </div>
+          
+          <div style="background: #fef3c7; border: 1px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h4 style="color: #92400e; margin: 0 0 10px;">What's Next?</h4>
+            <ul style="color: #92400e; margin: 0; padding-left: 20px;">
+              <li>Review our partnership presentation</li>
+              <li>We'll contact you within 2-3 business days</li>
+              <li>Schedule a meeting to discuss collaboration opportunities</li>
+              <li>Explore how we can work together to grow the beautiful game</li>
+            </ul>
+          </div>
+          
+          <div style="text-align: center; margin-top: 30px;">
+            <p style="color: #6b7280; font-size: 14px; margin: 0;">Thank you for considering KICKOFFUSA as your soccer community partner!</p>
+            <p style="color: #6b7280; font-size: 14px; margin: 5px 0 0;">Visit our website for updates and community information.</p>
+          </div>
+        </div>
+      `,
+      text: `
+        KICKOFFUSA Partnership Presentation
+        
+        Hello ${name},
+        
+        Thank you for your interest in partnering with KICKOFFUSA! We're excited about the possibility of working together to grow Atlanta's premier soccer community.
+        
+        Partnership Presentation:
+        Please find attached our comprehensive partnership presentation that outlines:
+        - Our mission and vision for Atlanta soccer
+        - Partnership opportunities and benefits
+        - Community impact and reach
+        - Next steps for collaboration
+        
+        What's Next?
+        - Review our partnership presentation
+        - We'll contact you within 2-3 business days
+        - Schedule a meeting to discuss collaboration opportunities
+        - Explore how we can work together to grow the beautiful game
+        
+        Thank you for considering KICKOFFUSA as your soccer community partner!
+        Visit our website for updates and community information.
+      `
+    };
+
+    // Send presentation email
+    await transporter.sendMail(presentationMailOptions);
+    
+    res.json({ 
+      success: true, 
+      message: 'Partnership request sent successfully! You will receive our presentation via email shortly.' 
+    });
+
+  } catch (error) {
+    console.error('Error sending partnership request:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to send partnership request. Please try again later.' 
+    });
+  }
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-  console.log(`Database: ${process.env.DB_NAME || 'kickoffusa'}`);
+  console.log(`Database: ${process.env.DB_NAME || 'KICKOFFUSA'}`);
 });

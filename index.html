@@ -3,163 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KickoffUSA - Home</title>
-  <meta name="description" content="KickoffUSA — A soccer initiative based in Atlanta, focused on uniting people with the beautiful game." />
+  <title>KICKOFFUSA - Home</title>
+  <meta name="description" content="KICKOFFUSA — A soccer initiative based in Atlanta, focused on uniting people with the beautiful game." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <!-- Top Navigation Bar -->
-    <div class="top-nav" style="background: #fff; padding: 0;">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0;">
-        <div class="brand" style="display: flex; align-items: center;">
-          <img src="assets/kicoff-logo-1.PNG" alt="KickoffUSA Logo" style="height: 40px; margin-right: 12px;">
-          <span style="color: #000; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
-        </div>
-        <nav>
-          <ul style="display: flex; gap: 40px; margin: 0; padding: 0; list-style: none;">
-            <li><a href="#" class="nav-category" data-category="discover" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🔍</span>Discover</a></li>
-            <li><a href="#" class="nav-category" data-category="store" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">🛍️</span>Store</a></li>
-            <li><a href="#" class="nav-category" data-category="community" style="color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;"><span style="font-size: 16px;">👥</span>Community</a></li>
-          </ul>
-        </nav>
-      </div>
+  <!-- Top Navigation -->
+  <nav class="top-nav" style="position: fixed; top: 0; left: 0; right: 0; height: 80px; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); z-index: 1000; display: flex; align-items: center; padding: 0 40px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <!-- Logo -->
+    <div style="display: flex; align-items: center; margin-right: 60px;">
+      <img src="assets/kickoff-logo.png" alt="KICKOFFUSA Logo" style="height: 50px; margin-right: 16px;">
+      <span style="color: #fff; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
     </div>
     
-    <!-- Secondary Navigation Bar -->
-    <div class="secondary-nav">
-      <div class="container">
-        <nav>
-          <ul id="secondary-nav-links">
-            <!-- Dynamic content will be inserted here -->
-          </ul>
-        </nav>
+    <!-- Navigation Links -->
+    <div style="flex: 1; display: flex; align-items: center; gap: 8px;">
+      <a href="index.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; background: rgba(251, 191, 36, 0.2); border-bottom: 3px solid #fbbf24;">HOME</a>
+      <a href="events.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">EVENTS</a>
+      <a href="tournament.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">TOURNAMENT</a>
+      <a href="shop.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">SHOP</a>
+      <a href="gallery.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">GALLERY</a>
+      <a href="contact.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">CONTACT</a>
+      <a href="partner.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">PARTNER</a>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main style="margin-top: 80px; min-height: 100vh; position: relative;">
+    <!-- Video Background -->
+    <div class="video-wrap" style="position: fixed; inset: 0; z-index: 0; overflow: hidden;">
+      <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.4) saturate(1.2);">
+        <source src="assets/Kickoff_Summer_Series_web_silent.mp4" type="video/mp4">
+        <img src="assets/gallery/KICKOFF CUP/IMG_3834.JPG" alt="KICKOFFUSA Celebration" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.4) saturate(1.2);">
+      </video>
+      <div class="overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);"></div>
+    </div>
+
+    <!-- Centered Content -->
+    <div style="position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 60px;">
+      <div style="text-align: center; max-width: 800px;">
+        <!-- Main Text Overlay -->
+        <div style="position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;">
+          <h1 style="font-size: clamp(48px, 8vw, 72px); font-weight: 900; color: #fff; margin: 0 0 16px; line-height: 1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.8);">
+            UNITING PEOPLE WITH<br>
+            <span style="color: #fbbf24;">THE BEAUTIFUL GAME.</span>
+          </h1>
+          <p style="font-size: clamp(18px, 3vw, 24px); color: #fff; margin: 0; line-height: 1.4; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 600px; margin-left: auto; margin-right: auto;">
+            Driven by culture with the aim of building a community rooted in soccer.
+          </p>
+        </div>
       </div>
     </div>
-  </header>
 
-  <!-- Hero & About Combined with Image Background -->
-  <div class="hero-about-wrapper" style="position: relative; min-height: 100vh;">
-    <div class="image-wrap" aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden; z-index: 0;">
-      <img src="assets/gallery/KICKOFF CUP/IMG_3834.JPG" alt="KickoffUSA Celebration" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.85) saturate(1.1) contrast(1.1);">
-      <div class="overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);"></div>
-    </div>
-    
-    <!-- Hero Section -->
-    <section id="home" class="hero" aria-label="KickoffUSA hero" style="position: relative; z-index: 1; padding: 0; min-height: 100vh; display: flex; align-items: center;">
-      <div class="container" style="padding: 80px 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
-        
-        <!-- Main Hero Content - Centered -->
-        <div class="hero-main animate-stagger" style="text-align: center; margin-bottom: 80px;">
-          <div style="background: rgba(0,0,0,0.4); padding: 60px 40px; border-radius: 24px; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); max-width: 1200px; margin: 0 auto; position: relative; overflow: hidden;">
-            <!-- Animated background pattern -->
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%); animation: shimmer 3s ease-in-out infinite; pointer-events: none;"></div>
-            
-            <!-- Logo positioned at top-left -->
-            <div style="position: absolute; top: 20px; left: 20px; z-index: 2;">
-              <img src="assets/kickoff-logo.png?v=2" alt="KickoffUSA Logo" class="parallax-element" style="height: 120px; filter: drop-shadow(2px 2px 8px rgba(0,0,0,0.7)); animation: float 3s ease-in-out infinite;">
-            </div>
-            
-            <!-- Centered content -->
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; text-align: center;">
-              <h1 style="font-size: clamp(48px, 8vw, 84px); margin: 0 0 24px; font-weight: 900; line-height: 1.1; text-shadow: 4px 4px 8px rgba(0,0,0,0.8); color: #fff; letter-spacing: 2px; position: relative; z-index: 1;">KICKOFFUSA</h1>
-              <p class="sub" style="font-size: clamp(20px, 3vw, 28px); margin: 0 0 20px; line-height: 1.4; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-weight: 300; position: relative; z-index: 1;">Atlanta's Premier Soccer Community</p>
-              <p class="value-prop" style="font-size: clamp(16px, 2.5vw, 20px); margin: 0 0 40px; line-height: 1.5; color: #f1f5f9; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-weight: 400; position: relative; z-index: 1; max-width: 600px; margin-left: auto; margin-right: auto;">Join 200+ players in competitive tournaments, exclusive events, and a thriving soccer community that celebrates the beautiful game.</p>
-              <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1;">
-                <a class="btn primary" href="gallery.html" style="font-size: 18px; padding: 18px 36px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); background: linear-gradient(135deg, #fff, #f8f9fa); color: #000; border: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Show Gallery</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mission & Stats Section -->
-        <div class="mission-stats" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px;">
-          <!-- Mission Card -->
-          <div class="mission-card" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
-            <!-- Animated background pattern -->
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%); animation: shimmer 3s ease-in-out infinite; pointer-events: none;"></div>
-            <h2 style="font-size: clamp(20px, 2.5vw, 24px); margin: 0 0 20px; color: #fff; font-weight: 700; text-align: center; position: relative; z-index: 1;">OUR MISSION</h2>
-            <p style="color: #e5e7eb; font-size: 16px; line-height: 1.7; margin: 0 0 16px; text-align: center; position: relative; z-index: 1;">At KickoffUSA, we believe the game doesn't end at the final whistle — it lives on in the way we connect, create, and carry ourselves every day.</p>
-            <p style="color: #e5e7eb; font-size: 16px; line-height: 1.7; margin: 0; text-align: center; position: relative; z-index: 1;">We're building a community where every player, every fan, and every supporter can find their place on and off the field.</p>
-          </div>
-
-          <!-- Stats Card -->
-          <div class="stats-card" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
-            <!-- Animated background pattern -->
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%); animation: shimmer 3s ease-in-out infinite; pointer-events: none;"></div>
-            <h3 style="font-size: clamp(20px, 2.5vw, 24px); margin: 0 0 30px; color: #fff; font-weight: 700; text-align: center; position: relative; z-index: 1;">BY THE NUMBERS</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; position: relative; z-index: 1;">
-              <div style="text-align: center;">
-                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">200+</div>
-                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Players</div>
-              </div>
-              <div style="text-align: center;">
-                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">20+</div>
-                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Teams</div>
-              </div>
-              <div style="text-align: center;">
-                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">3+</div>
-                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Events</div>
-              </div>
-              <div style="text-align: center;">
-                <div style="font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 8px;">1</div>
-                <div style="font-size: 14px; color: #e5e7eb; text-transform: uppercase; letter-spacing: 1px;">Year</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator animate-on-scroll" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; color: rgba(255, 255, 255, 0.8); font-size: 24px; cursor: pointer; transition: all 0.3s ease;">
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Scroll to explore</span>
-            <div style="width: 2px; height: 30px; background: currentColor; border-radius: 1px; animation: bounce 2s infinite;"></div>
-          </div>
-        </div>
-
+    <!-- Scroll Indicator -->
+    <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2;">
+      <div style="width: 40px; height: 40px; border: 2px solid #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px);">
+        <span style="color: #fff; font-weight: 700; font-size: 14px;">0</span>
       </div>
-    </section>
-  </div>
+    </div>
+  </main>
 
   <!-- Notification System -->
-  <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 10000; transform: translateX(400px); transition: transform 0.3s ease; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+  <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 10000; transform: translateX(400px); max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
     <div style="display: flex; align-items: center; gap: 12px;">
       <span id="notification-icon" style="font-size: 20px;">✓</span>
       <span id="notification-message">Notification message</span>
     </div>
   </div>
 
-  <footer>
-    <div class="container">© <span id="year"></span> KickoffUSA</div>
+  <!-- Footer -->
+  <footer style="background: rgba(0,0,0,0.9); color: #fff; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
+      <div style="margin-bottom: 20px;">
+        <img src="assets/kickoff-logo.png" alt="KICKOFFUSA Logo" style="height: 40px; margin-bottom: 16px;">
+        <h3 style="color: #fff; font-size: 24px; font-weight: 700; margin: 0 0 16px;">KICKOFFUSA</h3>
+        <p style="color: #cbd5e1; font-size: 16px; line-height: 1.6; margin: 0 0 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Atlanta's premier soccer community, bringing together players, fans, and supporters through competitive tournaments and exclusive events.
+        </p>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+        <div>
+          <h4 style="color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 16px;">Quick Links</h4>
+          <ul style="list-style: none; margin: 0; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="events.html" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Events</a></li>
+            <li style="margin-bottom: 8px;"><a href="tournament.html" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Tournament</a></li>
+            <li style="margin-bottom: 8px;"><a href="shop.html" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Shop</a></li>
+            <li style="margin-bottom: 8px;"><a href="gallery.html" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Gallery</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 16px;">Community</h4>
+          <ul style="list-style: none; margin: 0; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="contact.html" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Contact Us</a></li>
+            <li style="margin-bottom: 8px;"><a href="partner.html" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Become a Partner</a></li>
+            <li style="margin-bottom: 8px;"><a href="#" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Join Our Community</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 16px;">Connect</h4>
+          <div style="display: flex; gap: 16px; justify-content: center;">
+            <a href="#" style="color: #cbd5e1; font-size: 16px; text-decoration: none; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;">Instagram</a>
+            <a href="#" style="color: #cbd5e1; font-size: 16px; text-decoration: none; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;">TikTok</a>
+            <a href="#" style="color: #cbd5e1; font-size: 16px; text-decoration: none; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;">YouTube</a>
+            <a href="#" style="color: #cbd5e1; font-size: 16px; text-decoration: none; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;">Twitter</a>
+            <a href="#" style="color: #cbd5e1; font-size: 16px; text-decoration: none; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; color: #94a3b8; font-size: 14px;">
+        <p style="margin: 0;">© 2024 KICKOFFUSA. All rights reserved. | Atlanta, Georgia</p>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>
-  <script>
-  // Minimal page script + smooth anchor scrolling with sticky header offset
-  (function(){
-    const y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
-
-    const header = document.querySelector('header');
-    const OFFSET = (header?.offsetHeight || 0) + 8; // extra breathing room
-
-    document.addEventListener('click', (e)=>{
-      const a = e.target.closest('a[href^="#"]');
-      if(!a) return;
-      const id = a.getAttribute('href').slice(1);
-      const el = document.getElementById(id);
-      if(!el) return; // not an in-page anchor
-      e.preventDefault();
-      const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-
-  })();
-</script>
-
 </body>
 </html>

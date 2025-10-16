@@ -7,17 +7,18 @@ const ADMIN_PASSWORD = 'GGS7338&'; // Change this to your desired password
 // Navigation categories and their sub-links
 const navigationCategories = {
   discover: [
-    { text: 'Home', href: 'index.html', icon: '🏠' },
-    { text: 'Events', href: 'events.html', icon: '⚽' },
-    { text: 'Tournament', href: 'tournament.html', icon: '🏆' }
+    { text: 'Home', href: 'index.html' },
+    { text: 'Events', href: 'events.html' },
+    { text: 'Tournament', href: 'tournament.html' }
   ],
   store: [
-    { text: 'Shop', href: 'shop.html', icon: '🛍️' }
+    { text: 'Shop', href: 'shop.html' }
   ],
   community: [
-    { text: 'Gallery', href: 'gallery.html', icon: '📸' },
-    { text: 'Contact', href: 'contact.html', icon: '📧' },
-    { text: 'Admin', href: '#', onclick: 'toggleAdminPanel(); return false;', special: true, icon: '⚙️' }
+    { text: 'Gallery', href: 'gallery.html' },
+    { text: 'Contact', href: 'contact.html' },
+    { text: 'Partner', href: 'partner.html' },
+    { text: 'Admin', href: '#', onclick: 'toggleAdminPanel(); return false;', special: true }
   ]
 };
 
@@ -65,9 +66,7 @@ function updateSecondaryNav(category) {
     const isAdmin = link.special;
     const adminStyle = isAdmin ? 'color: #666; font-size: 12px;' : '';
     const onclickAttr = link.onclick ? `onclick="${link.onclick}"` : '';
-    const icon = link.icon ? `<span style="margin-right: 8px; font-size: 16px;">${link.icon}</span>` : '';
-    
-    return `<li><a href="${link.href}" class="secondary-nav-link" ${onclickAttr} style="color: #000; background: transparent; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 14px; padding: 12px 20px; border-radius: 6px; border: none; text-decoration: none; transition: all 0.2s ease; display: inline-flex; align-items: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; ${adminStyle}">${icon}${link.text}</a></li>`;
+    return `<li><a href="${link.href}" class="secondary-nav-link" ${onclickAttr} style="color: #000; background: transparent; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 14px; padding: 12px 20px; border-radius: 6px; border: none; text-decoration: none; transition: all 0.2s ease; display: inline-flex; align-items: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; ${adminStyle}">${link.text}</a></li>`;
   }).join('');
   
   // Add click handlers to secondary nav links
@@ -242,6 +241,79 @@ async function submitContactForm(event) {
   }
 }
 
+// Partner form submission
+async function submitPartnerForm(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('partnerName').value;
+  const email = document.getElementById('partnerEmail').value;
+  const company = document.getElementById('companyName').value;
+  const phone = document.getElementById('partnerPhone').value;
+  const partnershipType = document.getElementById('partnershipType').value;
+  const message = document.getElementById('partnerMessage').value;
+  
+  // Validation
+  if (!name || !email || !company || !phone || !partnershipType || !message) {
+    showNotification('Please fill in all fields', 'error');
+    return;
+  }
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    showNotification('Please enter a valid email address', 'error');
+    return;
+  }
+  
+  // Phone validation
+  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+  if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+    showNotification('Please enter a valid phone number', 'error');
+    return;
+  }
+  
+  // Show loading state
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Sending Request...';
+  submitBtn.disabled = true;
+  
+  try {
+    const response = await fetch('http://localhost:3000/api/partner', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        company,
+        phone,
+        partnershipType,
+        message
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok) {
+      showNotification('Partnership request sent successfully! You will receive our presentation via email shortly.', 'success');
+      event.target.reset();
+    } else {
+      showNotification('Error sending partnership request: ' + (result.message || 'Please try again'), 'error');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+      showNotification('Unable to send partnership request. Please check your internet connection.', 'error');
+    } else {
+      showNotification('Failed to send partnership request. Please try again later.', 'error');
+    }
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+}
+
 // Countdown Timer Function
 function startCountdown() {
   // Set the target date (October 4, 2025 at 2:00 PM) - using a future date
@@ -333,6 +405,98 @@ function initializeScrollAnimations() {
   });
 }
 
+// Enhanced motion effects
+function initializeMotionEffects() {
+  // Add hover effects to buttons
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.classList.add('btn-enhanced', 'hover-lift');
+  });
+
+  // Add hover effects to cards
+  document.querySelectorAll('.card, .event-card, .tournament-card').forEach(card => {
+    card.classList.add('card-enhanced', 'hover-lift');
+  });
+
+  // Add hover effects to images
+  document.querySelectorAll('img').forEach(img => {
+    img.classList.add('image-enhanced');
+  });
+
+  // Add hover effects to navigation links
+  document.querySelectorAll('.nav-category, .secondary-nav-link').forEach(link => {
+    link.classList.add('nav-enhanced');
+  });
+
+  // Add enhanced form effects
+  document.querySelectorAll('form').forEach(form => {
+    form.classList.add('form-enhanced');
+  });
+
+  // Add stagger animations to lists
+  document.querySelectorAll('ul li, .event-list li, .tournament-list li').forEach((li, index) => {
+    li.classList.add('animate-slide-stagger', `stagger-${Math.min(index + 1, 6)}`);
+  });
+
+  // Add continuous motion to key elements
+  document.querySelectorAll('h1, h2, h3').forEach(heading => {
+    if (!heading.classList.contains('animate-continuous-pulse')) {
+      heading.classList.add('animate-continuous-pulse');
+    }
+  });
+
+  // Add floating motion to stats numbers
+  document.querySelectorAll('.stats-card .animate-heartbeat').forEach(stat => {
+    stat.classList.add('animate-continuous-float');
+  });
+
+  // Add wave motion to paragraphs
+  document.querySelectorAll('p').forEach(paragraph => {
+    if (!paragraph.classList.contains('animate-continuous-wave')) {
+      paragraph.classList.add('animate-continuous-wave');
+    }
+  });
+
+  // Add glow effects to important buttons
+  document.querySelectorAll('.btn.primary').forEach(btn => {
+    if (!btn.classList.contains('animate-continuous-glow')) {
+      btn.classList.add('animate-continuous-glow');
+    }
+  });
+}
+
+// Enhanced interaction animations
+function initializeInteractionAnimations() {
+  // Add wiggle effect to error states
+  document.querySelectorAll('input, textarea, select').forEach(input => {
+    input.addEventListener('invalid', function() {
+      this.classList.add('animate-shake');
+      setTimeout(() => {
+        this.classList.remove('animate-shake');
+      }, 500);
+    });
+  });
+
+  // Add glow effect to successful actions
+  document.querySelectorAll('.btn.primary').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.classList.add('animate-glow');
+      setTimeout(() => {
+        this.classList.remove('animate-glow');
+      }, 2000);
+    });
+  });
+
+  // Add loading effects to buttons on click
+  document.querySelectorAll('button[type="submit"], .btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.classList.add('loading-enhanced');
+      setTimeout(() => {
+        this.classList.remove('loading-enhanced');
+      }, 2000);
+    });
+  });
+}
+
 // Parallax scroll effect
 function initializeParallax() {
   const parallaxElements = document.querySelectorAll('.parallax-element');
@@ -385,6 +549,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeNavigation();
   initializeScrollAnimations();
   initializeParallax();
+  initializeMotionEffects();
+  initializeInteractionAnimations();
   
   // Only run page-specific functions if elements exist
   if (document.getElementById('countdown')) {
@@ -1622,7 +1788,7 @@ function displayGallery() {
   if (hasMore) {
     html += `
       <div class="gallery-load-more" style="grid-column: 1 / -1; text-align: center; padding: 20px;">
-        <button class="btn outline" onclick="loadMoreItems()" style="padding: 12px 24px; font-size: 16px;">
+        <button class="btn outline" onclick="loadMoreItems()" style="padding: 12px 24px; font-size: 16px; background: #fff; color: #000; border: 2px solid #fff;">
           View More (${filteredItems.length - endIndex} remaining)
         </button>
       </div>

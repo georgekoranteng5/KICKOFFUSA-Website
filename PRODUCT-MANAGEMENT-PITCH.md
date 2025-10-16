@@ -1,8 +1,8 @@
-# **KickoffUSA Website: Product Management Pitch**
+# **KICKOFFUSA Website: Product Management Pitch**
 
 ## **Executive Summary**
 
-The KickoffUSA website is a comprehensive soccer community platform that bridges the gap between grassroots soccer culture and digital engagement. Built for the KICKOFFUSA soccer initiative, we're creating more than a website—we're building a digital movement that unites athletes, fans, and strangers through the beautiful game.
+The KICKOFFUSA website is a comprehensive soccer community platform that bridges the gap between grassroots soccer culture and digital engagement. Built for the KICKOFFUSA soccer initiative, we're creating more than a website—we're building a digital movement that unites athletes, fans, and strangers through the beautiful game.
 
 ---
 
@@ -30,7 +30,7 @@ The KICKOFFUSA soccer initiative and other grassroots soccer communities in Atla
 As someone deeply involved in Atlanta's soccer community, I experienced these pain points firsthand:
 - Watched tournament organizers struggle with manual processes
 - Saw players miss opportunities due to poor communication
-- Recognized the gap between KickoffUSA grassroots passion and digital tools
+- Recognized the gap between KICKOFFUSA grassroots passion and digital tools
 
 ### **Solution Approach**
 I built this website for the KICKOFFUSA soccer initiative to address these specific problems by:
@@ -396,7 +396,7 @@ matches (id, tournament_id, group_id, team1_id, team2_id, team1_score, team2_sco
 
 ## **Call to Action**
 
-The KickoffUSA website represents a significant opportunity to support the growing KICKOFFUSA soccer initiative in Atlanta and beyond. With our solid technical foundation, community-focused approach, and clear growth strategy, we're positioned to become the leading digital platform for the KICKOFFUSA soccer community.
+The KICKOFFUSA website represents a significant opportunity to support the growing KICKOFFUSA soccer initiative in Atlanta and beyond. With our solid technical foundation, community-focused approach, and clear growth strategy, we're positioned to become the leading digital platform for the KICKOFFUSA soccer community.
 
 **Next Steps:**
 1. **User Research:** Validate features with KICKOFFUSA community members
@@ -412,7 +412,7 @@ The KickoffUSA website represents a significant opportunity to support the growi
 
 *Document Version: 1.1*  
 *Last Updated: January 2025*  
-*Prepared for: KickoffUSA Website Development*
+*Prepared for: KICKOFFUSA Website Development*
 
 ### **Recent Updates (January 2025)**
 - ✅ Implemented dynamic two-tier navigation system with hover interactions

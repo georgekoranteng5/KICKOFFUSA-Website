@@ -1,4 +1,4 @@
-# KickoffUSA Backend Setup
+# KICKOFFUSA Backend Setup
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ npm install
 ### 2. Create Database
 ```sql
 -- Connect to PostgreSQL and run:
-CREATE DATABASE kickoffusa;
+CREATE DATABASE KICKOFFUSA;
 ```
 
 ### 3. Update Database Configuration

@@ -1,7 +1,7 @@
 # Gallery System Documentation
 
 ## Overview
-The KickoffUSA gallery system automatically displays photos and videos from the `assets/gallery/` folder. No user uploads are allowed - media is managed by adding files directly to the folder.
+The KICKOFFUSA gallery system automatically displays photos and videos from the `assets/gallery/` folder. No user uploads are allowed - media is managed by adding files directly to the folder.
 
 ## How to Add Media
 

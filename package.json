@@ -1,7 +1,7 @@
 {
-  "name": "kickoffusa-backend",
+  "name": "KICKOFFUSA-backend",
   "version": "1.0.0",
-  "description": "Backend server for KickoffUSA tournament management",
+  "description": "Backend server for KICKOFFUSA tournament management",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
