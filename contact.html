@@ -9,6 +9,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=6">
+  <style>
+    /* Mobile Responsive Styles for Contact Page */
+    @media (max-width: 768px) {
+      #contact {
+        flex-direction: column !important;
+        min-height: auto !important;
+      }
+      
+      .parallax-element {
+        height: 300px !important;
+        flex: none !important;
+      }
+      
+      #contact > div:last-child {
+        padding: 40px 20px !important;
+        flex: none !important;
+      }
+      
+      #contact h1 {
+        font-size: 36px !important;
+        margin-bottom: 20px !important;
+      }
+      
+      #contact p {
+        font-size: 16px !important;
+        margin-bottom: 30px !important;
+      }
+      
+      /* Make form fields stack vertically on mobile */
+      #contact form > div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+      
+      #contact form > div[style*="grid-template-columns"] > div {
+        width: 100% !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Top Navigation -->

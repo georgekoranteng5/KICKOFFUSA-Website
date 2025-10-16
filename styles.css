@@ -1684,15 +1684,21 @@ footer .container {
   
   .top-nav > div:first-child {
     margin-right: 20px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
   }
   
   .top-nav > div:first-child span {
-    font-size: 14px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
   
   .top-nav > div:first-child img {
-    height: 40px !important;
-    margin-right: 8px !important;
+    height: 35px !important;
+    margin-right: 6px !important;
+    flex-shrink: 0 !important;
   }
 }
 
