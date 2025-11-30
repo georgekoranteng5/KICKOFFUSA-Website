@@ -273,19 +273,33 @@
     })();
     
     // Email Signup Popup Functionality
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       const popup = document.getElementById('emailSignupPopup');
       const closeBtn = document.getElementById('closePopupBtn');
       const form = document.getElementById('emailSignupForm');
       const emailInput = document.getElementById('popupEmailInput');
       
+      if (!popup) {
+        console.error('Popup element not found');
+        return;
+      }
+      
       // Check if user has already seen the popup
-      let hasSeenPopup = localStorage.getItem('kickoffusa_popup_seen');
+      let hasSeenPopup = false;
+      try {
+        hasSeenPopup = localStorage.getItem('kickoffusa_popup_seen') === 'true';
+      } catch (e) {
+        // localStorage might not be available (private mode, etc.)
+        console.log('localStorage not available');
+      }
       
       // For testing: Add ?showpopup=true to URL to force show popup
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('showpopup') === 'true') {
-        hasSeenPopup = null; // Force show
+        hasSeenPopup = false; // Force show
+        try {
+          localStorage.removeItem('kickoffusa_popup_seen');
+        } catch (e) {}
       }
       
       // Show popup if user hasn't seen it (after a short delay)
@@ -293,17 +307,30 @@
         setTimeout(() => {
           if (popup) {
             popup.style.display = 'flex';
+            popup.style.opacity = '0';
+            // Fade in animation
+            requestAnimationFrame(() => {
+              popup.style.transition = 'opacity 0.3s ease';
+              popup.style.opacity = '1';
+            });
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
           }
-        }, 1000); // Show after 1 second
+        }, 1500); // Show after 1.5 seconds
       }
       
       // Close popup function
       function closePopup() {
         if (popup) {
-          popup.style.display = 'none';
-          document.body.style.overflow = ''; // Restore scrolling
-          localStorage.setItem('kickoffusa_popup_seen', 'true');
+          popup.style.opacity = '0';
+          setTimeout(() => {
+            popup.style.display = 'none';
+            document.body.style.overflow = ''; // Restore scrolling
+          }, 300);
+          try {
+            localStorage.setItem('kickoffusa_popup_seen', 'true');
+          } catch (e) {
+            // localStorage might not be available
+          }
         }
       }
       
@@ -336,8 +363,13 @@
           submitBtn.textContent = 'Subscribing...';
           
           try {
+            // Determine API endpoint (use relative path for production, localhost for development)
+            const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+              ? 'http://localhost:3000/api/newsletter/subscribe'
+              : '/api/newsletter/subscribe';
+            
             // Send email to backend
-            const response = await fetch('http://localhost:3000/api/newsletter/subscribe', {
+            const response = await fetch(apiUrl, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -379,7 +411,7 @@
           }
         });
       }
-    })();
+    });
   </script>
 </body>
 </html>
