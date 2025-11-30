@@ -1093,6 +1093,126 @@ app.post('/api/partner', async (req, res) => {
   }
 });
 
+// Newsletter Subscription Route
+app.post('/api/newsletter/subscribe', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Validate email
+    if (!email) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Email is required' 
+      });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Please enter a valid email address' 
+      });
+    }
+
+    // Create newsletter subscribers table if it doesn't exist
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // Check if email already exists
+    const existingSubscriber = await pool.query(
+      'SELECT * FROM newsletter_subscribers WHERE email = $1',
+      [email]
+    );
+
+    if (existingSubscriber.rows.length > 0) {
+      return res.json({ 
+        success: true, 
+        message: 'You are already subscribed to our newsletter!' 
+      });
+    }
+
+    // Insert new subscriber
+    await pool.query(
+      'INSERT INTO newsletter_subscribers (email) VALUES ($1)',
+      [email]
+    );
+
+    // Send confirmation email
+    try {
+      const mailOptions = {
+        from: 'KICKOFFUSAKICKOFFUSA@gmail.com',
+        to: email,
+        subject: 'Welcome to KICKOFFUSA - You\'re In!',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+              <h1 style="color: #111827; margin: 0;">KICKOFFUSA</h1>
+              <p style="color: #6b7280; margin: 5px 0 0;">Soccer Initiative</p>
+            </div>
+            
+            <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <h2 style="color: #111827; margin: 0 0 15px;">You're Subscribed! 🎉</h2>
+              <p style="color: #374151; margin: 0 0 10px;">Thanks for joining the KICKOFFUSA community!</p>
+              <p style="color: #374151; margin: 0 0 15px;">You'll be the first to know when we drop new merch, announce events, and share exclusive updates.</p>
+            </div>
+            
+            <div style="background: #fef3c7; border: 1px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+              <h4 style="color: #92400e; margin: 0 0 10px;">What's Next?</h4>
+              <ul style="color: #92400e; margin: 0; padding-left: 20px;">
+                <li>Get notified when new merch drops</li>
+                <li>Receive exclusive discounts and early access</li>
+                <li>Stay updated on tournaments and events</li>
+                <li>Join the community and grow the beautiful game</li>
+              </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+              <p style="color: #6b7280; font-size: 14px; margin: 0;">Thank you for being part of KICKOFFUSA!</p>
+            </div>
+          </div>
+        `,
+        text: `
+          Welcome to KICKOFFUSA - You're In!
+          
+          Thanks for joining the KICKOFFUSA community!
+          
+          You'll be the first to know when we drop new merch, announce events, and share exclusive updates.
+          
+          What's Next?
+          - Get notified when new merch drops
+          - Receive exclusive discounts and early access
+          - Stay updated on tournaments and events
+          - Join the community and grow the beautiful game
+          
+          Thank you for being part of KICKOFFUSA!
+        `
+      };
+      
+      await transporter.sendMail(mailOptions);
+    } catch (emailError) {
+      console.error('Error sending confirmation email:', emailError);
+      // Don't fail the subscription if email fails
+    }
+    
+    res.json({ 
+      success: true, 
+      message: 'Successfully subscribed to newsletter!' 
+    });
+
+  } catch (error) {
+    console.error('Error subscribing to newsletter:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to subscribe. Please try again later.' 
+    });
+  }
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

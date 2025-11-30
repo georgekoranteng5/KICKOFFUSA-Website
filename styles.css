@@ -2729,3 +2729,38 @@ html { scroll-behavior: smooth; }
 .particle:nth-child(7) { left: 70%; animation-delay: 0.5s; }
 .particle:nth-child(8) { left: 80%; animation-delay: 1.5s; }
 .particle:nth-child(9) { left: 90%; animation-delay: 2.5s; }
+
+/* Disable all text motion animations */
+h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, button {
+  animation: none !important;
+}
+
+/* Disable continuous motion classes on text elements */
+h1.animate-continuous-pulse,
+h2.animate-continuous-pulse,
+h3.animate-continuous-pulse,
+h4.animate-continuous-pulse,
+h5.animate-continuous-pulse,
+h6.animate-continuous-pulse,
+p.animate-continuous-wave,
+.animate-continuous-float,
+.animate-continuous-glow,
+.animate-continuous-rotate,
+.animate-continuous-slide,
+.animate-wave,
+.animate-glow,
+.animate-pulse {
+  animation: none !important;
+}
+
+/* Disable fadeInUp and other text animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

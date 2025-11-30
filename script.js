@@ -437,31 +437,11 @@ function initializeMotionEffects() {
     li.classList.add('animate-slide-stagger', `stagger-${Math.min(index + 1, 6)}`);
   });
 
-  // Add continuous motion to key elements
-  document.querySelectorAll('h1, h2, h3').forEach(heading => {
-    if (!heading.classList.contains('animate-continuous-pulse')) {
-      heading.classList.add('animate-continuous-pulse');
-    }
-  });
+  // Motion effects disabled for text elements
+  // Removed: continuous motion to headings, paragraphs, and stats
 
-  // Add floating motion to stats numbers
-  document.querySelectorAll('.stats-card .animate-heartbeat').forEach(stat => {
-    stat.classList.add('animate-continuous-float');
-  });
-
-  // Add wave motion to paragraphs
-  document.querySelectorAll('p').forEach(paragraph => {
-    if (!paragraph.classList.contains('animate-continuous-wave')) {
-      paragraph.classList.add('animate-continuous-wave');
-    }
-  });
-
-  // Add glow effects to important buttons
-  document.querySelectorAll('.btn.primary').forEach(btn => {
-    if (!btn.classList.contains('animate-continuous-glow')) {
-      btn.classList.add('animate-continuous-glow');
-    }
-  });
+  // Glow effects disabled for buttons
+  // Removed: continuous glow effects on primary buttons
 }
 
 // Enhanced interaction animations
@@ -476,15 +456,8 @@ function initializeInteractionAnimations() {
     });
   });
 
-  // Add glow effect to successful actions
-  document.querySelectorAll('.btn.primary').forEach(btn => {
-    btn.addEventListener('click', function() {
-      this.classList.add('animate-glow');
-      setTimeout(() => {
-        this.classList.remove('animate-glow');
-      }, 2000);
-    });
-  });
+  // Glow effect disabled for button clicks
+  // Removed: glow animation on button click
 
   // Add loading effects to buttons on click
   document.querySelectorAll('button[type="submit"], .btn').forEach(btn => {
