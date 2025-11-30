@@ -61,25 +61,79 @@
     }
     
     @media (max-width: 768px) {
+      #emailSignupPopup {
+        padding: 10px !important;
+        align-items: flex-start !important;
+      }
+      
       #emailSignupPopup > div {
         flex-direction: column;
         max-height: 95vh;
         overflow-y: auto;
+        max-width: 100% !important;
+        border-radius: 12px !important;
       }
       
       #emailSignupPopup > div > div:first-child {
-        width: 100%;
-        height: 200px;
-        min-height: 200px;
+        width: 100% !important;
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
       }
       
       #emailSignupPopup > div > div:last-child {
-        padding: 30px 24px;
+        padding: 24px 20px !important;
+        flex: 1;
+      }
+      
+      #emailSignupPopup h2 {
+        font-size: 24px !important;
+        margin-bottom: 10px !important;
+      }
+      
+      #emailSignupPopup p {
+        font-size: 14px !important;
+        margin-bottom: 24px !important;
+      }
+      
+      #popupEmailInput {
+        padding: 14px 16px !important;
+        font-size: 16px !important;
+      }
+      
+      #emailSignupForm button {
+        padding: 14px 20px !important;
+        font-size: 14px !important;
       }
       
       #closePopupBtn {
         top: 10px !important;
         right: 10px !important;
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 24px !important;
+        background: rgba(255,255,255,0.9) !important;
+        z-index: 10;
+      }
+      
+      #popupImage {
+        object-fit: cover !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      #emailSignupPopup > div > div:first-child {
+        height: 150px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+      }
+      
+      #emailSignupPopup > div > div:last-child {
+        padding: 20px 16px !important;
+      }
+      
+      #emailSignupPopup h2 {
+        font-size: 22px !important;
       }
     }
   </style>
@@ -151,8 +205,8 @@
   </main>
 
   <!-- Email Signup Popup Modal -->
-  <div id="emailSignupPopup" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); z-index: 10001; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #fff; border-radius: 16px; max-width: 900px; width: 100%; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); display: flex; flex-direction: row; max-height: 90vh;">
+  <div id="emailSignupPopup" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); z-index: 10001; align-items: center; justify-content: center; padding: 20px; overflow-y: auto;">
+    <div style="background: #fff; border-radius: 16px; max-width: 900px; width: 100%; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); display: flex; flex-direction: row; max-height: 90vh; margin: auto;">
       <!-- Image Section -->
       <div style="width: 50%; background: #000; display: flex; align-items: center; justify-content: center; padding: 0; position: relative; overflow: hidden;">
         <img id="popupImage" src="assets/gallery/IMG_7739.JPG" alt="KICKOFFUSA" style="width: 100%; height: 100%; object-fit: contain; object-position: center;">
