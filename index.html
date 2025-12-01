@@ -60,30 +60,41 @@
       flex-direction: row;
     }
     
+    /* Force mobile layout */
+    @media (max-width: 768px) {
+      #emailSignupPopup > div {
+        flex-direction: column !important;
+      }
+    }
+    
     @media (max-width: 768px) {
       #emailSignupPopup {
         padding: 10px !important;
-        align-items: flex-start !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
       
       #emailSignupPopup > div {
-        flex-direction: column;
-        max-height: 95vh;
-        overflow-y: auto;
+        flex-direction: column !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
         max-width: 100% !important;
+        width: 100% !important;
         border-radius: 12px !important;
       }
       
       #emailSignupPopup > div > div:first-child {
         width: 100% !important;
-        height: 180px !important;
-        min-height: 180px !important;
-        max-height: 180px !important;
+        height: 200px !important;
+        min-height: 200px !important;
+        max-height: 200px !important;
+        flex-shrink: 0 !important;
       }
       
       #emailSignupPopup > div > div:last-child {
-        padding: 24px 20px !important;
-        flex: 1;
+        padding: 30px 24px !important;
+        flex: 1 !important;
+        width: 100% !important;
       }
       
       #emailSignupPopup h2 {
@@ -123,13 +134,13 @@
     
     @media (max-width: 480px) {
       #emailSignupPopup > div > div:first-child {
-        height: 150px !important;
-        min-height: 150px !important;
-        max-height: 150px !important;
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
       }
       
       #emailSignupPopup > div > div:last-child {
-        padding: 20px 16px !important;
+        padding: 24px 20px !important;
       }
       
       #emailSignupPopup h2 {
