@@ -284,13 +284,16 @@
         return;
       }
       
+      console.log('Popup element found, initializing...');
+      
       // Check if user has already seen the popup
       let hasSeenPopup = false;
       try {
         hasSeenPopup = localStorage.getItem('kickoffusa_popup_seen') === 'true';
+        console.log('Has seen popup:', hasSeenPopup);
       } catch (e) {
         // localStorage might not be available (private mode, etc.)
-        console.log('localStorage not available');
+        console.log('localStorage not available, will show popup');
       }
       
       // For testing: Add ?showpopup=true to URL to force show popup
@@ -303,20 +306,38 @@
       }
       
       // Show popup if user hasn't seen it (after a short delay)
-      if (!hasSeenPopup) {
-        setTimeout(() => {
-          if (popup) {
-            popup.style.display = 'flex';
-            popup.style.opacity = '0';
-            // Fade in animation
-            requestAnimationFrame(() => {
-              popup.style.transition = 'opacity 0.3s ease';
-              popup.style.opacity = '1';
-            });
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-          }
-        }, 1500); // Show after 1.5 seconds
+      function showPopup() {
+        if (popup) {
+          console.log('Showing popup...');
+          popup.style.display = 'flex';
+          popup.style.opacity = '0';
+          // Fade in animation
+          requestAnimationFrame(() => {
+            popup.style.transition = 'opacity 0.3s ease';
+            popup.style.opacity = '1';
+          });
+          document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        } else {
+          console.error('Popup element is null when trying to show');
+        }
       }
+      
+      if (!hasSeenPopup) {
+        console.log('Will show popup in 1.5 seconds...');
+        // Show after page is fully loaded
+        if (document.readyState === 'loading') {
+          window.addEventListener('load', function() {
+            setTimeout(showPopup, 1500);
+          });
+        } else {
+          setTimeout(showPopup, 1500);
+        }
+      } else {
+        console.log('Popup already seen, not showing');
+      }
+      
+      // Expose showPopup globally for testing
+      window.showEmailPopup = showPopup;
       
       // Close popup function
       function closePopup() {
