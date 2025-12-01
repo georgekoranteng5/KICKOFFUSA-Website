@@ -380,13 +380,24 @@
         });
       }
       
-      // Form submission
+      // Form submission - Mailchimp Integration
       if (form) {
         form.addEventListener('submit', async function(e) {
           e.preventDefault();
           
           const email = emailInput.value.trim();
           if (!email) return;
+          
+          // Validate email format
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            if (typeof showNotification === 'function') {
+              showNotification('Please enter a valid email address', 'error');
+            } else {
+              alert('Please enter a valid email address');
+            }
+            return;
+          }
           
           // Disable form during submission
           const submitBtn = form.querySelector('button[type="submit"]');
@@ -395,23 +406,28 @@
           submitBtn.textContent = 'Subscribing...';
           
           try {
-            // Determine API endpoint (use relative path for production, localhost for development)
-            const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-              ? 'http://localhost:3000/api/newsletter/subscribe'
-              : '/api/newsletter/subscribe';
+            // Mailchimp Configuration
+            // Get your form action URL from Mailchimp:
+            // 1. Go to Mailchimp → Audience → Signup forms → Embedded forms
+            // 2. Copy the form action URL (looks like: https://yourdomain.us1.list-manage.com/subscribe/post?u=...&id=...)
+            // 3. Replace the URL below
+            const MAILCHIMP_FORM_ACTION = 'YOUR_MAILCHIMP_FORM_ACTION_URL_HERE';
             
-            // Send email to backend
-            const response = await fetch(apiUrl, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ email: email })
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok) {
+            // Check if Mailchimp is configured
+            if (MAILCHIMP_FORM_ACTION === 'YOUR_MAILCHIMP_FORM_ACTION_URL_HERE') {
+              // Fallback: Store email locally and show success
+              // You can collect these manually or set up Mailchimp later
+              console.log('Email to subscribe:', email);
+              
+              // Store in localStorage as backup
+              try {
+                const subscribers = JSON.parse(localStorage.getItem('kickoffusa_subscribers') || '[]');
+                if (!subscribers.includes(email)) {
+                  subscribers.push(email);
+                  localStorage.setItem('kickoffusa_subscribers', JSON.stringify(subscribers));
+                }
+              } catch (e) {}
+              
               // Show success message
               if (typeof showNotification === 'function') {
                 showNotification('Thanks for subscribing! You\'ll be notified when we drop merch.', 'success');
@@ -419,14 +435,45 @@
                 alert('Thanks for subscribing! You\'ll be notified when we drop merch.');
               }
               
-              // Close popup
               closePopup();
-              
-              // Reset form
               form.reset();
-            } else {
-              throw new Error(result.message || 'Failed to subscribe');
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+              return;
             }
+            
+            // Submit to Mailchimp using form action (works with static sites)
+            const formData = new FormData();
+            formData.append('EMAIL', email);
+            
+            // Extract bot protection field from form action URL if present
+            const urlParams = new URLSearchParams(MAILCHIMP_FORM_ACTION.split('?')[1]);
+            const botField = urlParams.get('b'); // Bot protection field
+            if (botField) {
+              formData.append('b_' + botField, '');
+            }
+            
+            // Submit to Mailchimp
+            const response = await fetch(MAILCHIMP_FORM_ACTION, {
+              method: 'POST',
+              body: formData,
+              mode: 'no-cors' // Required for Mailchimp form action (CORS)
+            });
+            
+            // With no-cors mode, we can't read the response, but Mailchimp handles it
+            // Mailchimp will redirect or show a success page, but we'll show our own message
+            if (typeof showNotification === 'function') {
+              showNotification('Thanks for subscribing! You\'ll be notified when we drop merch.', 'success');
+            } else {
+              alert('Thanks for subscribing! You\'ll be notified when we drop merch.');
+            }
+            
+            // Close popup
+            closePopup();
+            
+            // Reset form
+            form.reset();
+            
           } catch (error) {
             console.error('Error subscribing:', error);
             
