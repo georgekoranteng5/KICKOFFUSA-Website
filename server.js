@@ -24,8 +24,15 @@ pool.on('connect', () => {
   console.log('Connected to PostgreSQL database');
 });
 
-// Create tables if they don't exist
+// Create tables if they don't exist (tournaments first so teams can reference it)
 const createTablesQuery = `
+  CREATE TABLE IF NOT EXISTS tournaments (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    status VARCHAR(50) DEFAULT 'upcoming',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+
   CREATE TABLE IF NOT EXISTS teams (
     id SERIAL PRIMARY KEY,
     team_name VARCHAR(255) NOT NULL,
@@ -33,15 +40,9 @@ const createTablesQuery = `
     captain_email VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     skill_level VARCHAR(50) NOT NULL,
+    tournament_id INTEGER REFERENCES tournaments(id),
     payment_status VARCHAR(20) DEFAULT 'pending',
     payment_intent_id VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS tournaments (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    status VARCHAR(50) DEFAULT 'upcoming',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
@@ -83,9 +84,31 @@ const createTablesQuery = `
 pool.query(createTablesQuery, (err) => {
   if (err) {
     console.error('Error creating tables:', err);
-  } else {
-    console.log('Database tables ready');
+    return;
   }
+  console.log('Database tables ready');
+  (async () => {
+    try {
+      await pool.query(`
+        ALTER TABLE teams ADD COLUMN IF NOT EXISTS tournament_id INTEGER REFERENCES tournaments(id)
+      `);
+    } catch (alterErr) {
+      console.error('Error adding tournament_id to teams:', alterErr);
+    }
+    try {
+      const existing = await pool.query(
+        "SELECT id FROM tournaments WHERE name = 'KICKOFF CUP' LIMIT 1"
+      );
+      if (existing.rows.length === 0) {
+        await pool.query(
+          "INSERT INTO tournaments (name, status) VALUES ('KICKOFF CUP', 'upcoming') RETURNING id"
+        );
+        console.log('KICKOFF CUP tournament created');
+      }
+    } catch (seedErr) {
+      console.error('Error seeding KICKOFF CUP tournament:', seedErr);
+    }
+  })();
 });
 
 // API Routes
@@ -105,10 +128,10 @@ app.get('/api/teams', async (req, res) => {
 app.post('/api/teams', async (req, res) => {
   try {
     const { teamName, captainName, captainEmail, phoneNumber, skillLevel, tournamentId } = req.body;
-    
+    const tournamentIdNum = tournamentId ? parseInt(tournamentId, 10) : null;
     const result = await pool.query(
-      'INSERT INTO teams (team_name, captain_name, captain_email, phone_number, skill_level) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [teamName, captainName, captainEmail, phoneNumber, skillLevel]
+      'INSERT INTO teams (team_name, captain_name, captain_email, phone_number, skill_level, tournament_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [teamName, captainName, captainEmail, phoneNumber, skillLevel, tournamentIdNum]
     );
     
     // Send confirmation email
@@ -243,6 +266,21 @@ app.get('/api/tournaments', async (req, res) => {
   }
 });
 
+// Get teams registered for a tournament
+app.get('/api/tournaments/:id/teams', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      'SELECT * FROM teams WHERE tournament_id = $1 ORDER BY created_at DESC',
+      [id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching tournament teams:', err);
+    res.status(500).json({ error: 'Failed to fetch tournament teams' });
+  }
+});
+
 // Create a new tournament
 app.post('/api/tournaments', async (req, res) => {
   try {
@@ -295,12 +333,15 @@ app.post('/api/tournaments/:id/generate', async (req, res) => {
     await pool.query('DELETE FROM group_teams WHERE group_id IN (SELECT id FROM groups WHERE tournament_id = $1)', [id]);
     await pool.query('DELETE FROM groups WHERE tournament_id = $1', [id]);
     
-    // Get all teams
-    const teamsResult = await pool.query('SELECT * FROM teams ORDER BY RANDOM()');
+    // Get teams registered for this tournament only
+    const teamsResult = await pool.query(
+      'SELECT * FROM teams WHERE tournament_id = $1 ORDER BY RANDOM()',
+      [id]
+    );
     const teams = teamsResult.rows;
-    
+
     if (teams.length < 2) {
-      return res.status(400).json({ error: 'Need at least 2 teams to create a tournament' });
+      return res.status(400).json({ error: 'Need at least 2 teams registered for this tournament to generate the draw' });
     }
     
     // Determine number of groups based on team count
@@ -1213,8 +1254,164 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
   }
 });
 
+// --- Shopify Storefront API (proxy so we keep token server-side) ---
+const SHOPIFY_STORE = (process.env.SHOPIFY_STORE_DOMAIN || 'kickoffusastore.myshopify.com').replace(/^https?:\/\//, '').replace(/\/$/, '');
+const SHOPIFY_STOREFRONT_TOKEN = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || '';
+
+async function shopifyGraphql(query, variables = {}) {
+  const url = `https://${SHOPIFY_STORE}/api/2024-01/graphql.json`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
+    },
+    body: JSON.stringify({ query, variables }),
+  });
+  const json = await res.json();
+  if (json.errors) throw new Error(json.errors[0]?.message || 'Shopify API error');
+  return json.data;
+}
+
+// GET /api/shop/products — list products for the main site storefront
+app.get('/api/shop/products', async (req, res) => {
+  if (!SHOPIFY_STOREFRONT_TOKEN) {
+    return res.status(503).json({ error: 'Shopify storefront not configured. Set SHOPIFY_STOREFRONT_ACCESS_TOKEN in .env' });
+  }
+  try {
+    const data = await shopifyGraphql(`
+      query getProducts($first: Int!) {
+        products(first: $first, query: "status:active") {
+          edges {
+            node {
+              id
+              title
+              descriptionHtml
+              featuredImage { url altText }
+              variants(first: 20) {
+                edges {
+                  node {
+                    id
+                    title
+                    availableForSale
+                    price { amount currencyCode }
+                    image { url altText }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `, { first: 50 });
+    res.json(data?.products?.edges?.map(e => e.node) || []);
+  } catch (err) {
+    console.error('Shopify products error:', err);
+    res.status(502).json({ error: err.message || 'Failed to load products' });
+  }
+});
+
+// POST /api/shop/cart — create a new cart (optional: lines in body)
+app.post('/api/shop/cart', async (req, res) => {
+  if (!SHOPIFY_STOREFRONT_TOKEN) {
+    return res.status(503).json({ error: 'Shopify storefront not configured' });
+  }
+  try {
+    const lines = (req.body.lines || []).map(l => ({
+      merchandiseId: l.merchandiseId,
+      quantity: Math.max(1, parseInt(l.quantity, 10) || 1),
+    })).filter(l => l.merchandiseId);
+    const input = lines.length ? { lines } : {};
+    const data = await shopifyGraphql(`
+      mutation cartCreate($input: CartInput!) {
+        cartCreate(input: $input) {
+          cart { id checkoutUrl }
+          userErrors { message field }
+        }
+      }
+    `, { input });
+    const create = data?.cartCreate;
+    if (create?.userErrors?.length) {
+      return res.status(400).json({ error: create.userErrors[0].message });
+    }
+    if (!create?.cart) return res.status(502).json({ error: 'Could not create cart' });
+    res.json(create.cart);
+  } catch (err) {
+    console.error('Shopify cart create error:', err);
+    res.status(502).json({ error: err.message || 'Failed to create cart' });
+  }
+});
+
+// GET /api/shop/cart/:id — get cart by ID
+app.get('/api/shop/cart/:id', async (req, res) => {
+  if (!SHOPIFY_STOREFRONT_TOKEN) return res.status(503).json({ error: 'Shopify storefront not configured' });
+  try {
+    const data = await shopifyGraphql(`
+      query getCart($id: ID!) {
+        cart(id: $id) {
+          id
+          checkoutUrl
+          lines(first: 100) {
+            edges {
+              node {
+                id
+                quantity
+                merchandise {
+                  ... on ProductVariant {
+                    id
+                    title
+                    product { title }
+                    price { amount currencyCode }
+                    image { url }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `, { id: req.params.id });
+    if (!data?.cart) return res.status(404).json({ error: 'Cart not found' });
+    res.json(data.cart);
+  } catch (err) {
+    console.error('Shopify cart get error:', err);
+    res.status(502).json({ error: err.message || 'Failed to load cart' });
+  }
+});
+
+// POST /api/shop/cart/:id/lines — add line(s) to cart
+app.post('/api/shop/cart/:id/lines', async (req, res) => {
+  if (!SHOPIFY_STOREFRONT_TOKEN) return res.status(503).json({ error: 'Shopify storefront not configured' });
+  try {
+    const lines = (req.body.lines || []).map(l => ({
+      merchandiseId: l.merchandiseId,
+      quantity: Math.max(1, parseInt(l.quantity, 10) || 1),
+    })).filter(l => l.merchandiseId);
+    if (!lines.length) return res.status(400).json({ error: 'At least one line (merchandiseId, quantity) required' });
+    const data = await shopifyGraphql(`
+      mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+        cartLinesAdd(cartId: $cartId, lines: $lines) {
+          cart { id checkoutUrl lines(first: 100) { edges { node { id quantity merchandise { ... on ProductVariant { id title product { title } price { amount currencyCode } image { url } } } } } } }
+          userErrors { message field }
+        }
+      }
+    `, { cartId: req.params.id, lines });
+    const add = data?.cartLinesAdd;
+    if (add?.userErrors?.length) {
+      return res.status(400).json({ error: add.userErrors[0].message });
+    }
+    if (!add?.cart) return res.status(502).json({ error: 'Could not add to cart' });
+    res.json(add.cart);
+  } catch (err) {
+    console.error('Shopify cart lines add error:', err);
+    res.status(502).json({ error: err.message || 'Failed to add to cart' });
+  }
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
   console.log(`Database: ${process.env.DB_NAME || 'KICKOFFUSA'}`);
+  if (SHOPIFY_STOREFRONT_TOKEN) console.log('Shopify Storefront: enabled');
+  else console.log('Shopify Storefront: set SHOPIFY_STOREFRONT_ACCESS_TOKEN in .env to enable shop on main site');
 });

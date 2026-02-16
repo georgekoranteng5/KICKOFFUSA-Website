@@ -4,11 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KICKOFFUSA - Shop</title>
-  <meta name="description" content="Shop KICKOFFUSA merchandise and merch. Coming soon — we're finalizing our store. Stay tuned for merch drops." />
+  <meta name="description" content="Shop KICKOFFUSA merchandise — premium jerseys, exclusive merch, and accessories. Every purchase supports youth soccer." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=5">
+  <style>
+    .shop-products-grid { display: grid !important; }
+    .shop-product-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+    .shop-product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+    .shop-product-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .shop-product-card .info { padding: 20px; }
+    .shop-product-card .info h4 { margin: 0 0 8px; font-size: 18px; font-weight: 700; color: #111; }
+    .shop-product-card .info .price { font-size: 18px; font-weight: 700; color: #f59e0b; margin-bottom: 12px; }
+    .shop-product-card select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; margin-bottom: 12px; }
+    .shop-product-card .add-btn { width: 100%; padding: 12px; background: #fbbf24; color: #000; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+    .shop-product-card .add-btn:hover { background: #f59e0b; }
+    .shop-product-card .add-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .shop-cart-drawer { position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
+    .shop-cart-drawer[aria-hidden="false"] { pointer-events: auto; }
+    .shop-cart-drawer-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.25s; }
+    .shop-cart-drawer[aria-hidden="false"] .shop-cart-drawer-backdrop { opacity: 1; }
+    .shop-cart-drawer-panel { position: absolute; top: 0; right: 0; width: 100%; max-width: 400px; height: 100%; background: #fff; box-shadow: -4px 0 24px rgba(0,0,0,0.15); transform: translateX(100%); transition: transform 0.25s; display: flex; flex-direction: column; }
+    .shop-cart-drawer[aria-hidden="false"] .shop-cart-drawer-panel { transform: translateX(0); }
+    .shop-cart-drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #e2e8f0; }
+    .shop-cart-drawer-close { background: none; border: none; font-size: 28px; cursor: pointer; color: #64748b; line-height: 1; padding: 0 4px; }
+    .shop-cart-drawer-close:hover { color: #111; }
+    .shop-cart-drawer-body { flex: 1; overflow: auto; padding: 20px; }
+    .shop-cart-drawer-footer { padding: 20px; border-top: 1px solid #e2e8f0; }
+    .shop-cart-line { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+    .shop-cart-line img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
+    .shop-cart-line .detail { flex: 1; min-width: 0; }
+    .shop-cart-line .detail .title { font-weight: 600; color: #111; margin: 0 0 4px; font-size: 14px; }
+    .shop-cart-line .detail .meta { font-size: 13px; color: #64748b; margin: 0; }
+  </style>
 </head>
 <body>
   <!-- Top Navigation -->
@@ -28,6 +57,7 @@
       <a href="gallery.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">GALLERY</a>
       <a href="contact.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">CONTACT</a>
       <a href="partner.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">PARTNER</a>
+      <button type="button" id="shop-cart-trigger" aria-label="Cart" style="display: none; align-items: center; gap: 8px; padding: 10px 16px; background: rgba(251,191,36,0.2); border: 1px solid #fbbf24; border-radius: 8px; color: #fbbf24; font-weight: 600; cursor: pointer; font-size: 15px;"><span id="shop-cart-count">0</span> Cart</button>
     </div>
     
     <!-- Mobile Menu Button -->
@@ -44,17 +74,33 @@
       <a href="gallery.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7; margin-bottom: 8px;">GALLERY</a>
       <a href="contact.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7; margin-bottom: 8px;">CONTACT</a>
       <a href="partner.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">PARTNER</a>
+      <button type="button" id="shop-cart-trigger-mobile" aria-label="Cart" style="display: none; margin-top: 12px; padding: 14px 20px; background: rgba(251,191,36,0.2); border: 1px solid #fbbf24; border-radius: 8px; color: #fbbf24; font-weight: 600; cursor: pointer; font-size: 16px; width: 100%;"><span id="shop-cart-count-mobile">0</span> Cart</button>
     </div>
   </nav>
 
+  <!-- Cart drawer (Storefront API) -->
+  <div id="shop-cart-drawer" class="shop-cart-drawer" aria-hidden="true">
+    <div class="shop-cart-drawer-backdrop"></div>
+    <div class="shop-cart-drawer-panel">
+      <div class="shop-cart-drawer-header">
+        <h2 style="margin: 0; font-size: 20px; color: #111;">Your cart</h2>
+        <button type="button" class="shop-cart-drawer-close" aria-label="Close cart">&times;</button>
+      </div>
+      <div id="shop-cart-drawer-body" class="shop-cart-drawer-body">
+        <p id="shop-cart-empty" style="color: #64748b; margin: 0;">Your cart is empty.</p>
+        <ul id="shop-cart-lines" style="list-style: none; padding: 0; margin: 0;"></ul>
+      </div>
+      <div class="shop-cart-drawer-footer">
+        <a id="shop-cart-checkout-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn primary" style="display: none; width: 100%; text-align: center; padding: 16px; font-weight: 700; text-decoration: none; border-radius: 8px; background: #fbbf24; color: #000; border: 2px solid #fbbf24;">Checkout</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Main Content Area -->
   <main style="margin-top: 80px; min-height: 100vh; position: relative;">
-    <!-- Video Background -->
+    <!-- Background Image (merch) -->
     <div class="video-wrap" style="position: fixed; inset: 0; z-index: 0; overflow: hidden;">
-      <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.4) saturate(1.2);">
-        <source src="assets/loop20.mp4" type="video/mp4">
-        <img src="assets/gallery/KICKOFF CUP/IMG_3834.JPG" alt="KICKOFFUSA Celebration" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.4) saturate(1.2);">
-      </video>
+      <img src="assets/merch.jpg" alt="KICKOFFUSA Merch" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.4) saturate(1.2);">
       <div class="overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);"></div>
     </div>
 
@@ -76,28 +122,25 @@
 
   </main>
 
-  <!-- Shop Content -->
+  <!-- Shop Content: Storefront API (products on main site, checkout on Shopify) -->
   <section id="shop" style="padding: 80px 0; background: #f8fafc;">
     <div class="container">
-      <!-- Coming Soon Hero -->
-      <div style="text-align: center; padding: 80px 40px; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden; margin-bottom: 60px;">
-        <!-- Background Pattern -->
+      <!-- Shop Hero -->
+      <div style="text-align: center; padding: 48px 40px; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden; margin-bottom: 48px;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.2) 0%, transparent 50%);"></div>
-        
-        <!-- Content -->
         <div style="position: relative; z-index: 2;">
-          <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 40px; position: relative;">
-            <span style="font-size: 48px; color: #000;">🛍️</span>
-          </div>
-          
-          <h3 style="font-size: clamp(32px, 5vw, 48px); font-weight: 800; margin: 0 0 24px; color: #fff;">Store Coming Soon</h3>
-          <p style="font-size: 18px; margin: 0 0 50px; color: #e5e7eb; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">We're crafting the ultimate KICKOFFUSA collection. Get ready for premium jerseys, exclusive merch, and accessories that celebrate the beautiful game.</p>
-          
-          <!-- Action Buttons -->
-          <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <a href="contact.html" class="btn primary" style="font-size: 18px; padding: 18px 36px; box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3); background: #fbbf24; color: #000; border: 2px solid #fbbf24; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Get Updates</a>
-            <a href="index.html" class="btn secondary" style="font-size: 18px; padding: 18px 36px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); background: transparent; color: #fbbf24; border: 2px solid #fbbf24; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Back to Home</a>
-          </div>
+          <h3 style="font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin: 0 0 16px; color: #fff;">Shop KICKOFFUSA</h3>
+          <p style="font-size: 16px; margin: 0; color: #e5e7eb; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.5;">Premium merch that funds youth fees, field time, and free clinics. Checkout is secure on Shopify.</p>
+        </div>
+      </div>
+
+      <!-- Product grid (loaded by JS from Storefront API) -->
+      <div id="shop-products-wrap" style="margin-bottom: 60px;">
+        <div id="shop-products-loading" style="text-align: center; padding: 60px 20px; color: #64748b;">Loading products…</div>
+        <div id="shop-products-grid" class="shop-products-grid" style="display: none; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;"></div>
+        <div id="shop-products-fallback" style="display: none; text-align: center; padding: 60px 40px; background: rgba(0,0,0,0.4); border-radius: 20px; color: #e5e7eb;">
+          <p style="margin: 0 0 24px; font-size: 18px;">Shop is available on our store. You’ll be redirected to complete your purchase securely.</p>
+          <a id="shop-now-btn" href="https://kickoffusastore.myshopify.com/" target="_blank" rel="noopener noreferrer" class="btn primary" style="font-size: 18px; padding: 18px 36px; background: #fbbf24; color: #000; border: 2px solid #fbbf24; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 8px; text-decoration: none; display: inline-block;">Shop on Store</a>
         </div>
       </div>
       
@@ -135,37 +178,188 @@
 
   <script src="script.js"></script>
   <script>
-    // Minimal page script + smooth anchor scrolling with sticky header offset
-    (function(){
-      const y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
+    // --- Storefront API: products on main site, checkout on Shopify ---
+    (function() {
+      var CART_KEY = 'kickoffusa_cart_id';
+      var loadingEl = document.getElementById('shop-products-loading');
+      var gridEl = document.getElementById('shop-products-grid');
+      var fallbackEl = document.getElementById('shop-products-fallback');
+      var cartDrawer = document.getElementById('shop-cart-drawer');
+      var cartTrigger = document.getElementById('shop-cart-trigger');
+      var cartTriggerMobile = document.getElementById('shop-cart-trigger-mobile');
+      var cartCountEl = document.getElementById('shop-cart-count');
+      var cartCountMobile = document.getElementById('shop-cart-count-mobile');
+      var cartLinesEl = document.getElementById('shop-cart-lines');
+      var cartEmptyEl = document.getElementById('shop-cart-empty');
+      var cartCheckoutBtn = document.getElementById('shop-cart-checkout-btn');
+      var productsCache = [];
 
-      const header = document.querySelector('header');
-      const OFFSET = (header?.offsetHeight || 0) + 8; // extra breathing room
+      function getCartId() { return localStorage.getItem(CART_KEY); }
+      function setCartId(id) { if (id) localStorage.setItem(CART_KEY, id); else localStorage.removeItem(CART_KEY); }
 
-      document.addEventListener('click', (e)=>{
-        const a = e.target.closest('a[href^="#"]');
-        if(!a) return;
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if(!el) return; // not an in-page anchor
-        e.preventDefault();
-        const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
-        window.scrollTo({ top, behavior: 'smooth' });
-      });
-
-    })();
-
-    // Function to scroll to shop content
-    function scrollToShop() {
-      const shopSection = document.getElementById('shop');
-      if (shopSection) {
-        const header = document.querySelector('header');
-        const OFFSET = (header?.offsetHeight || 0) + 8;
-        const top = shopSection.getBoundingClientRect().top + window.scrollY - OFFSET;
-        window.scrollTo({ top, behavior: 'smooth' });
+      function showNotification(msg, isError) {
+        var n = document.getElementById('notification');
+        if (!n) return;
+        n.querySelector('#notification-message').textContent = msg;
+        n.querySelector('#notification-icon').textContent = isError ? '!' : '✓';
+        n.style.background = isError ? '#b91c1c' : '#059669';
+        n.style.transform = 'translateX(0)';
+        setTimeout(function() { n.style.transform = 'translateX(400px)'; }, 3000);
       }
-    }
+
+      function renderProducts(products) {
+        if (!gridEl || !products.length) return;
+        productsCache = products;
+        loadingEl.style.display = 'none';
+        gridEl.style.display = 'grid';
+        fallbackEl.style.display = 'none';
+        gridEl.innerHTML = products.map(function(p) {
+          var variants = (p.variants && p.variants.edges) ? p.variants.edges.map(function(e) { return e.node; }) : [];
+          var first = variants[0];
+          var img = (p.featuredImage && p.featuredImage.url) ? p.featuredImage.url : (first && first.image && first.image.url) ? first.image.url : '';
+          var select = variants.length > 1 ? '<select class="shop-variant-select" data-product-id="' + p.id + '">' + variants.map(function(v) {
+            return '<option value="' + v.id + '">' + (v.title && v.title !== 'Default Title' ? v.title : 'Default') + ' - ' + (v.price ? v.price.currencyCode + ' ' + v.price.amount : '') + '</option>';
+          }).join('') + '</select>' : '';
+          var priceStr = first && first.price ? first.price.currencyCode + ' ' + parseFloat(first.price.amount).toFixed(2) : '';
+          var available = first ? first.availableForSale : false;
+          return '<div class="shop-product-card" data-product-id="' + p.id + '">' +
+            (img ? '<img src="' + img + '" alt="' + (p.featuredImage && p.featuredImage.altText ? p.featuredImage.altText : p.title) + '">' : '') +
+            '<div class="info"><h4>' + (p.title || '') + '</h4><div class="price">' + priceStr + '</div>' + select +
+            '<button type="button" class="add-btn" data-product-id="' + p.id + '" ' + (available ? '' : 'disabled') + '>Add to cart</button></div></div>';
+        }).join('');
+        gridEl.querySelectorAll('.add-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var card = btn.closest('.shop-product-card');
+            var select = card.querySelector('.shop-variant-select');
+            var variantId = select ? select.value : null;
+            if (!variantId) {
+              var prod = productsCache.find(function(p) { return p.id === card.dataset.productId; });
+              if (prod && prod.variants && prod.variants.edges && prod.variants.edges[0]) variantId = prod.variants.edges[0].node.id;
+            }
+            if (variantId) addToCart(variantId, 1, btn);
+          });
+        });
+        gridEl.addEventListener('change', function(e) {
+          if (!e.target.classList.contains('shop-variant-select')) return;
+          var opt = e.target.options[e.target.selectedIndex];
+          var card = e.target.closest('.shop-product-card');
+          var priceEl = card && card.querySelector('.price');
+          if (priceEl && opt && productsCache.length) {
+            var prod = productsCache.find(function(p) { return p.id === card.dataset.productId; });
+            if (prod && prod.variants && prod.variants.edges) {
+              var v = prod.variants.edges.find(function(ed) { return ed.node.id === opt.value; });
+              if (v && v.node.price) priceEl.textContent = v.node.price.currencyCode + ' ' + parseFloat(v.node.price.amount).toFixed(2);
+            }
+          }
+        });
+      }
+
+      function addToCart(merchandiseId, quantity, btnEl) {
+        if (btnEl) { btnEl.disabled = true; btnEl.textContent = 'Adding…'; }
+        var cartId = getCartId();
+        var url = cartId ? '/api/shop/cart/' + encodeURIComponent(cartId) + '/lines' : '/api/shop/cart';
+        var body = cartId ? { lines: [{ merchandiseId: merchandiseId, quantity: quantity }] } : { lines: [{ merchandiseId: merchandiseId, quantity: quantity }] };
+        var method = 'POST';
+        fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.id) setCartId(data.id);
+            if (data.checkoutUrl) { cartCheckoutBtn.href = data.checkoutUrl; cartCheckoutBtn.style.display = 'block'; }
+            refreshCart();
+            showNotification('Added to cart');
+            if (btnEl) { btnEl.disabled = false; btnEl.textContent = 'Add to cart'; }
+          })
+          .catch(function(err) {
+            showNotification(err.message || 'Could not add to cart', true);
+            if (btnEl) { btnEl.disabled = false; btnEl.textContent = 'Add to cart'; }
+          });
+      }
+
+      function refreshCart() {
+        var cartId = getCartId();
+        if (!cartId) {
+          if (cartCountEl) cartCountEl.textContent = '0';
+          if (cartCountMobile) cartCountMobile.textContent = '0';
+          cartLinesEl.innerHTML = '';
+          cartEmptyEl.style.display = 'block';
+          cartCheckoutBtn.style.display = 'none';
+          return;
+        }
+        fetch('/api/shop/cart/' + encodeURIComponent(cartId))
+          .then(function(r) { return r.json(); })
+          .then(function(cart) {
+            var lines = (cart.lines && cart.lines.edges) ? cart.lines.edges.map(function(e) { return e.node; }) : [];
+            cartLinesEl.innerHTML = lines.map(function(line) {
+              var m = line.merchandise;
+              if (!m) return '';
+              var img = m.image && m.image.url ? m.image.url : '';
+              return '<li class="shop-cart-line"><img src="' + img + '" alt=""><div class="detail"><p class="title">' + (m.product ? m.product.title : '') + '</p><p class="meta">' + (m.title && m.title !== 'Default Title' ? m.title : '') + ' × ' + line.quantity + ' — ' + (m.price ? m.price.currencyCode + ' ' + parseFloat(m.price.amount).toFixed(2) : '') + '</p></div></li>';
+            }).join('');
+            var count = lines.reduce(function(s, l) { return s + l.quantity; }, 0);
+            if (cartCountEl) cartCountEl.textContent = count;
+            if (cartCountMobile) cartCountMobile.textContent = count;
+            cartEmptyEl.style.display = lines.length ? 'none' : 'block';
+            if (cart.checkoutUrl) { cartCheckoutBtn.href = cart.checkoutUrl; cartCheckoutBtn.style.display = lines.length ? 'block' : 'none'; }
+          })
+          .catch(function() {
+            setCartId(null);
+            if (cartCountEl) cartCountEl.textContent = '0';
+            if (cartCountMobile) cartCountMobile.textContent = '0';
+            cartLinesEl.innerHTML = '';
+            cartEmptyEl.style.display = 'block';
+            cartCheckoutBtn.style.display = 'none';
+          });
+      }
+
+      function openCart() { if (cartDrawer) cartDrawer.setAttribute('aria-hidden', 'false'); }
+      function closeCart() { if (cartDrawer) cartDrawer.setAttribute('aria-hidden', 'true'); }
+
+      if (cartTrigger) cartTrigger.addEventListener('click', openCart);
+      if (cartTriggerMobile) cartTriggerMobile.addEventListener('click', function() { closeCart(); openCart(); });
+      if (cartDrawer) {
+        cartDrawer.querySelector('.shop-cart-drawer-backdrop').addEventListener('click', closeCart);
+        cartDrawer.querySelector('.shop-cart-drawer-close').addEventListener('click', closeCart);
+      }
+
+      fetch('/api/shop/products')
+        .then(function(r) {
+          if (r.status === 503) { throw new Error('Storefront not configured'); }
+          return r.json();
+        })
+        .then(function(data) {
+          var list = Array.isArray(data) ? data : (data && data.products && data.products.edges ? data.products.edges.map(function(e) { return e.node; }) : []);
+          if (list.length) {
+            renderProducts(list);
+            if (cartTrigger) cartTrigger.style.display = 'flex';
+            if (cartTriggerMobile) cartTriggerMobile.style.display = 'block';
+            refreshCart();
+          } else {
+            throw new Error('No products');
+          }
+        })
+        .catch(function() {
+          loadingEl.style.display = 'none';
+          gridEl.style.display = 'none';
+          fallbackEl.style.display = 'block';
+        });
+    })();
+  </script>
+  <script>
+    (function(){
+      var y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+      var header = document.querySelector('header');
+      var OFFSET = (header && header.offsetHeight ? header.offsetHeight : 0) + 8;
+      document.addEventListener('click', function(e){
+        var a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        var id = a.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (!el) return;
+        e.preventDefault();
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - OFFSET, behavior: 'smooth' });
+      });
+    })();
   </script>
 
 </body>

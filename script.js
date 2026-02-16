@@ -531,8 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   if (document.getElementById('tournamentSelect')) {
-    loadTournaments();
-    loadCurrentTournament();
+    loadTournaments().then(() => loadCurrentTournament());
   }
   
   if (document.getElementById('galleryGrid')) {
@@ -561,66 +560,48 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Load available tournaments from static data
-function loadTournaments() {
+// Load available tournaments (from API when server is running, else static fallback)
+async function loadTournaments() {
+  const select = document.getElementById('tournamentSelect');
+  if (!select) return;
   try {
-    // Static tournament data for GitHub Pages
+    const response = await fetch('http://localhost:3000/api/tournaments');
+    if (response.ok) {
+      const list = await response.json();
+      tournaments = list.map(t => ({ id: t.id, name: t.name, status: t.status || 'upcoming' }));
+    } else throw new Error('Not OK');
+  } catch (e) {
     tournaments = [
-      {
-        id: 'summer-series-2024',
-        name: 'Summer Series 2024',
-        status: 'active',
-        startDate: '2024-07-15',
-        endDate: '2024-08-15',
-        description: 'Join our exciting summer tournament featuring multiple age groups and skill levels.',
-        maxTeams: 16,
-        registrationFee: 50
-      },
-      {
-        id: 'champion-sound-2024',
-        name: 'Champion Sound 2024',
-        status: 'upcoming',
-        startDate: '2024-09-01',
-        endDate: '2024-09-30',
-        description: 'The ultimate championship tournament for advanced players.',
-        maxTeams: 12,
-        registrationFee: 75
-      }
+      { id: 1, name: 'KICKOFF CUP', status: 'upcoming' },
+      { id: 'summer-series-2024', name: 'Summer Series 2024', status: 'active' },
+      { id: 'champion-sound-2024', name: 'Champion Sound 2024', status: 'upcoming' }
     ];
-    
-    const select = document.getElementById('tournamentSelect');
-    if (select) {
-      select.innerHTML = '<option value="">Select Tournament</option>';
-      
-      tournaments.forEach(tournament => {
-        if (tournament.status === 'upcoming' || tournament.status === 'active') {
-          const option = document.createElement('option');
-          option.value = tournament.id;
-          option.textContent = tournament.name;
-          select.appendChild(option);
-        }
-      });
-    }
-  } catch (error) {
-    console.error('Error loading tournaments:', error);
   }
+  select.innerHTML = '<option value="">Select Tournament</option>';
+  tournaments.forEach(tournament => {
+    if (tournament.status === 'upcoming' || tournament.status === 'active') {
+      const option = document.createElement('option');
+      option.value = tournament.id;
+      option.textContent = tournament.name;
+      select.appendChild(option);
+    }
+  });
 }
 
-// Load current active tournament from static data
+// Load current tournament (prefer active, else first upcoming e.g. KICKOFF CUP)
 function loadCurrentTournament() {
   try {
-    // Find active tournament from static data
     const activeTournament = tournaments.find(t => t.status === 'active');
-    
+    const tournament = activeTournament || tournaments.find(t => t.status === 'upcoming') || tournaments[0];
     const currentTournamentEl = document.getElementById('currentTournament');
     if (currentTournamentEl) {
-      if (activeTournament) {
-        currentTournament = activeTournament;
-        displayCurrentTournament(activeTournament);
+      if (tournament) {
+        currentTournament = tournament;
+        displayCurrentTournament(tournament);
         loadTournamentData();
       } else {
-        currentTournamentEl.innerHTML = 
-          '<p style="text-align: center; color: #374151;">No active tournament</p>';
+        currentTournamentEl.innerHTML =
+          '<p style="text-align: center; color: #374151;">No tournament. Create one in admin or wait for KICKOFF CUP to load.</p>';
       }
     }
   } catch (error) {
