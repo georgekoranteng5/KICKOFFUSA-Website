@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KICKOFFUSA - Shop</title>
-  <meta name="description" content="Shop KICKOFFUSA merchandise — premium jerseys, exclusive merch, and accessories. Every purchase supports youth soccer." />
+  <meta name="description" content="Shop KICKOFFUSA merchandise: premium jerseys, exclusive merch, and accessories. Every purchase supports our operations." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="styles.css?v=7">
   <style>
     .shop-products-grid { display: grid !important; }
     .shop-product-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
@@ -37,48 +37,32 @@
     .shop-cart-line .detail { flex: 1; min-width: 0; }
     .shop-cart-line .detail .title { font-weight: 600; color: #111; margin: 0 0 4px; font-size: 14px; }
     .shop-cart-line .detail .meta { font-size: 13px; color: #64748b; margin: 0; }
+    .shop-impact-banner { background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.08)); border: 1px solid rgba(251, 191, 36, 0.35); border-radius: 20px; padding: 32px 28px; margin-bottom: 40px; text-align: center; }
+    .shop-impact-banner h3 { margin: 0 0 12px; font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 900; color: #0f172a; }
+    .shop-impact-banner p { margin: 0; font-size: 1.05rem; color: #334155; line-height: 1.6; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .shop-impact-banner .impact-highlight { color: #b45309; font-weight: 800; }
+    .shop-lifestyle { margin-bottom: 48px; }
+    .shop-lifestyle h3 { text-align: center; font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0 0 8px; }
+    .shop-lifestyle .shop-lifestyle-lead { text-align: center; color: #64748b; margin: 0 0 24px; font-size: 0.95rem; }
+    .shop-lifestyle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .shop-lifestyle-grid img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; display: block; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .shop-size-guide { background: #fff; border-radius: 16px; padding: 24px 28px; margin-bottom: 40px; border: 1px solid #e2e8f0; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .shop-size-guide summary { cursor: pointer; font-weight: 700; color: #0f172a; font-size: 1rem; list-style: none; }
+    .shop-size-guide summary::-webkit-details-marker { display: none; }
+    .shop-size-guide table { width: 100%; margin-top: 16px; border-collapse: collapse; font-size: 0.9rem; }
+    .shop-size-guide th, .shop-size-guide td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #f1f5f9; }
+    .shop-size-guide th { color: #64748b; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+    .shop-storefront-cta { display: none; text-align: center; padding: 48px 32px; background: #fff; border-radius: 20px; border: 2px solid #fbbf24; margin-bottom: 40px; box-shadow: 0 12px 40px rgba(251, 191, 36, 0.15); }
+    .shop-storefront-cta.is-visible { display: block; }
+    .shop-storefront-cta h3 { margin: 0 0 12px; font-size: 1.5rem; font-weight: 800; color: #0f172a; }
+    .shop-storefront-cta p { margin: 0 0 24px; color: #64748b; max-width: 480px; margin-left: auto; margin-right: auto; }
+    #shop-products-loading { display: none; }
   </style>
 </head>
 <body>
-  <!-- Top Navigation -->
-  <nav class="top-nav" style="position: fixed; top: 0; left: 0; right: 0; height: 80px; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); z-index: 1000; display: flex; align-items: center; padding: 0 40px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-    <!-- Logo -->
-    <div style="display: flex; align-items: center; margin-right: 60px;">
-      <img src="assets/kickoff-logo.png" alt="KICKOFFUSA Logo" style="height: 50px; margin-right: 16px;">
-      <span style="color: #fff; font-weight: 700; font-size: 18px; text-transform: uppercase;">KICKOFFUSA</span>
-    </div>
-    
-    <!-- Desktop Navigation Links -->
-    <div class="desktop-nav" style="flex: 1; display: flex; align-items: center; gap: 8px;">
-      <a href="index.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">HOME</a>
-      <a href="events.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">EVENTS</a>
-      <a href="tournament.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">TOURNAMENT</a>
-      <a href="shop.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; background: rgba(251, 191, 36, 0.2); border-bottom: 3px solid #fbbf24;">SHOP</a>
-      <a href="gallery.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">GALLERY</a>
-      <a href="contact.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">CONTACT</a>
-      <a href="partner.html" style="padding: 12px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">PARTNER</a>
-      <button type="button" id="shop-cart-trigger" aria-label="Cart" style="display: none; align-items: center; gap: 8px; padding: 10px 16px; background: rgba(251,191,36,0.2); border: 1px solid #fbbf24; border-radius: 8px; color: #fbbf24; font-weight: 600; cursor: pointer; font-size: 15px;"><span id="shop-cart-count">0</span> Cart</button>
-    </div>
-    
-    <!-- Mobile Menu Button -->
-    <button class="mobile-menu-btn" style="display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 8px;">
-      ☰
-    </button>
-    
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); padding: 20px;">
-      <a href="index.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7; margin-bottom: 8px;">HOME</a>
-      <a href="events.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7; margin-bottom: 8px;">EVENTS</a>
-      <a href="tournament.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7; margin-bottom: 8px;">TOURNAMENT</a>
-      <a href="shop.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; background: rgba(251, 191, 36, 0.2); border-bottom: 3px solid #fbbf24; margin-bottom: 8px;">SHOP</a>
-      <a href="gallery.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7; margin-bottom: 8px;">GALLERY</a>
-      <a href="contact.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7; margin-bottom: 8px;">CONTACT</a>
-      <a href="partner.html" style="display: block; padding: 15px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; opacity: 0.7;">PARTNER</a>
-      <button type="button" id="shop-cart-trigger-mobile" aria-label="Cart" style="display: none; margin-top: 12px; padding: 14px 20px; background: rgba(251,191,36,0.2); border: 1px solid #fbbf24; border-radius: 8px; color: #fbbf24; font-weight: 600; cursor: pointer; font-size: 16px; width: 100%;"><span id="shop-cart-count-mobile">0</span> Cart</button>
-    </div>
-  </nav>
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-active="shop"></nav>
 
-  <!-- Cart drawer (Storefront API) -->
+<!-- Cart drawer (Storefront API) -->
   <div id="shop-cart-drawer" class="shop-cart-drawer" aria-hidden="true">
     <div class="shop-cart-drawer-backdrop"></div>
     <div class="shop-cart-drawer-panel">
@@ -114,7 +98,7 @@
             <span style="color: #fbbf24;">DRIP SECOND.</span>
           </h1>
           <p style="font-size: clamp(18px, 3vw, 24px); color: #fff; margin: 0; line-height: 1.4; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 600px; margin-left: auto; margin-right: auto;">
-            Pieces that fund youth fees, field time, and free clinics.
+            Gear that supports everything we do on and off the pitch.
           </p>
         </div>
       </div>
@@ -125,23 +109,50 @@
   <!-- Shop Content: Storefront API (products on main site, checkout on Shopify) -->
   <section id="shop" style="padding: 80px 0; background: #f8fafc;">
     <div class="container">
-      <!-- Shop Hero -->
-      <div style="text-align: center; padding: 48px 40px; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden; margin-bottom: 48px;">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.2) 0%, transparent 50%);"></div>
-        <div style="position: relative; z-index: 2;">
-          <h3 style="font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin: 0 0 16px; color: #fff;">Shop KICKOFFUSA</h3>
-          <p style="font-size: 16px; margin: 0; color: #e5e7eb; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.5;">Premium merch that funds youth fees, field time, and free clinics. Checkout is secure on Shopify.</p>
-        </div>
+      <!-- Impact message (above products) -->
+      <div class="shop-impact-banner">
+        <h3>Every purchase supports our operations</h3>
+        <p>Premium KICKOFFUSA merch helps us run tournaments, keep the community moving, and grow what we build together.</p>
       </div>
 
-      <!-- Product grid (loaded by JS from Storefront API) -->
-      <div id="shop-products-wrap" style="margin-bottom: 60px;">
+      <!-- Lifestyle shots from gallery/MERCH -->
+      <div class="shop-lifestyle" id="shop-lifestyle">
+        <h3>Worn at KICKOFFUSA</h3>
+        <p class="shop-lifestyle-lead">Real players, real events. See the gear in action.</p>
+        <div id="shop-lifestyle-grid" class="shop-lifestyle-grid" aria-live="polite"></div>
+        <p id="shop-lifestyle-empty" style="display: none; text-align: center; color: #94a3b8; font-size: 0.9rem; margin: 16px 0 0;">Lifestyle photos will appear here from the MERCH gallery folder.</p>
+      </div>
+
+      <!-- Size guide -->
+      <details class="shop-size-guide">
+        <summary>Jersey &amp; apparel size guide</summary>
+        <p style="margin: 12px 0 0; color: #64748b; font-size: 0.9rem;">Measurements are body size in inches. When in doubt, size up for a relaxed fit.</p>
+        <table>
+          <thead>
+            <tr><th>Size</th><th>Chest</th><th>Length</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>S</td><td>34–36</td><td>27</td></tr>
+            <tr><td>M</td><td>38–40</td><td>28</td></tr>
+            <tr><td>L</td><td>42–44</td><td>29</td></tr>
+            <tr><td>XL</td><td>46–48</td><td>30</td></tr>
+            <tr><td>2XL</td><td>50–52</td><td>31</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <!-- Direct Shopify CTA (shown when embedded catalog unavailable) -->
+      <div id="shop-storefront-cta" class="shop-storefront-cta is-visible">
+        <h3>Shop the full store</h3>
+        <p>Browse all jerseys and merch on our secure Shopify store. Same gear, checkout in seconds.</p>
+        <a id="shop-now-btn" href="https://kickoffusastore.myshopify.com/" target="_blank" rel="noopener noreferrer" class="btn primary" style="font-size: 18px; padding: 18px 36px; background: #fbbf24; color: #000; border: 2px solid #fbbf24; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 8px; text-decoration: none; display: inline-block;">Shop Now →</a>
+      </div>
+
+      <!-- Product grid (Storefront API — hidden until products load) -->
+      <div id="shop-products-wrap" style="margin-bottom: 60px; display: none;">
+        <h3 style="text-align: center; font-size: 1.35rem; font-weight: 800; color: #0f172a; margin: 0 0 24px;">Shop collection</h3>
         <div id="shop-products-loading" style="text-align: center; padding: 60px 20px; color: #64748b;">Loading products…</div>
         <div id="shop-products-grid" class="shop-products-grid" style="display: none; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;"></div>
-        <div id="shop-products-fallback" style="display: none; text-align: center; padding: 60px 40px; background: rgba(0,0,0,0.4); border-radius: 20px; color: #e5e7eb;">
-          <p style="margin: 0 0 24px; font-size: 18px;">Shop is available on our store. You’ll be redirected to complete your purchase securely.</p>
-          <a id="shop-now-btn" href="https://kickoffusastore.myshopify.com/" target="_blank" rel="noopener noreferrer" class="btn primary" style="font-size: 18px; padding: 18px 36px; background: #fbbf24; color: #000; border: 2px solid #fbbf24; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 8px; text-decoration: none; display: inline-block;">Shop on Store</a>
-        </div>
       </div>
       
       <!-- Newsletter Signup -->
@@ -181,9 +192,11 @@
     // --- Storefront API: products on main site, checkout on Shopify ---
     (function() {
       var CART_KEY = 'kickoffusa_cart_id';
+      var SHOPIFY_STORE_URL = 'https://kickoffusastore.myshopify.com/';
       var loadingEl = document.getElementById('shop-products-loading');
       var gridEl = document.getElementById('shop-products-grid');
-      var fallbackEl = document.getElementById('shop-products-fallback');
+      var productsWrap = document.getElementById('shop-products-wrap');
+      var storefrontCta = document.getElementById('shop-storefront-cta');
       var cartDrawer = document.getElementById('shop-cart-drawer');
       var cartTrigger = document.getElementById('shop-cart-trigger');
       var cartTriggerMobile = document.getElementById('shop-cart-trigger-mobile');
@@ -207,12 +220,69 @@
         setTimeout(function() { n.style.transform = 'translateX(400px)'; }, 3000);
       }
 
+      function showEmbeddedShop() {
+        if (storefrontCta) storefrontCta.classList.remove('is-visible');
+        if (productsWrap) productsWrap.style.display = 'block';
+      }
+
+      function showShopifyOnly() {
+        if (storefrontCta) storefrontCta.classList.add('is-visible');
+        if (productsWrap) productsWrap.style.display = 'none';
+      }
+
+      function loadMerchLifestyle() {
+        var grid = document.getElementById('shop-lifestyle-grid');
+        var empty = document.getElementById('shop-lifestyle-empty');
+        if (!grid) return;
+
+        function render(paths) {
+          if (!paths.length) {
+            if (empty) empty.style.display = 'block';
+            return;
+          }
+          if (empty) empty.style.display = 'none';
+          grid.innerHTML = paths.map(function(src) {
+            return '<img src="' + src.replace(/^\//, '') + '" alt="KICKOFFUSA merch at an event" loading="lazy">';
+          }).join('');
+        }
+
+        function loadFromManifest() {
+          return fetch('assets/gallery/MERCH/manifest.json?v=' + Date.now())
+            .then(function(r) { return r.ok ? r.json() : []; })
+            .then(function(list) {
+              return (list || []).map(function(p) { return String(p).replace(/^\//, ''); }).filter(Boolean);
+            });
+        }
+
+        loadFromManifest()
+          .then(function(paths) {
+            if (paths.length) {
+              render(paths.slice(0, 8));
+              return;
+            }
+            return fetch('/api/gallery')
+              .then(function(r) { return r.ok ? r.json() : []; })
+              .then(function(items) {
+                var merch = (items || []).filter(function(i) {
+                  return (i.event_name || '').toUpperCase().replace(/\s+/g, ' ') === 'MERCH';
+                });
+                paths = merch.map(function(i) {
+                  return (i.file_path || '').replace(/^\//, '');
+                }).filter(Boolean);
+                render(paths.slice(0, 8));
+              });
+          })
+          .catch(function() {
+            if (empty) empty.style.display = 'block';
+          });
+      }
+
       function renderProducts(products) {
         if (!gridEl || !products.length) return;
         productsCache = products;
+        showEmbeddedShop();
         loadingEl.style.display = 'none';
         gridEl.style.display = 'grid';
-        fallbackEl.style.display = 'none';
         gridEl.innerHTML = products.map(function(p) {
           var variants = (p.variants && p.variants.edges) ? p.variants.edges.map(function(e) { return e.node; }) : [];
           var first = variants[0];
@@ -293,7 +363,7 @@
               var m = line.merchandise;
               if (!m) return '';
               var img = m.image && m.image.url ? m.image.url : '';
-              return '<li class="shop-cart-line"><img src="' + img + '" alt=""><div class="detail"><p class="title">' + (m.product ? m.product.title : '') + '</p><p class="meta">' + (m.title && m.title !== 'Default Title' ? m.title : '') + ' × ' + line.quantity + ' — ' + (m.price ? m.price.currencyCode + ' ' + parseFloat(m.price.amount).toFixed(2) : '') + '</p></div></li>';
+              return '<li class="shop-cart-line"><img src="' + img + '" alt=""><div class="detail"><p class="title">' + (m.product ? m.product.title : '') + '</p><p class="meta">' + (m.title && m.title !== 'Default Title' ? m.title : '') + ' × ' + line.quantity + ' · ' + (m.price ? m.price.currencyCode + ' ' + parseFloat(m.price.amount).toFixed(2) : '') + '</p></div></li>';
             }).join('');
             var count = lines.reduce(function(s, l) { return s + l.quantity; }, 0);
             if (cartCountEl) cartCountEl.textContent = count;
@@ -321,9 +391,13 @@
         cartDrawer.querySelector('.shop-cart-drawer-close').addEventListener('click', closeCart);
       }
 
+      loadMerchLifestyle();
+      showShopifyOnly();
+
       fetch('/api/shop/products')
         .then(function(r) {
           if (r.status === 503) { throw new Error('Storefront not configured'); }
+          if (!r.ok) { throw new Error('Products unavailable'); }
           return r.json();
         })
         .then(function(data) {
@@ -338,9 +412,7 @@
           }
         })
         .catch(function() {
-          loadingEl.style.display = 'none';
-          gridEl.style.display = 'none';
-          fallbackEl.style.display = 'block';
+          showShopifyOnly();
         });
     })();
   </script>

@@ -519,6 +519,8 @@ function smoothScrollTo(elementId) {
 
 // Load tournaments on page load
 document.addEventListener('DOMContentLoaded', function() {
+  renderSiteNav();
+  initializeMobileNavigation();
   initializeNavigation();
   initializeScrollAnimations();
   initializeParallax();
@@ -531,6 +533,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   if (document.getElementById('tournamentSelect')) {
+    if (typeof renderLastTournamentArchive === 'function') {
+      renderLastTournamentArchive();
+    }
     loadTournaments().then(() => loadCurrentTournament());
   }
   
@@ -588,24 +593,28 @@ async function loadTournaments() {
   });
 }
 
-// Load current tournament (prefer active, else first upcoming e.g. KICKOFF CUP)
+// Load current tournament (prefer live API data, else last completed tournament archive)
 function loadCurrentTournament() {
   try {
     const activeTournament = tournaments.find(t => t.status === 'active');
     const tournament = activeTournament || tournaments.find(t => t.status === 'upcoming') || tournaments[0];
     const currentTournamentEl = document.getElementById('currentTournament');
-    if (currentTournamentEl) {
-      if (tournament) {
-        currentTournament = tournament;
-        displayCurrentTournament(tournament);
-        loadTournamentData();
-      } else {
-        currentTournamentEl.innerHTML =
-          '<p style="text-align: center; color: #374151;">No tournament. Create one in admin or wait for KICKOFF CUP to load.</p>';
-      }
+    if (!currentTournamentEl) return;
+
+    if (tournament) {
+      currentTournament = tournament;
+      loadTournamentData();
+    } else if (typeof renderLastTournamentArchive === 'function') {
+      renderLastTournamentArchive();
+    } else {
+      currentTournamentEl.innerHTML =
+        '<p style="text-align: center; color: #cbd5e1;">No tournament data available yet.</p>';
     }
   } catch (error) {
     console.error('Error loading current tournament:', error);
+    if (typeof renderLastTournamentArchive === 'function') {
+      renderLastTournamentArchive();
+    }
   }
 }
 
@@ -1062,25 +1071,41 @@ function displayKnockoutStage(matches) {
   container.innerHTML = html;
 }
 
-// Load tournament data
+// Load tournament data (live API when available, else static last-tournament archive)
 async function loadTournamentData() {
-  if (!currentTournament) return;
+  if (!currentTournament) {
+    if (typeof renderLastTournamentArchive === 'function') {
+      renderLastTournamentArchive();
+    }
+    return;
+  }
+
+  let hasLiveData = false;
 
   try {
-    // Load groups
     const groupsResponse = await fetch(`http://localhost:3000/api/tournaments/${currentTournament.id}/groups`);
-    const groups = await groupsResponse.json();
-    displayGroupStandings(groups);
+    if (groupsResponse.ok) {
+      const groups = await groupsResponse.json();
+      if (groups.length > 0) {
+        hasLiveData = true;
+        displayCurrentTournament(currentTournament);
+        displayGroupStandings(groups);
 
-    // Load matches
-    const matchesResponse = await fetch(`http://localhost:3000/api/tournaments/${currentTournament.id}/matches`);
-    const matches = await matchesResponse.json();
-    displayMatchSchedule(matches);
+        const matchesResponse = await fetch(`http://localhost:3000/api/tournaments/${currentTournament.id}/matches`);
+        if (matchesResponse.ok) {
+          const matches = await matchesResponse.json();
+          displayMatchSchedule(matches);
+        }
 
-    // Load knockout stage
-    await loadKnockoutStage();
+        await loadKnockoutStage();
+      }
+    }
   } catch (error) {
     console.error('Error loading tournament data:', error);
+  }
+
+  if (!hasLiveData && typeof renderLastTournamentArchive === 'function') {
+    renderLastTournamentArchive();
   }
 }
 
@@ -1616,12 +1641,9 @@ function initializeGallery() {
   loadGallery();
 }
 
-// Load gallery items from static files
-function loadGallery() {
-  try {
-    console.log('Loading gallery...');
-    // Static gallery data for GitHub Pages
-    galleryItems = [
+// Static gallery fallback (GitHub Pages / when API unavailable)
+function getStaticGalleryItems() {
+  return [
       // CHAMPION SOUND images
       { src: 'assets/gallery/CHAMPION SOUND/IMG_6162.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
       { src: 'assets/gallery/CHAMPION SOUND/IMG_6163.jpeg', event_name: 'CHAMPION SOUND', type: 'image' },
@@ -1654,21 +1676,70 @@ function loadGallery() {
       { src: 'assets/gallery/SUMMER SERIES /AO4I9895.jpg', event_name: 'SUMMER SERIES', type: 'image' },
       { src: 'assets/gallery/SUMMER SERIES /AO4I9928.jpg', event_name: 'SUMMER SERIES', type: 'image' },
       { src: 'assets/gallery/SUMMER SERIES /AO4I9950.jpg', event_name: 'SUMMER SERIES', type: 'image' }
-    ];
-    
-    // Extract unique events for filter buttons
+  ];
+}
+
+function mapApiGalleryItem(item) {
+  const path = (item.file_path || '').replace(/^\//, '');
+  const isVideo = (item.file_type || '').startsWith('video');
+  return {
+    src: path,
+    event_name: item.event_name || 'KICKOFFUSA Event',
+    type: isVideo ? 'video' : 'image'
+  };
+}
+
+async function mergeMerchManifest(items) {
+  try {
+    const res = await fetch('assets/gallery/MERCH/manifest.json');
+    if (!res.ok) return items;
+    const list = await res.json();
+    if (!Array.isArray(list)) return items;
+    const existing = new Set(items.map((i) => i.src));
+    list.forEach((p) => {
+      const src = String(p).replace(/^\//, '');
+      if (src && !existing.has(src)) {
+        items.push({ src, event_name: 'MERCH', type: 'image' });
+        existing.add(src);
+      }
+    });
+  } catch (_) { /* optional manifest */ }
+  return items;
+}
+
+// Load gallery from API (includes assets/gallery/MERCH) or static fallback
+async function loadGallery() {
+  const galleryGrid = document.getElementById('galleryGrid');
+  try {
+    console.log('Loading gallery...');
+    let items = [];
+
+    try {
+      const response = await fetch('/api/gallery');
+      if (response.ok) {
+        const data = await response.json();
+        items = (data || []).map(mapApiGalleryItem);
+      }
+    } catch (_) { /* API unavailable */ }
+
+    if (!items.length) {
+      items = getStaticGalleryItems();
+      items = await mergeMerchManifest(items);
+    }
+
+    galleryItems = items;
+
     availableEvents.clear();
-    galleryItems.forEach(item => {
+    galleryItems.forEach((item) => {
       availableEvents.add(item.event_name);
     });
-    
+
     updateFilterButtons();
     displayGallery();
   } catch (error) {
     console.error('Error loading gallery:', error);
-    const galleryGrid = document.getElementById('galleryGrid');
     if (galleryGrid) {
-      galleryGrid.innerHTML = 
+      galleryGrid.innerHTML =
         '<div style="text-align: center; color: var(--muted); grid-column: 1 / -1; padding: 40px;"><p>Failed to load gallery. Please try again later.</p></div>';
     }
   }
@@ -1774,35 +1845,99 @@ function filterGallery(filter, clickedButton) {
   displayGallery();
 }
 
-// Mobile Navigation Toggle
-function initializeMobileNavigation() {
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  const mobileNav = document.querySelector('.mobile-nav');
-  
-  if (mobileMenuBtn && mobileNav) {
-    mobileMenuBtn.addEventListener('click', function() {
-      if (mobileNav.style.display === 'none' || mobileNav.style.display === '') {
-        mobileNav.style.display = 'block';
-        mobileMenuBtn.innerHTML = '✕';
-      } else {
-        mobileNav.style.display = 'none';
-        mobileMenuBtn.innerHTML = '☰';
-      }
-    });
-    
-    // Close mobile menu when clicking on a link
-    const mobileLinks = mobileNav.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        mobileNav.style.display = 'none';
-        mobileMenuBtn.innerHTML = '☰';
-      });
-    });
+// Site-wide primary navigation (rendered into #site-nav)
+const SITE_NAV_ITEMS = [
+  { href: 'index.html', label: 'Home', key: 'index' },
+  { href: 'events.html', label: 'Events', key: 'events' },
+  { href: 'tournament.html', label: 'Tournament', key: 'tournament' },
+  { href: 'shop.html', label: 'Shop', key: 'shop' },
+  { href: 'gallery.html', label: 'Gallery', key: 'gallery' },
+  { href: 'contact.html', label: 'Contact', key: 'contact' },
+  { href: 'partner.html', label: 'Partner', key: 'partner' }
+];
+
+const SITE_NAV_PAGE_KEYS = {
+  '': 'index',
+  'index.html': 'index',
+  'events.html': 'events',
+  'tournament.html': 'tournament',
+  'shop.html': 'shop',
+  'gallery.html': 'gallery',
+  'contact.html': 'contact',
+  'partner.html': 'partner',
+  'unity-cup.html': 'events'
+};
+
+function resolveActiveNavKey() {
+  const nav = document.getElementById('site-nav');
+  if (nav && nav.dataset.active) {
+    return nav.dataset.active;
   }
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  return SITE_NAV_PAGE_KEYS[page] || '';
 }
 
-// Initialize mobile navigation when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  initializeMobileNavigation();
-});
+function renderSiteNav() {
+  const nav = document.getElementById('site-nav');
+  if (!nav) return;
+
+  const activeKey = resolveActiveNavKey();
+
+  const desktopLinks = SITE_NAV_ITEMS.map((item) => {
+    const active = item.key === activeKey ? ' is-active' : '';
+    return `<a href="${item.href}" class="nav-link${active}">${item.label}</a>`;
+  }).join('');
+
+  const mobileLinks = SITE_NAV_ITEMS.map((item) => {
+    const active = item.key === activeKey ? ' is-active' : '';
+    return `<a href="${item.href}" class="nav-link${active}">${item.label}</a>`;
+  }).join('');
+
+  nav.innerHTML = `
+    <a href="index.html" class="nav-brand">
+      <img src="assets/kickoff-logo.png" alt="KICKOFFUSA Logo" width="50" height="50">
+      <span>KICKOFFUSA</span>
+    </a>
+    <div class="desktop-nav">${desktopLinks}</div>
+    <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+    <div class="mobile-nav" id="site-mobile-nav">${mobileLinks}</div>
+  `;
+}
+
+// Mobile Navigation Toggle
+function initializeMobileNavigation() {
+  const mobileMenuBtn = document.querySelector('.site-nav .mobile-menu-btn, .top-nav .mobile-menu-btn');
+  const mobileNav = document.querySelector('.site-nav .mobile-nav, .top-nav .mobile-nav');
+
+  if (!mobileMenuBtn || !mobileNav) return;
+
+  function closeMenu() {
+    mobileNav.classList.remove('is-open');
+    mobileNav.style.display = '';
+    mobileMenuBtn.innerHTML = '☰';
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+  }
+
+  function openMenu() {
+    mobileNav.classList.add('is-open');
+    mobileNav.style.display = 'flex';
+    mobileMenuBtn.innerHTML = '✕';
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    mobileMenuBtn.setAttribute('aria-label', 'Close menu');
+  }
+
+  mobileMenuBtn.addEventListener('click', function () {
+    const isOpen = mobileNav.classList.contains('is-open') || mobileNav.style.display === 'block';
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  mobileNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+}
 

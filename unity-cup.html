@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KICKOFFUSA - Unity Cup</title>
+  <meta name="description" content="The inaugural KICKOFF Unity Cup, a citywide 5v5 charity soccer tournament supporting Atlanta Children's Day Shelter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=9">
+</head>
+<body class="unity-cup-page">
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-active="events"></nav>
+
+  <header class="unity-hero">
+    <div class="unity-hero-bg">
+      <img src="assets/kc2.png" alt="" aria-hidden="true">
+      <div class="unity-hero-overlay"></div>
+    </div>
+    <div class="container unity-hero-content">
+      <a href="events.html" class="unity-back-link">← Back to Events</a>
+      <span class="unity-badge">Charity Tournament</span>
+      <h1>KICKOFF UNITY CUP</h1>
+      <p class="unity-hero-date">July 11 · 11:00 AM · Atlanta, GA</p>
+      <p class="unity-hero-tagline">Competition, community, and impact. Atlanta's entertainment groups united for a cause bigger than the pitch.</p>
+    </div>
+  </header>
+
+  <main class="unity-main">
+    <div class="container">
+
+      <div class="event-countdown unity-page-countdown" id="unity-countdown">
+        <p class="countdown-eyebrow">Kickoff in</p>
+        <p class="countdown-event-name">KICKOFF UNITY CUP · July 11 · 11:00 AM ET</p>
+        <div class="countdown-grid" aria-live="polite">
+          <div class="countdown-unit"><span data-unit="days">--</span><small>Days</small></div>
+          <div class="countdown-unit"><span data-unit="hours">--</span><small>Hours</small></div>
+          <div class="countdown-unit"><span data-unit="minutes">--</span><small>Mins</small></div>
+          <div class="countdown-unit"><span data-unit="seconds">--</span><small>Secs</small></div>
+        </div>
+        <p class="countdown-status">July 11th · 11:00 AM Eastern</p>
+      </div>
+
+      <section class="unity-section" aria-labelledby="unity-overview-heading">
+        <h2 id="unity-overview-heading">The Tournament</h2>
+        <div class="unity-prose">
+          <p>Welcome to the inaugural <strong>Kickoff Unity Cup</strong>, a citywide 5v5 charity soccer tournament that brings together Atlanta's leading Black entertainment groups for a day of competition, community, and impact.</p>
+          <p>This event is about uniting influential social communities through a shared experience that goes beyond nightlife and into meaningful engagement. It's an opportunity to showcase your brand, connect with other groups, and be part of the larger Atlanta social scene.</p>
+        </div>
+      </section>
+
+      <section class="unity-section" aria-labelledby="unity-charity-heading">
+        <h2 id="unity-charity-heading">Atlanta Children's Day Shelter</h2>
+        <div class="unity-prose">
+          <p>Atlanta Children's Day Shelter provides free, high-quality childcare to families experiencing extreme poverty or homelessness. They are a day shelter open from 7:00 AM to 6:00 PM, Monday through Friday, where families enroll for long-term assistance.</p>
+          <p>Students are under the age of 6 and are divided into five age groups: infants, toddler 1, toddler 2, and preschool. The shelter also provides comprehensive Family Services to parents, including education and employment opportunities, mental health services, and financial assistance.</p>
+        </div>
+
+        <div class="unity-video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/7ntLqkcLf7g"
+            title="Atlanta Children's Day Shelter"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </section>
+
+      <section class="unity-section unity-feature-card" aria-labelledby="unity-spectators-heading">
+        <h2 id="unity-spectators-heading">Spectator Fees</h2>
+        <p class="unity-feature-price">$5 Entry</p>
+        <div class="unity-prose">
+          <p>Pull up and be part of the energy. For just $5, you get access to watch Atlanta's top entertainment groups compete in a full day of 5v5 action at StationSoccer Westend.</p>
+          <p>Every dollar of your spectator entry goes directly to Atlanta Children's Day Shelter. No cuts, no overhead. Just community showing up for community.</p>
+        </div>
+        <button type="button" class="unity-btn unity-btn--disabled" id="spectator-tickets-btn" disabled aria-disabled="true">
+          Spectator Tickets (Coming Soon)
+        </button>
+      </section>
+
+      <section class="unity-section unity-feature-card" aria-labelledby="unity-raffle-heading">
+        <h2 id="unity-raffle-heading">Raffle Draw</h2>
+        <p class="unity-feature-price">$1 Per Entry</p>
+        <div class="unity-prose">
+          <p>Take a shot at winning exclusive KICKOFF merch. Each $1 raffle entry puts you in the draw for a limited edition t-shirt, with winners announced on event day.</p>
+          <p>100% of raffle proceeds support Atlanta Children's Day Shelter, so every ticket you buy helps a family in need while giving you a chance to rep the movement.</p>
+        </div>
+        <button type="button" class="unity-btn unity-btn--disabled" disabled aria-disabled="true">
+          Raffle Entries (Coming Soon)
+        </button>
+      </section>
+
+      <section class="unity-donation" aria-labelledby="unity-donation-heading">
+        <div class="unity-donation-inner">
+          <h2 class="unity-donation-eyebrow" id="unity-donation-heading">Live Donation Tracker</h2>
+          <p class="unity-donation-amount" id="donation-amount">$0</p>
+          <p class="unity-donation-progress-label"><span id="donation-percent">0%</span> of our $1,000 goal</p>
+          <div class="unity-donation-progress" aria-hidden="true">
+            <div class="unity-donation-progress-bar" id="donation-progress-bar"></div>
+          </div>
+          <p class="unity-donation-note">100% of spectator fees and raffle proceeds go directly to Atlanta Children's Day Shelter.</p>
+          <p class="unity-donation-updated" id="donation-updated">Updating…</p>
+        </div>
+      </section>
+
+      <section class="unity-section unity-feature-card unity-location-card" aria-labelledby="unity-location-heading">
+        <h2 id="unity-location-heading">Location</h2>
+        <p class="unity-location-name">StationSoccer Westend</p>
+        <p class="unity-location-address">680 Lee St SW<br>Atlanta, GA 30306</p>
+        <a href="https://maps.google.com/?q=680+Lee+St+SW,+Atlanta,+GA+30306" target="_blank" rel="noopener noreferrer" class="unity-btn unity-btn--outline">
+          Get Directions
+        </a>
+      </section>
+
+      <section class="unity-section" aria-labelledby="unity-teams-heading">
+        <div class="unity-section-header">
+          <h2 id="unity-teams-heading">Participating Teams</h2>
+          <p>Eight brands coming together for a good cause.</p>
+        </div>
+        <div class="unity-teams-grid" id="unity-teams-grid"></div>
+      </section>
+
+      <section class="unity-cta">
+        <h2>Be Part of Something Bigger</h2>
+        <p>Show up, cheer loud, and help us raise for Atlanta Children's Day Shelter.</p>
+        <div class="unity-cta-actions">
+          <button type="button" class="unity-btn unity-btn--disabled" disabled aria-disabled="true">Spectator Tickets (Coming Soon)</button>
+          <a href="contact.html" class="unity-btn unity-btn--outline">Contact Us</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer style="background: #000; color: #fff; padding: 40px 0; text-align: center;">
+    <div class="container">© <span id="year"></span> KICKOFFUSA</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="unity-cup.js"></script>
+  <script>
+    (function () {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

@@ -1273,7 +1273,7 @@ async function shopifyGraphql(query, variables = {}) {
   return json.data;
 }
 
-// GET /api/shop/products — list products for the main site storefront
+// GET /api/shop/products - list products for the main site storefront
 app.get('/api/shop/products', async (req, res) => {
   if (!SHOPIFY_STOREFRONT_TOKEN) {
     return res.status(503).json({ error: 'Shopify storefront not configured. Set SHOPIFY_STOREFRONT_ACCESS_TOKEN in .env' });
@@ -1311,7 +1311,7 @@ app.get('/api/shop/products', async (req, res) => {
   }
 });
 
-// POST /api/shop/cart — create a new cart (optional: lines in body)
+// POST /api/shop/cart - create a new cart (optional: lines in body)
 app.post('/api/shop/cart', async (req, res) => {
   if (!SHOPIFY_STOREFRONT_TOKEN) {
     return res.status(503).json({ error: 'Shopify storefront not configured' });
@@ -1342,7 +1342,7 @@ app.post('/api/shop/cart', async (req, res) => {
   }
 });
 
-// GET /api/shop/cart/:id — get cart by ID
+// GET /api/shop/cart/:id - get cart by ID
 app.get('/api/shop/cart/:id', async (req, res) => {
   if (!SHOPIFY_STOREFRONT_TOKEN) return res.status(503).json({ error: 'Shopify storefront not configured' });
   try {
@@ -1379,7 +1379,7 @@ app.get('/api/shop/cart/:id', async (req, res) => {
   }
 });
 
-// POST /api/shop/cart/:id/lines — add line(s) to cart
+// POST /api/shop/cart/:id/lines - add line(s) to cart
 app.post('/api/shop/cart/:id/lines', async (req, res) => {
   if (!SHOPIFY_STOREFRONT_TOKEN) return res.status(503).json({ error: 'Shopify storefront not configured' });
   try {
@@ -1408,7 +1408,28 @@ app.post('/api/shop/cart/:id/lines', async (req, res) => {
   }
 });
 
+// Sync assets/gallery/MERCH → manifest.json for shop + static gallery fallback
+function updateMerchManifest() {
+  const merchDir = path.join(__dirname, 'assets', 'gallery', 'MERCH');
+  if (!fs.existsSync(merchDir)) return;
+  try {
+    const imageExt = /\.(jpe?g|png|gif|webp)$/i;
+    const files = fs.readdirSync(merchDir)
+      .filter((f) => imageExt.test(f))
+      .sort();
+    const paths = files.map((f) => `assets/gallery/MERCH/${f}`);
+    fs.writeFileSync(
+      path.join(merchDir, 'manifest.json'),
+      JSON.stringify(paths, null, 2) + '\n'
+    );
+    if (paths.length) console.log(`MERCH gallery: ${paths.length} image(s) indexed`);
+  } catch (err) {
+    console.warn('Could not update MERCH manifest:', err.message);
+  }
+}
+
 // Start server
+updateMerchManifest();
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
   console.log(`Database: ${process.env.DB_NAME || 'KICKOFFUSA'}`);
