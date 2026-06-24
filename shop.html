@@ -7,8 +7,9 @@
   <meta name="description" content="Shop KICKOFFUSA merchandise: premium jerseys, exclusive merch, and accessories. Every purchase supports our operations." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="kickoff-theme.css?v=4">
   <style>
     .shop-products-grid { display: grid !important; }
     .shop-product-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
@@ -37,13 +38,13 @@
     .shop-cart-line .detail { flex: 1; min-width: 0; }
     .shop-cart-line .detail .title { font-weight: 600; color: #111; margin: 0 0 4px; font-size: 14px; }
     .shop-cart-line .detail .meta { font-size: 13px; color: #64748b; margin: 0; }
-    .shop-impact-banner { background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.08)); border: 1px solid rgba(251, 191, 36, 0.35); border-radius: 20px; padding: 32px 28px; margin-bottom: 40px; text-align: center; }
-    .shop-impact-banner h3 { margin: 0 0 12px; font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 900; color: #0f172a; }
-    .shop-impact-banner p { margin: 0; font-size: 1.05rem; color: #334155; line-height: 1.6; max-width: 640px; margin-left: auto; margin-right: auto; }
-    .shop-impact-banner .impact-highlight { color: #b45309; font-weight: 800; }
-    .shop-lifestyle { margin-bottom: 48px; }
+    .shop-impact-banner { background: #fff; border: 1px solid rgba(10, 10, 10, 0.12); border-radius: 20px; padding: 32px 28px; margin-bottom: 40px; text-align: center; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); }
+    .shop-impact-banner h3 { margin: 0 0 12px; font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 900; color: #0a0a0a; }
+    .shop-impact-banner p { margin: 0; font-size: 1.05rem; color: #2a2a2a; line-height: 1.6; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .shop-impact-banner .impact-highlight { color: #cc3d00; font-weight: 800; }
+    .shop-lifestyle { margin-bottom: 48px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); }
     .shop-lifestyle h3 { text-align: center; font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0 0 8px; }
-    .shop-lifestyle .shop-lifestyle-lead { text-align: center; color: #64748b; margin: 0 0 24px; font-size: 0.95rem; }
+    .shop-lifestyle .shop-lifestyle-lead { text-align: center; color: #475569; margin: 0 0 24px; font-size: 0.95rem; }
     .shop-lifestyle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
     .shop-lifestyle-grid img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; display: block; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
     .shop-size-guide { background: #fff; border-radius: 16px; padding: 24px 28px; margin-bottom: 40px; border: 1px solid #e2e8f0; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
@@ -107,7 +108,7 @@
   </main>
 
   <!-- Shop Content: Storefront API (products on main site, checkout on Shopify) -->
-  <section id="shop" style="padding: 80px 0; background: #f8fafc;">
+  <section id="shop" style="position: relative; z-index: 2; padding: 80px 0; background: #f8fafc;">
     <div class="container">
       <!-- Impact message (above products) -->
       <div class="shop-impact-banner">
@@ -120,7 +121,7 @@
         <h3>Worn at KICKOFFUSA</h3>
         <p class="shop-lifestyle-lead">Real players, real events. See the gear in action.</p>
         <div id="shop-lifestyle-grid" class="shop-lifestyle-grid" aria-live="polite"></div>
-        <p id="shop-lifestyle-empty" style="display: none; text-align: center; color: #94a3b8; font-size: 0.9rem; margin: 16px 0 0;">Lifestyle photos will appear here from the MERCH gallery folder.</p>
+        <p id="shop-lifestyle-empty" style="display: none; text-align: center; color: #64748b; font-size: 0.9rem; margin: 16px 0 0;">Lifestyle photos will appear here from the MERCH gallery folder.</p>
       </div>
 
       <!-- Size guide -->
@@ -156,7 +157,7 @@
       </div>
       
       <!-- Newsletter Signup -->
-      <div style="background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 20px; padding: 50px 40px; text-align: center; color: #fff; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1);">
+      <div class="shop-newsletter" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 20px; padding: 50px 40px; text-align: center; color: #fff; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1);">
         <!-- Background Pattern -->
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 30% 20%, rgba(251, 191, 36, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(251, 191, 36, 0.2) 0%, transparent 50%);"></div>
         

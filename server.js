@@ -804,6 +804,9 @@ app.get('/api/gallery', async (req, res) => {
         const stat = fs.statSync(itemPath);
         
         if (stat.isFile()) {
+          // Only include media inside event folders, not loose files in gallery root
+          if (!eventName) continue;
+
           const ext = path.extname(item).toLowerCase();
           const isImage = ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
           const isVideo = ['.mp4', '.mov', '.avi', '.webm'].includes(ext);

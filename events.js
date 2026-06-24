@@ -4,14 +4,14 @@
 (function () {
   const UPCOMING_EVENTS = [
     {
-      iso: '2026-06-19T18:00:00-04:00',
-      label: 'KICKOFF Summer Series V2 · June 19 · 6:00 PM ET',
-      status: 'June 19th · 6:00 PM Eastern'
-    },
-    {
       iso: '2026-07-11T11:00:00-04:00',
       label: 'KICKOFF UNITY CUP · July 11 · 11:00 AM ET',
       status: 'July 11th · 11:00 AM Eastern'
+    },
+    {
+      iso: '2026-07-12T14:00:00-04:00',
+      label: 'KICKOFF GOALFEST · July 12 · 2:00 PM ET',
+      status: 'July 12th · 2:00 PM · College Park'
     }
   ];
 

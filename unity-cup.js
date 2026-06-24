@@ -8,8 +8,8 @@
   const DONATION_GOAL = 1000;
 
   const UPCOMING_EVENTS = [
-    { iso: '2026-06-19T18:00:00-04:00', label: 'KICKOFF Summer Series V2 · June 19 · 6:00 PM ET', status: 'June 19th · 6:00 PM Eastern' },
-    { iso: '2026-07-11T11:00:00-04:00', label: 'KICKOFF UNITY CUP · July 11 · 11:00 AM ET', status: 'July 11th · 11:00 AM Eastern' }
+    { iso: '2026-07-11T11:00:00-04:00', label: 'KICKOFF UNITY CUP · July 11 · 11:00 AM ET', status: 'July 11th · 11:00 AM Eastern' },
+    { iso: '2026-07-12T14:00:00-04:00', label: 'KICKOFF GOALFEST · July 12 · 2:00 PM ET', status: 'July 12th · 2:00 PM · College Park' }
   ];
 
   const TEAMS = [
@@ -17,7 +17,7 @@
     { name: 'C2C', logo: 'assets/unity cup /C2C.png' },
     { name: 'CRWN', logo: 'assets/unity cup /CRWN.png' },
     { name: 'CYKLANTA', logo: 'assets/unity cup /CYKLANTA.png' },
-    { name: 'ENJ', logo: 'assets/unity cup /ENJ.png' },
+    { name: 'ENJ', logo: 'assets/unity cup /ENJ.jpg' },
     { name: 'HAUS419', logo: 'assets/unity cup /HAUS419.png' },
     { name: 'PLAYHSE', logo: 'assets/unity cup /PLAYHSE.png' },
     { name: 'SME', logo: 'assets/unity cup /SME.png' }
@@ -31,7 +31,7 @@
     const root = document.getElementById('unity-countdown');
     if (!root) return;
 
-    const event = UPCOMING_EVENTS[1];
+    const event = UPCOMING_EVENTS[0];
     const target = new Date(event.iso);
 
     const els = {

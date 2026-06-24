@@ -1727,7 +1727,7 @@ async function loadGallery() {
       items = await mergeMerchManifest(items);
     }
 
-    galleryItems = items;
+    galleryItems = items.filter((item) => item.event_name !== 'Img');
 
     availableEvents.clear();
     galleryItems.forEach((item) => {
