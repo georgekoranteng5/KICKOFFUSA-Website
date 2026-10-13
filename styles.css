@@ -2,8 +2,8 @@
   /* KICKOFFUSA design tokens */
   --ink: #0A0A0A;
   --chalk: #EDE6D6;
-  --gold: #C9A227;
-  --accent: #FF4D00;
+  --gold: #B8922A;
+  --accent: #D4AF37;
   --font-display: 'Kumbh Sans', system-ui, sans-serif;
   --font-body: 'Kumbh Sans', system-ui, sans-serif;
 
@@ -30,13 +30,13 @@
   
   /* Brand Colors */
   --primary: var(--accent);
-  --primary-light: #ff7a45;
-  --primary-dark: #cc3d00;
+  --primary-light: #E4C56A;
+  --primary-dark: #9A7824;
   --secondary: var(--ink);
   --secondary-light: #333;
   --secondary-dark: #000;
-  --accent-light: #ff7a45;
-  --accent-dark: #cc3d00;
+  --accent-light: #E4C56A;
+  --accent-dark: #9A7824;
   --success: #2d6a4f;
   --warning: var(--gold);
   --error: #c1121f;
@@ -186,7 +186,7 @@ html {
 .badge-warning {
   background: var(--gradient-accent);
   color: white;
-  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .badge-neutral {
@@ -269,7 +269,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(251, 191, 36, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
   opacity: 0;
   transition: opacity var(--transition-normal);
   pointer-events: none;
@@ -861,7 +861,7 @@ header::before {
 
 .btn.primary { 
   background: var(--accent); 
-  color: var(--chalk); 
+  color: var(--ink); 
   border: 2px solid var(--accent);
   border-radius: 0;
   font-family: var(--font-display);
@@ -1620,7 +1620,7 @@ textarea {
 .update-score-btn:hover { background: #333; transform: translateY(-1px); }
 .match-status { font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 4px; }
 .match-status.completed { background: #dcfce7; color: #166534; }
-.match-status.scheduled { background: #fef3c7; color: #92400e; }
+.match-status.scheduled { background: #FFF4A8; color: #6B5600; }
 .knockout-bracket { display: flex; flex-direction: column; gap: 30px; }
 .knockout-round { text-align: center; }
 .knockout-round h4 { color: var(--brand); margin-bottom: 20px; font-size: 20px; }
@@ -2052,7 +2052,7 @@ html { scroll-behavior: smooth; }
 .newsletter-input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
 }
 
 .newsletter-input::placeholder {
@@ -2886,7 +2886,7 @@ p.animate-continuous-wave,
   content: '';
   position: absolute;
   inset: 4px 8px;
-  background: rgba(251, 191, 36, 0.12);
+  background: rgba(212, 175, 55, 0.12);
   border-radius: 6px;
   z-index: -1;
 }
@@ -2907,7 +2907,7 @@ p.animate-continuous-wave,
 
 .site-nav .mobile-menu-btn:hover {
   border-color: var(--accent);
-  background: rgba(251, 191, 36, 0.08);
+  background: rgba(212, 175, 55, 0.08);
 }
 
 .site-nav .mobile-nav {
@@ -2974,7 +2974,7 @@ p.animate-continuous-wave,
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(16px);
   border-radius: 20px;
-  border: 1px solid rgba(251, 191, 36, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.25);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
   text-align: center;
 }
@@ -3123,13 +3123,13 @@ p.animate-continuous-wave,
   font-weight: 800;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
-  box-shadow: 0 8px 28px rgba(251, 191, 36, 0.35);
+  box-shadow: 0 8px 28px rgba(212, 175, 55, 0.35);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .instagram-follow-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(251, 191, 36, 0.45);
+  box-shadow: 0 12px 36px rgba(212, 175, 55, 0.45);
 }
 
 .instagram-section .instagram-cta {
@@ -3177,8 +3177,8 @@ p.animate-continuous-wave,
   align-items: center;
   gap: 4px;
   padding: 16px 28px;
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.1));
-  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 146, 42, 0.1));
+  border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: 16px;
 }
 
@@ -3275,7 +3275,7 @@ p.animate-continuous-wave,
 }
 
 .archive-standings-table tbody tr.archive-row--qualified {
-  background: rgba(251, 191, 36, 0.08);
+  background: rgba(212, 175, 55, 0.08);
 }
 
 .archive-team-cell {
@@ -3313,8 +3313,8 @@ p.animate-continuous-wave,
 .archive-match-card--final {
   max-width: 480px;
   margin: 0 auto;
-  border-color: rgba(251, 191, 36, 0.4);
-  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.08);
 }
 
 .archive-match-teams {
@@ -3706,13 +3706,13 @@ p.animate-continuous-wave,
 }
 
 .unity-btn--primary {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  background: linear-gradient(135deg, #D4AF37, #B8922A);
   color: #000;
-  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.35);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
 }
 
 .unity-btn--primary:hover {
-  box-shadow: 0 12px 32px rgba(251, 191, 36, 0.45);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.45);
 }
 
 .unity-btn--disabled {
@@ -3763,7 +3763,7 @@ p.animate-continuous-wave,
 
 .unity-team-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(251, 191, 36, 0.35);
+  border-color: rgba(212, 175, 55, 0.35);
 }
 
 .unity-team-logo-wrap {

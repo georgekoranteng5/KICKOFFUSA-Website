@@ -1411,18 +1411,26 @@ app.post('/api/shop/cart/:id/lines', async (req, res) => {
   }
 });
 
-// Sync assets/gallery/MERCH → manifest.json for shop + static gallery fallback
+// Sync assets/merch and assets/gallery/MERCH → manifest.json for the shop lifestyle grid
 function updateMerchManifest() {
-  const merchDir = path.join(__dirname, 'assets', 'gallery', 'MERCH');
-  if (!fs.existsSync(merchDir)) return;
+  const imageExt = /\.(jpe?g|png|gif|webp)$/i;
+  const sources = [
+    { dir: path.join(__dirname, 'assets', 'merch'), prefix: 'assets/merch' },
+    { dir: path.join(__dirname, 'assets', 'gallery', 'MERCH'), prefix: 'assets/gallery/MERCH' }
+  ];
+  const manifestDir = path.join(__dirname, 'assets', 'gallery', 'MERCH');
   try {
-    const imageExt = /\.(jpe?g|png|gif|webp)$/i;
-    const files = fs.readdirSync(merchDir)
-      .filter((f) => imageExt.test(f))
-      .sort();
-    const paths = files.map((f) => `assets/gallery/MERCH/${f}`);
+    const paths = [];
+    sources.forEach((source) => {
+      if (!fs.existsSync(source.dir)) return;
+      fs.readdirSync(source.dir)
+        .filter((f) => imageExt.test(f) && !f.startsWith('.'))
+        .sort()
+        .forEach((f) => paths.push(`${source.prefix}/${f}`));
+    });
+    fs.mkdirSync(manifestDir, { recursive: true });
     fs.writeFileSync(
-      path.join(merchDir, 'manifest.json'),
+      path.join(manifestDir, 'manifest.json'),
       JSON.stringify(paths, null, 2) + '\n'
     );
     if (paths.length) console.log(`MERCH gallery: ${paths.length} image(s) indexed`);

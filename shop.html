@@ -8,19 +8,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=7">
-  <link rel="stylesheet" href="kickoff-theme.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=17">
+  <link rel="stylesheet" href="kickoff-theme.css?v=14">
   <style>
     .shop-products-grid { display: grid !important; }
-    .shop-product-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
-    .shop-product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+    .shop-product-card { background: #141414; border-radius: 0; overflow: hidden; border: 1px solid rgba(237, 230, 214, 0.16); transition: transform 0.2s, box-shadow 0.2s; }
+    .shop-product-card:hover { transform: translateY(-4px); box-shadow: 8px 8px 0 #B8922A; }
     .shop-product-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
     .shop-product-card .info { padding: 20px; }
-    .shop-product-card .info h4 { margin: 0 0 8px; font-size: 18px; font-weight: 700; color: #111; }
-    .shop-product-card .info .price { font-size: 18px; font-weight: 700; color: #f59e0b; margin-bottom: 12px; }
+    .shop-product-card .info h4 { margin: 0 0 8px; font-size: 18px; font-weight: 700; color: #EDE6D6; }
+    .shop-product-card .info .price { font-size: 18px; font-weight: 700; color: #B8922A; margin-bottom: 12px; }
     .shop-product-card select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; margin-bottom: 12px; }
-    .shop-product-card .add-btn { width: 100%; padding: 12px; background: #fbbf24; color: #000; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 14px; transition: background 0.2s; }
-    .shop-product-card .add-btn:hover { background: #f59e0b; }
+    .shop-product-card .add-btn { width: 100%; padding: 12px; background: #D4AF37; color: #000; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+    .shop-product-card .add-btn:hover { background: #B8922A; }
     .shop-product-card .add-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .shop-cart-drawer { position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
     .shop-cart-drawer[aria-hidden="false"] { pointer-events: auto; }
@@ -38,25 +38,25 @@
     .shop-cart-line .detail { flex: 1; min-width: 0; }
     .shop-cart-line .detail .title { font-weight: 600; color: #111; margin: 0 0 4px; font-size: 14px; }
     .shop-cart-line .detail .meta { font-size: 13px; color: #64748b; margin: 0; }
-    .shop-impact-banner { background: #fff; border: 1px solid rgba(10, 10, 10, 0.12); border-radius: 20px; padding: 32px 28px; margin-bottom: 40px; text-align: center; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); }
-    .shop-impact-banner h3 { margin: 0 0 12px; font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 900; color: #0a0a0a; }
-    .shop-impact-banner p { margin: 0; font-size: 1.05rem; color: #2a2a2a; line-height: 1.6; max-width: 640px; margin-left: auto; margin-right: auto; }
-    .shop-impact-banner .impact-highlight { color: #cc3d00; font-weight: 800; }
-    .shop-lifestyle { margin-bottom: 48px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); }
-    .shop-lifestyle h3 { text-align: center; font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0 0 8px; }
-    .shop-lifestyle .shop-lifestyle-lead { text-align: center; color: #475569; margin: 0 0 24px; font-size: 0.95rem; }
+    .shop-impact-banner { background: #141414; border: 2px solid #D4AF37; border-radius: 0; padding: 32px 28px; margin-bottom: 40px; text-align: center; box-shadow: 8px 8px 0 #B8922A; }
+    .shop-impact-banner h3 { margin: 0 0 12px; font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 900; color: #EDE6D6; }
+    .shop-impact-banner p { margin: 0; font-size: 1.05rem; color: rgba(237, 230, 214, 0.78); line-height: 1.6; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .shop-impact-banner .impact-highlight { color: #E4C56A; font-weight: 800; }
+    .shop-lifestyle { margin-bottom: 48px; background: #141414; border: 1px solid rgba(237, 230, 214, 0.16); border-radius: 0; padding: 32px 24px; box-shadow: none; }
+    .shop-lifestyle h3 { text-align: center; font-size: 1.5rem; font-weight: 800; color: #EDE6D6; margin: 0 0 8px; }
+    .shop-lifestyle .shop-lifestyle-lead { text-align: center; color: rgba(237, 230, 214, 0.78); margin: 0 0 24px; font-size: 0.95rem; }
     .shop-lifestyle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
     .shop-lifestyle-grid img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; display: block; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-    .shop-size-guide { background: #fff; border-radius: 16px; padding: 24px 28px; margin-bottom: 40px; border: 1px solid #e2e8f0; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-    .shop-size-guide summary { cursor: pointer; font-weight: 700; color: #0f172a; font-size: 1rem; list-style: none; }
+    .shop-size-guide { background: #141414; border-radius: 0; padding: 24px 28px; margin-bottom: 40px; border: 1px solid rgba(237, 230, 214, 0.16); box-shadow: none; color: #EDE6D6; }
+    .shop-size-guide summary { cursor: pointer; font-weight: 700; color: #EDE6D6; font-size: 1rem; list-style: none; }
     .shop-size-guide summary::-webkit-details-marker { display: none; }
     .shop-size-guide table { width: 100%; margin-top: 16px; border-collapse: collapse; font-size: 0.9rem; }
-    .shop-size-guide th, .shop-size-guide td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #f1f5f9; }
-    .shop-size-guide th { color: #64748b; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
-    .shop-storefront-cta { display: none; text-align: center; padding: 48px 32px; background: #fff; border-radius: 20px; border: 2px solid #fbbf24; margin-bottom: 40px; box-shadow: 0 12px 40px rgba(251, 191, 36, 0.15); }
+    .shop-size-guide th, .shop-size-guide td { padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(237, 230, 214, 0.12); color: rgba(237, 230, 214, 0.78); }
+    .shop-size-guide th { color: rgba(237, 230, 214, 0.5); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+    .shop-storefront-cta { display: none; text-align: center; padding: 48px 32px; background: #141414; border-radius: 0; border: 2px solid #D4AF37; margin-bottom: 40px; box-shadow: 8px 8px 0 #B8922A; }
     .shop-storefront-cta.is-visible { display: block; }
-    .shop-storefront-cta h3 { margin: 0 0 12px; font-size: 1.5rem; font-weight: 800; color: #0f172a; }
-    .shop-storefront-cta p { margin: 0 0 24px; color: #64748b; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .shop-storefront-cta h3 { margin: 0 0 12px; font-size: 1.5rem; font-weight: 800; color: #EDE6D6; }
+    .shop-storefront-cta p { margin: 0 0 24px; color: rgba(237, 230, 214, 0.78); max-width: 480px; margin-left: auto; margin-right: auto; }
     #shop-products-loading { display: none; }
   </style>
 </head>
@@ -76,7 +76,7 @@
         <ul id="shop-cart-lines" style="list-style: none; padding: 0; margin: 0;"></ul>
       </div>
       <div class="shop-cart-drawer-footer">
-        <a id="shop-cart-checkout-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn primary" style="display: none; width: 100%; text-align: center; padding: 16px; font-weight: 700; text-decoration: none; border-radius: 8px; background: #fbbf24; color: #000; border: 2px solid #fbbf24;">Checkout</a>
+        <a id="shop-cart-checkout-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn primary" style="display: none; width: 100%; text-align: center; padding: 16px; font-weight: 700; text-decoration: none; border-radius: 8px; background: #D4AF37; color: #000; border: 2px solid #D4AF37;">Checkout</a>
       </div>
     </div>
   </div>
@@ -93,13 +93,13 @@
     <div style="position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 60px;">
       <div style="text-align: center; max-width: 800px;">
         <!-- Main Text Overlay -->
-        <div style="position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;">
+        <div class="shop-hero-copy" style="position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;">
           <h1 style="font-size: clamp(48px, 8vw, 72px); font-weight: 900; color: #fff; margin: 0 0 16px; line-height: 1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.8);">
             COMMUNITY FIRST,<br>
-            <span style="color: #fbbf24;">DRIP SECOND.</span>
+            <span style="color: #D4AF37;">DRIP SECOND.</span>
           </h1>
-          <p style="font-size: clamp(18px, 3vw, 24px); color: #fff; margin: 0; line-height: 1.4; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 600px; margin-left: auto; margin-right: auto;">
-            Gear that supports everything we do on and off the pitch.
+          <p style="font-size: clamp(18px, 3vw, 24px); color: #fff; margin: 0; line-height: 1.4; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+            Merch that supports everything we do on and off the pitch.
           </p>
         </div>
       </div>
@@ -108,7 +108,7 @@
   </main>
 
   <!-- Shop Content: Storefront API (products on main site, checkout on Shopify) -->
-  <section id="shop" style="position: relative; z-index: 2; padding: 80px 0; background: #f8fafc;">
+  <section id="shop" style="position: relative; z-index: 2; padding: 80px 0; background: #0A0A0A;">
     <div class="container">
       <!-- Impact message (above products) -->
       <div class="shop-impact-banner">
@@ -116,18 +116,25 @@
         <p>Premium KICKOFFUSA merch helps us run tournaments, keep the community moving, and grow what we build together.</p>
       </div>
 
+      <!-- Direct Shopify CTA (shown when embedded catalog unavailable) -->
+      <div id="shop-storefront-cta" class="shop-storefront-cta is-visible">
+        <h3>Shop the full store</h3>
+        <p>Browse all pieces on our secure Shopify store, with checkout in seconds.</p>
+        <a id="shop-now-btn" href="https://kickoffusastore.myshopify.com/" target="_blank" rel="noopener noreferrer" class="btn primary" style="font-size: 18px; padding: 18px 36px; background: #D4AF37; color: #000; border: 2px solid #D4AF37; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 8px; text-decoration: none; display: inline-block;">Shop Now →</a>
+      </div>
+
       <!-- Lifestyle shots from gallery/MERCH -->
       <div class="shop-lifestyle" id="shop-lifestyle">
         <h3>Worn at KICKOFFUSA</h3>
-        <p class="shop-lifestyle-lead">Real players, real events. See the gear in action.</p>
+        <p class="shop-lifestyle-lead">The family pictured in KICKOFF merch</p>
         <div id="shop-lifestyle-grid" class="shop-lifestyle-grid" aria-live="polite"></div>
-        <p id="shop-lifestyle-empty" style="display: none; text-align: center; color: #64748b; font-size: 0.9rem; margin: 16px 0 0;">Lifestyle photos will appear here from the MERCH gallery folder.</p>
+        <p id="shop-lifestyle-empty" style="display: none; text-align: center; color: rgba(237, 230, 214, 0.78); font-size: 0.9rem; margin: 16px 0 0;">Lifestyle photos will appear here from the MERCH gallery folder.</p>
       </div>
 
       <!-- Size guide -->
-      <details class="shop-size-guide">
+      <details class="shop-size-guide" open>
         <summary>Jersey &amp; apparel size guide</summary>
-        <p style="margin: 12px 0 0; color: #64748b; font-size: 0.9rem;">Measurements are body size in inches. When in doubt, size up for a relaxed fit.</p>
+        <p style="margin: 12px 0 0; color: rgba(237, 230, 214, 0.78); font-size: 0.9rem;">Measurements are body size in inches. When in doubt, size up for a relaxed fit.</p>
         <table>
           <thead>
             <tr><th>Size</th><th>Chest</th><th>Length</th></tr>
@@ -142,16 +149,9 @@
         </table>
       </details>
 
-      <!-- Direct Shopify CTA (shown when embedded catalog unavailable) -->
-      <div id="shop-storefront-cta" class="shop-storefront-cta is-visible">
-        <h3>Shop the full store</h3>
-        <p>Browse all jerseys and merch on our secure Shopify store. Same gear, checkout in seconds.</p>
-        <a id="shop-now-btn" href="https://kickoffusastore.myshopify.com/" target="_blank" rel="noopener noreferrer" class="btn primary" style="font-size: 18px; padding: 18px 36px; background: #fbbf24; color: #000; border: 2px solid #fbbf24; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 8px; text-decoration: none; display: inline-block;">Shop Now →</a>
-      </div>
-
       <!-- Product grid (Storefront API — hidden until products load) -->
       <div id="shop-products-wrap" style="margin-bottom: 60px; display: none;">
-        <h3 style="text-align: center; font-size: 1.35rem; font-weight: 800; color: #0f172a; margin: 0 0 24px;">Shop collection</h3>
+        <h3 style="text-align: center; font-size: 1.35rem; font-weight: 800; color: #EDE6D6; margin: 0 0 24px;">Shop collection</h3>
         <div id="shop-products-loading" style="text-align: center; padding: 60px 20px; color: #64748b;">Loading products…</div>
         <div id="shop-products-grid" class="shop-products-grid" style="display: none; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;"></div>
       </div>
@@ -159,14 +159,14 @@
       <!-- Newsletter Signup -->
       <div class="shop-newsletter" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); border-radius: 20px; padding: 50px 40px; text-align: center; color: #fff; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1);">
         <!-- Background Pattern -->
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 30% 20%, rgba(251, 191, 36, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(251, 191, 36, 0.2) 0%, transparent 50%);"></div>
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.2) 0%, transparent 50%);"></div>
         
         <div style="position: relative; z-index: 1;">
           <h3 style="font-size: clamp(28px, 4vw, 36px); font-weight: 800; margin: 0 0 20px; color: #fff;">Be the First to Know</h3>
           <p style="font-size: 18px; margin: 0 0 40px; color: #e5e7eb; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">Get exclusive early access and special discounts when our store launches</p>
           <form style="display: flex; gap: 16px; max-width: 500px; margin: 0 auto; flex-wrap: wrap; position: relative;">
-            <input type="email" placeholder="Enter your email address" required style="flex: 1; min-width: 250px; padding: 16px 20px; border: none; border-radius: 8px; font-size: 16px; background: rgba(255,255,255,0.1); color: #fff; backdrop-filter: blur(10px); transition: all 0.3s ease;" placeholder="Enter your email address" onfocus="this.style.background='rgba(255,255,255,0.2)'; this.style.boxShadow='0 0 0 2px rgba(251, 191, 36, 0.5)';" onblur="this.style.background='rgba(255,255,255,0.1)'; this.style.boxShadow='none';">
-            <button type="submit" class="btn primary" style="padding: 16px 32px; background: #fbbf24; color: #000; border: 2px solid #fbbf24; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 32px rgba(251, 191, 36, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(251, 191, 36, 0.4)';">
+            <input type="email" placeholder="Enter your email address" required style="flex: 1; min-width: 250px; padding: 16px 20px; border: none; border-radius: 8px; font-size: 16px; background: rgba(255,255,255,0.1); color: #fff; backdrop-filter: blur(10px); transition: all 0.3s ease;" placeholder="Enter your email address" onfocus="this.style.background='rgba(255,255,255,0.2)'; this.style.boxShadow='0 0 0 2px rgba(212, 175, 55, 0.5)';" onblur="this.style.background='rgba(255,255,255,0.1)'; this.style.boxShadow='none';">
+            <button type="submit" class="btn primary" style="padding: 16px 32px; background: #D4AF37; color: #000; border: 2px solid #D4AF37; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 32px rgba(212, 175, 55, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(212, 175, 55, 0.4)';">
               Subscribe
             </button>
           </form>
@@ -243,7 +243,8 @@
           }
           if (empty) empty.style.display = 'none';
           grid.innerHTML = paths.map(function(src) {
-            return '<img src="' + src.replace(/^\//, '') + '" alt="KICKOFFUSA merch at an event" loading="lazy">';
+            var safe = src.replace(/^\//, '').split('/').map(encodeURIComponent).join('/');
+            return '<img src="' + safe + '" alt="KICKOFFUSA merch at an event" loading="lazy">';
           }).join('');
         }
 
@@ -258,7 +259,7 @@
         loadFromManifest()
           .then(function(paths) {
             if (paths.length) {
-              render(paths.slice(0, 8));
+              render(paths);
               return;
             }
             return fetch('/api/gallery')
@@ -270,7 +271,7 @@
                 paths = merch.map(function(i) {
                   return (i.file_path || '').replace(/^\//, '');
                 }).filter(Boolean);
-                render(paths.slice(0, 8));
+                render(paths);
               });
           })
           .catch(function() {

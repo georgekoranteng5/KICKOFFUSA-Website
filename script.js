@@ -517,6 +517,101 @@ function smoothScrollTo(elementId) {
   }
 }
 
+// Home metric numbers count up from 0 once the card is on screen
+function initializeMetricCountUp() {
+  const nodes = document.querySelectorAll('[data-count-to]');
+  if (!nodes.length) return;
+
+  const format = (value) => Number(value).toLocaleString('en-US');
+  const writeFinal = (el) => {
+    const suffix = el.dataset.countSuffix || '';
+    el.textContent = format(el.dataset.countTo) + suffix;
+  };
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    nodes.forEach(writeFinal);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      observer.unobserve(el);
+      const target = Number(el.dataset.countTo);
+      const suffix = el.dataset.countSuffix || '';
+      const duration = 1600;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = format(Math.round(target * eased)) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.45 });
+
+  nodes.forEach((el) => observer.observe(el));
+}
+
+// Home metric cards: play a short clip on hover (one video per card)
+function initializeMetricHoverClips() {
+  const cards = document.querySelectorAll('.metric-card');
+  if (!cards.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  cards.forEach((card) => {
+    const video = card.querySelector('video');
+    if (!video) return;
+
+    const play = () => {
+      card.classList.add('is-playing');
+      const attempt = video.play();
+      if (attempt && typeof attempt.catch === 'function') {
+        attempt.catch(() => {});
+      }
+    };
+
+    const stop = () => {
+      card.classList.remove('is-playing');
+      video.pause();
+      try {
+        video.currentTime = 0;
+      } catch (err) {
+        /* clip may not be seekable yet */
+      }
+    };
+
+    if (canHover) {
+      card.addEventListener('pointerenter', play);
+      card.addEventListener('pointerleave', stop);
+      return;
+    }
+
+    card.addEventListener('click', () => {
+      if (card.classList.contains('is-playing')) {
+        stop();
+      } else {
+        cards.forEach((other) => {
+          if (other === card) return;
+          const otherVideo = other.querySelector('video');
+          other.classList.remove('is-playing');
+          if (otherVideo) {
+            otherVideo.pause();
+            try { otherVideo.currentTime = 0; } catch (err) { /* ignore */ }
+          }
+        });
+        play();
+      }
+    });
+  });
+}
+
 // Load tournaments on page load
 document.addEventListener('DOMContentLoaded', function() {
   renderSiteNav();
@@ -542,6 +637,9 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('galleryGrid')) {
     initializeGallery();
   }
+
+  initializeMetricHoverClips();
+  initializeMetricCountUp();
   
   // Handle Enter key in password field
   const passwordField = document.getElementById('adminPassword');
@@ -978,7 +1076,7 @@ function displayKnockoutStage(matches) {
         '<span style="color: #10b981; font-size: 12px;">Completed</span>' :
         isAdminLoggedIn ? 
           `<button class="update-score-btn" onclick="updateMatchResult(${match.id})">Update</button>` :
-          '<span style="color: #f59e0b; font-size: 12px;">Scheduled</span>';
+          '<span style="color: #B8922A; font-size: 12px;">Scheduled</span>';
       
       html += `
         <div class="knockout-match">
@@ -1015,7 +1113,7 @@ function displayKnockoutStage(matches) {
         '<span style="color: #10b981; font-size: 12px;">Completed</span>' :
         isAdminLoggedIn ? 
           `<button class="update-score-btn" onclick="updateMatchResult(${match.id})">Update</button>` :
-          '<span style="color: #f59e0b; font-size: 12px;">Scheduled</span>';
+          '<span style="color: #B8922A; font-size: 12px;">Scheduled</span>';
       
       html += `
         <div class="knockout-match">
@@ -1049,10 +1147,10 @@ function displayKnockoutStage(matches) {
       
       const updateButton = isCompleted ? 
         '<span style="color: #10b981; font-size: 12px;">Completed</span>' :
-        isPending ? '<span style="color: #f59e0b; font-size: 12px;">Waiting for semi-finals</span>' :
+        isPending ? '<span style="color: #B8922A; font-size: 12px;">Waiting for semi-finals</span>' :
         isAdminLoggedIn ? 
           `<button class="update-score-btn" onclick="updateMatchResult(${match.id})">Update</button>` :
-          '<span style="color: #f59e0b; font-size: 12px;">Scheduled</span>';
+          '<span style="color: #B8922A; font-size: 12px;">Scheduled</span>';
       
       html += `
         <div class="knockout-match">
@@ -1667,7 +1765,44 @@ function getStaticGalleryItems() {
       { src: 'assets/gallery/KICKOFF CUP/IMG_3884.JPG', event_name: 'KICKOFF CUP', type: 'image' },
       { src: 'assets/gallery/KICKOFF CUP/IMG_3885.JPG', event_name: 'KICKOFF CUP', type: 'image' },
       { src: 'assets/gallery/KICKOFF CUP/IMG_5823.JPG', event_name: 'KICKOFF CUP', type: 'image' },
-      
+
+      // GRASSROOTS images
+      { src: 'assets/gallery/GRASSROOTS/000A0056.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0499.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0501.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0508.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0527.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0679.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0691.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0732.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0830.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A0860.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A1008.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A1050.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A1188.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A1228.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A1385.jpg', event_name: 'GRASSROOTS', type: 'image' },
+      { src: 'assets/gallery/GRASSROOTS/000A1409.jpg', event_name: 'GRASSROOTS', type: 'image' },
+
+      // UNITY CUP images
+      { src: 'assets/gallery/UNITY CUP/IMG_2772.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_2773.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_2774.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_2776.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_2777.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_2778.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_2779.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_2781.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3304.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3307.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3308.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3309.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3310.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3311.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3313.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3314.JPG', event_name: 'UNITY CUP', type: 'image' },
+      { src: 'assets/gallery/UNITY CUP/IMG_3576.JPG', event_name: 'UNITY CUP', type: 'image' },
+
       // SUMMER SERIES images
       { src: 'assets/gallery/SUMMER SERIES /AO4I9247.jpg', event_name: 'SUMMER SERIES', type: 'image' },
       { src: 'assets/gallery/SUMMER SERIES /AO4I9452.jpg', event_name: 'SUMMER SERIES', type: 'image' },
@@ -1751,10 +1886,19 @@ function updateFilterButtons() {
   if (!filtersContainer) return;
   
   let html = '<button class="filter-btn active" onclick="filterGallery(\'all\', this)">All Events</button>';
-  
-  Array.from(availableEvents).sort().forEach(eventName => {
-    html += `<button class="filter-btn" onclick="filterGallery('${eventName}', this)">${eventName}</button>`;
-  });
+
+  const galleryFilterOrder = ['CHAMPION SOUND', 'KICKOFF CUP', 'SUMMER SERIES', 'GRASSROOTS', 'UNITY CUP', 'MERCH'];
+  Array.from(availableEvents)
+    .sort((a, b) => {
+      const rank = (name) => {
+        const index = galleryFilterOrder.indexOf(name.trim());
+        return index === -1 ? galleryFilterOrder.length : index;
+      };
+      return rank(a) - rank(b) || a.localeCompare(b);
+    })
+    .forEach(eventName => {
+      html += `<button class="filter-btn" onclick="filterGallery('${eventName}', this)">${eventName}</button>`;
+    });
   
   filtersContainer.innerHTML = html;
 }
