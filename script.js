@@ -1859,10 +1859,12 @@ async function loadGallery() {
 
     if (!items.length) {
       items = getStaticGalleryItems();
-      items = await mergeMerchManifest(items);
     }
 
-    galleryItems = items.filter((item) => item.event_name !== 'Img');
+    galleryItems = items.filter((item) => {
+      const name = (item.event_name || '').trim().toUpperCase();
+      return name !== 'IMG' && name !== 'MERCH';
+    });
 
     availableEvents.clear();
     galleryItems.forEach((item) => {
@@ -1887,7 +1889,7 @@ function updateFilterButtons() {
   
   let html = '<button class="filter-btn active" onclick="filterGallery(\'all\', this)">All Events</button>';
 
-  const galleryFilterOrder = ['CHAMPION SOUND', 'KICKOFF CUP', 'SUMMER SERIES', 'GRASSROOTS', 'UNITY CUP', 'MERCH'];
+  const galleryFilterOrder = ['CHAMPION SOUND', 'KICKOFF CUP', 'SUMMER SERIES', 'GRASSROOTS', 'UNITY CUP'];
   Array.from(availableEvents)
     .sort((a, b) => {
       const rank = (name) => {
@@ -2037,14 +2039,18 @@ function renderSiteNav() {
     return `<a href="${item.href}" class="nav-link${active}">${item.label}</a>`;
   }).join('');
 
+  const adminControl = activeKey === 'tournament'
+    ? `<button type="button" class="nav-link" onclick="toggleAdminPanel()">Admin</button>`
+    : '';
+
   nav.innerHTML = `
     <a href="index.html" class="nav-brand">
       <img src="assets/kickoff-logo.png" alt="KICKOFFUSA Logo" width="50" height="50">
       <span>KICKOFFUSA</span>
     </a>
-    <div class="desktop-nav">${desktopLinks}</div>
+    <div class="desktop-nav">${desktopLinks}${adminControl}</div>
     <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
-    <div class="mobile-nav" id="site-mobile-nav">${mobileLinks}</div>
+    <div class="mobile-nav" id="site-mobile-nav">${mobileLinks}${adminControl}</div>
   `;
 }
 

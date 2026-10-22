@@ -250,6 +250,7 @@ body[style*="background: #000"] {
 .metric-card-video {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -259,10 +260,20 @@ body[style*="background: #000"] {
   pointer-events: none;
 }
 
+.metric-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(10, 10, 10, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
 .metric-card-copy {
   position: relative;
-  z-index: 1;
-  transition: opacity 0.3s ease;
+  z-index: 2;
 }
 
 .metric-card-value {
@@ -308,14 +319,15 @@ body[style*="background: #000"] {
 }
 
 .metric-card.is-playing .metric-card-video,
-.metric-card:hover .metric-card-video {
+.metric-card:hover .metric-card-video,
+.metric-card.is-playing::before,
+.metric-card:hover::before {
   opacity: 1;
-  transform: scale(1);
 }
 
-.metric-card.is-playing .metric-card-copy,
-.metric-card:hover .metric-card-copy {
-  opacity: 0;
+.metric-card.is-playing .metric-card-video,
+.metric-card:hover .metric-card-video {
+  transform: scale(1);
 }
 
 .metric-card.is-playing .metric-card-arrow,
@@ -638,6 +650,81 @@ footer {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.01em;
+}
+
+/* ── Tournament steps ──────────────────────────────────────── */
+.how-steps {
+  margin: 0 0 56px;
+  padding: 28px 32px 36px;
+  background: #0a0a0a;
+  border: 1px solid rgba(237, 230, 214, 0.14);
+}
+
+.how-kicker {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.how-steps ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(237, 230, 214, 0.22);
+}
+
+.how-steps li {
+  padding: 22px 32px 8px 0;
+  border-top: 3px solid var(--accent);
+  margin-top: -1px;
+}
+
+.how-steps li + li {
+  padding-left: 32px;
+  border-left: 1px solid rgba(237, 230, 214, 0.16);
+}
+
+.how-steps .step-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.how-steps h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  color: var(--chalk);
+}
+
+.how-steps p {
+  margin: 0;
+  max-width: 32ch;
+  color: rgba(237, 230, 214, 0.72);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+  .how-steps ol {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .how-steps li,
+  .how-steps li + li {
+    padding: 20px 0 12px;
+    border-left: 0;
+  }
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────── */
